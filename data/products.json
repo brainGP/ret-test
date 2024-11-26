@@ -1,0 +1,21 @@
+[
+  {
+    "id": "14",
+    "name": "TYT MD-680",
+    "type": "UHF",
+    "style": "Өндрийн станц",
+    "price": "260’000₮",
+    "priceN": "286’000₮",
+    "battery": "2200mAh",
+    "power": "10W, 10-12км",
+    "hertz": "136-174MHz, 400-480MHz",
+    "status": "",
+    "size": [
+      {
+        "height": "",
+        "width": ""
+      }
+    ],
+    "image": "stations/RA89.png"
+  }
+]

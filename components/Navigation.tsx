@@ -20,17 +20,17 @@ function Navigation() {
   const navItems = [
     { href: "/", label: "Нүүр", icon: "icons/home.svg" },
     {
-      label: "Станц",
+      label: "Station",
       href: "/handstation",
       dropdown: [
-        { href: "/handstation", label: "Гар станц" },
-        { href: "/handstation/hoyor", label: "Суурь станц" },
-        { href: "/handstation/gurav", label: "Дагалдах хэрэгслүүд" },
+        { href: "/stations/handstation", label: "Гар станц" },
+        { href: "/stations/basestation", label: "Суурь станц" },
+        { href: "/statios/equipments/", label: "Дагалдах хэрэгслүүд" },
       ],
     },
     {
       label: "Бусад бараа",
-      href: "/otherstation",
+      href: "/other",
     },
     { href: "/contact", label: "Холбоо барих" },
   ];

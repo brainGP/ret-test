@@ -7,24 +7,41 @@ import Navigation from "./Navigation";
 const Header: React.FC = () => {
   return (
     <header className="flex flex-col bg-gray-100 justify-center items-center gap-2 px-4 md:px-6">
-      <div className="container flex items-center justify-between pt-4 mx-auto max-w-7xl gap-2 my-2 mb-4">
-        <Image src="/retevis.svg" alt="Retevis Logo" width={160} height={80} />
+      <div className="container flex flex-col sm:flex-row items-center justify-between py-4 mx-auto max-w-7xl gap-4">
+        <div className="flex-shrink-0">
+          <Image
+            src="/retevis.png"
+            alt="Retevis Logo"
+            width={160}
+            height={80}
+            className="w-[120px] md:w-[160px] object-contain"
+          />
+        </div>
 
-        <Search />
+        <div className="w-full flex-1 max-w-md md:max-w-lg">
+          <Search />
+        </div>
 
-        <Button className="flex items-center gap-2 bg-white">
+        <Button className="items-center gap-2 bg-white hidden md:visible">
           <Image
             src="/icons/store.svg"
             alt="Cart Icon"
             width={24}
             height={24}
+            className="w-6 h-6"
           />
-          <span>Сагс</span>
+          <span className="text-sm md:text-base">Сагс</span>
         </Button>
       </div>
-      <div className="h-[0.5px] w-full bg-gray/20" />
+
+      {/* Divider */}
+      <div className="h-[0.5px] w-full bg-gray-300/50" />
+
+      {/* Navigation */}
       <Navigation />
-      <div className="h-[0.5px] w-full bg-gray/20  mb-8" />
+
+      {/* Divider */}
+      <div className="h-[0.5px] w-full bg-gray-300/50 mb-6" />
     </header>
   );
 };

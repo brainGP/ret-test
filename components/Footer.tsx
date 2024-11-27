@@ -3,12 +3,12 @@ import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="flex flex-col bg-gray-100 shadow justify-center items-center px-4 md:px-6 md:mt-16">
+    <footer className="flex flex-col bg-gray-100 justify-center items-center px-4 md:px-6 md:mt-16">
       <div className="h-[0.5px] w-full bg-gray/20 my-4" />
       <div className="container mx-auto max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 py-6 text-gray-700">
         <div className="flex items-start md:items-center justify-center sm:justify-start">
           <Image
-            src="/retevis.svg"
+            src="/retevis.png"
             alt="Retevis Mongolia Logo"
             width={160}
             height={80}

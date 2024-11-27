@@ -2,23 +2,21 @@
 
 import React from "react";
 import Link from "next/link";
-import pathname, { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 // Define labels for your navigation items
 const Nav_labels: Record<string, string> = {
+  stations: "Станц",
   handstation: "Гар станц",
   otherstation: "Бусад бараа",
-  neg: "neg",
-  hoyor: "hoyor",
-  gurav: "gurav",
   basestation: "Суурин станц",
   other: "Бусад Бараа",
-  news: "Мэдээ",
+
   contact: "Холбоо барих",
 };
 
 const Breadcrumb = () => {
-  const pathname = usePathname();
+  const pathname = usePathname() || ""; // Fallback to an empty string if undefined
   const paths = pathname.split("/").filter((path) => path);
 
   return (

@@ -23,13 +23,12 @@ interface Station {
   image: string;
 }
 
-// Define the structure of stationsData
 interface StationsData {
   stations: Station[];
 }
 
 const Home = () => {
-  const stations: Station[] = stationsData[0]?.stations || []; // Correct type and fallback if no data
+  const stations: Station[] = stationsData[0]?.stations || [];
 
   return (
     <div>

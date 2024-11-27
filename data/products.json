@@ -18,7 +18,7 @@
             "width": "5.6cm"
           }
         ],
-        "image": "stations/RT15.png"
+        "image": "/stations/RT15.png"
       },
       {
         "id": "2",
@@ -56,7 +56,7 @@
             "width": ""
           }
         ],
-        "image": "stations/TSSDq5.png"
+        "image": "/stations/TSSDq5.png"
       },
       {
         "id": "4",
@@ -75,7 +75,7 @@
             "width": "5.6cm"
           }
         ],
-        "image": "stations/RT22.png"
+        "image": "/stations/RT22.png"
       },
       {
         "id": "5",
@@ -94,7 +94,7 @@
             "width": ""
           }
         ],
-        "image": "stations/KDC6.png"
+        "image": "/stations/KDC6.png"
       },
       {
         "id": "6",
@@ -113,7 +113,7 @@
             "width": "6.5cm"
           }
         ],
-        "image": "stations/RB26.png"
+        "image": "/stations/RB26.png"
       },
       {
         "id": "7",
@@ -132,7 +132,7 @@
             "width": "5.8cm"
           }
         ],
-        "image": "stations/RT85.png"
+        "image": "/stations/RT85.png"
       },
       {
         "id": "8",
@@ -151,7 +151,7 @@
             "width": "5cm"
           }
         ],
-        "image": "stations/RT76.png"
+        "image": "/stations/RT76.png"
       },
       {
         "id": "9",
@@ -170,7 +170,7 @@
             "width": "6.5cm"
           }
         ],
-        "image": "stations/RT-86.png"
+        "image": "/stations/RT-86.png"
       },
       {
         "id": "10",
@@ -189,7 +189,7 @@
             "width": "5.9cm"
           }
         ],
-        "image": "stations/RT29.png"
+        "image": "/stations/RT29.png"
       },
       {
         "id": "11",
@@ -208,7 +208,7 @@
             "width": ""
           }
         ],
-        "image": "stations/RT29.png"
+        "image": "/stations/RT29.png"
       },
       {
         "id": "12",
@@ -227,7 +227,7 @@
             "width": ""
           }
         ],
-        "image": "stations/RB25.png"
+        "image": "/stations/RB25.png"
       },
       {
         "id": "13",
@@ -246,7 +246,7 @@
             "width": "6.2cm"
           }
         ],
-        "image": "stations/RA89.png"
+        "image": "/stations/RA89.png"
       },
       {
         "id": "14",
@@ -265,7 +265,7 @@
             "width": ""
           }
         ],
-        "image": "stations/TYTMD680.png"
+        "image": "/stations/TYTMD680.png"
       },
       {
         "id": "15",
@@ -284,7 +284,7 @@
             "width": ""
           }
         ],
-        "image": "stations/TYTMD680.png"
+        "image": "/stations/TYTMD680.png"
       },
       {
         "id": "16",
@@ -303,7 +303,7 @@
             "width": ""
           }
         ],
-        "image": "stations/RT95.png"
+        "image": "/stations/RT95.png"
       },
       {
         "id": "17",
@@ -322,7 +322,7 @@
             "width": ""
           }
         ],
-        "image": "stations/TM481A.png"
+        "image": "/stations/TM481A.png"
       },
       {
         "id": "18",
@@ -341,7 +341,7 @@
             "width": ""
           }
         ],
-        "image": "stations/TM481A.png"
+        "image": "/stations/TM481A.png"
       },
       {
         "id": "19",
@@ -360,7 +360,7 @@
             "width": ""
           }
         ],
-        "image": "stations/MD9600.png"
+        "image": "/stations/MD9600.png"
       },
       {
         "id": "20",
@@ -379,7 +379,7 @@
             "width": ""
           }
         ],
-        "image": "stations/2300HV.png"
+        "image": "/stations/2300HV.png"
       },
       {
         "id": "21",
@@ -398,7 +398,7 @@
             "width": ""
           }
         ],
-        "image": "stations/TSM610.png"
+        "image": "/stations/TSM610.png"
       }
     ]
   },

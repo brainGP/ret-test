@@ -1,21 +1,415 @@
 [
   {
-    "id": "14",
-    "name": "TYT MD-680",
-    "type": "UHF",
-    "style": "Өндрийн станц",
-    "price": "260’000₮",
-    "priceN": "286’000₮",
-    "battery": "2200mAh",
-    "power": "10W, 10-12км",
-    "hertz": "136-174MHz, 400-480MHz",
-    "status": "",
-    "size": [
+    "stations": [
       {
-        "height": "",
-        "width": ""
+        "id": "1",
+        "name": "Retevis RT-15",
+        "type": "UHF",
+        "style": "(Өндрийн станц)",
+        "price": "50’000₮",
+        "priceN": "55’000₮",
+        "battery": "1000mAh",
+        "power": "2W, 2-3км",
+        "hertz": "400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "14cm",
+            "width": "5.6cm"
+          }
+        ],
+        "image": "stations/RT15.png"
+      },
+      {
+        "id": "2",
+        "name": "WLN C-888",
+        "type": "UHF",
+        "style": "(Өндрийн станц)",
+        "price": "45’000₮",
+        "priceN": "49’500₮",
+        "battery": "1000mAh",
+        "power": "2W, 2-3км",
+        "hertz": "400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "/stations/c888.png"
+      },
+      {
+        "id": "3",
+        "name": "TSSD Q5",
+        "type": "UHF",
+        "style": "",
+        "price": "95’000₮",
+        "priceN": "104’500₮",
+        "battery": " 2800mAh",
+        "power": "5W 5-6км",
+        "hertz": "400-470MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/TSSDq5.png"
+      },
+      {
+        "id": "4",
+        "name": "RT-22",
+        "type": "UHF",
+        "style": "(Өндрийн станц)",
+        "price": "50’000₮",
+        "priceN": "55’000₮",
+        "battery": "1000mAh",
+        "power": "2W, 2-3км",
+        "hertz": "400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "14cm",
+            "width": "5.6cm"
+          }
+        ],
+        "image": "stations/RT22.png"
+      },
+      {
+        "id": "5",
+        "name": "WLN KD-c6",
+        "type": "UHF",
+        "style": "(Өндрийн станц)",
+        "price": "50’000₮",
+        "priceN": "55’000₮",
+        "battery": "1000mAh",
+        "power": "2W, 2-3км",
+        "hertz": "400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/KDC6.png"
+      },
+      {
+        "id": "6",
+        "name": "RB-26",
+        "type": "UHF",
+        "style": "(Өндрийн станц)",
+        "price": "70’000₮",
+        "priceN": "77’000₮",
+        "battery": "2000mAh,",
+        "power": "3W, 3-4км",
+        "hertz": "400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "29.5cm",
+            "width": "6.5cm"
+          }
+        ],
+        "image": "stations/RB26.png"
+      },
+      {
+        "id": "7",
+        "name": "RT-85",
+        "type": "UHF+VHF",
+        "style": "(Өндөр ба Нам)",
+        "price": "95’000₮",
+        "priceN": "104’500₮",
+        "battery": "1400mAh",
+        "power": "5-7W, 5-7км",
+        "hertz": "136-174MHz, 400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "25.5cm",
+            "width": "5.8cm"
+          }
+        ],
+        "image": "stations/RT85.png"
+      },
+      {
+        "id": "8",
+        "name": "RT-76",
+        "type": "UHF",
+        "style": "(Өндрийн станц)",
+        "price": "120'000₮",
+        "priceN": "132’000₮",
+        "battery": "1400mAh",
+        "power": "5-7W, 5-7км",
+        "hertz": "400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "26cm",
+            "width": "5cm"
+          }
+        ],
+        "image": "stations/RT76.png"
+      },
+      {
+        "id": "9",
+        "name": "RT-86",
+        "type": "UHF/VHF",
+        "style": "(Өндөр ба Нам)",
+        "price": "150’000₮",
+        "priceN": "165’000₮",
+        "battery": "2600mAh",
+        "power": "10W, 10-12км",
+        "hertz": "136-174MHz, 400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "29.5cm",
+            "width": "6.5cm"
+          }
+        ],
+        "image": "stations/RT-86.png"
+      },
+      {
+        "id": "10",
+        "name": "RT-29",
+        "type": "UHF/VHF",
+        "style": "(Өндөр эсвэл Нам)",
+        "price": "175’000₮",
+        "priceN": "192’500₮",
+        "battery": "3200mAh",
+        "power": "10W, 10-12км",
+        "hertz": "136-174MHz, 400-480MHz",
+        "status": "New",
+        "size": [
+          {
+            "height": "29.5cm",
+            "width": "5.9cm"
+          }
+        ],
+        "image": "stations/RT29.png"
+      },
+      {
+        "id": "11",
+        "name": "Retevis RT-29 IP-67",
+        "type": "VHF",
+        "style": "Намын станц",
+        "price": "195’000₮",
+        "priceN": "214’500₮",
+        "battery": "3200mAh",
+        "power": "10W, 10-12км",
+        "hertz": "136-174MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/RT29.png"
+      },
+      {
+        "id": "12",
+        "name": "Retevis RB-25",
+        "type": "UHF",
+        "style": "Өндрийн станц",
+        "price": "185’000₮",
+        "priceN": "203’500₮",
+        "battery": "2600mAh",
+        "power": "10V",
+        "hertz": "400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/RB25.png"
+      },
+      {
+        "id": "13",
+        "name": "RA-89",
+        "type": "UHF+VHF",
+        "style": "(Өндөр ба Нам)",
+        "price": "195’000₮",
+        "priceN": "214’500₮",
+        "battery": "2500mAh",
+        "power": "10W, 10-12км",
+        "hertz": "136-174MHz, 400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "28cm",
+            "width": "6.2cm"
+          }
+        ],
+        "image": "stations/RA89.png"
+      },
+      {
+        "id": "14",
+        "name": "TYT MD-680",
+        "type": "UHF",
+        "style": "Өндрийн станц",
+        "price": "260’000₮",
+        "priceN": "286’000₮",
+        "battery": "2200mAh",
+        "power": "10W, 10-12км",
+        "hertz": "136-174MHz, 400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/TYTMD680.png"
+      },
+      {
+        "id": "15",
+        "name": "Retevis RT-81",
+        "type": "UHF",
+        "style": "Өндрийн станц",
+        "price": "280’000₮",
+        "priceN": "308’000₮",
+        "battery": "2200mAh",
+        "power": "10W, 10-12км",
+        "hertz": "136-174MHz, 400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/TYTMD680.png"
+      },
+      {
+        "id": "16",
+        "name": "Retevis RT-95",
+        "type": "UHF/VHF",
+        "style": "(Өндөр ба Нам)",
+        "price": "380’000₮",
+        "priceN": "418’000₮",
+        "battery": "DC",
+        "power": "25W, 25-27км",
+        "hertz": "136-174MHz, 400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/RT95.png"
+      },
+      {
+        "id": "17",
+        "name": "Kenwood TM-481",
+        "type": "UHF",
+        "style": "Өндрийн станц",
+        "price": "495’000₮",
+        "priceN": "544’500₮",
+        "battery": "DC",
+        "power": "40W, 40-42км",
+        "hertz": "136-174MHz, 400-480MHz",
+        "status": "stations/TM481A.png",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/TM481A.png"
+      },
+      {
+        "id": "18",
+        "name": "Kenwood TM-281",
+        "type": "VHF",
+        "style": "Намын станц",
+        "price": "495’000₮",
+        "priceN": "544’500₮",
+        "battery": "DC",
+        "power": "65W, 65-67км",
+        "hertz": "136-174MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/TM481A.png"
+      },
+      {
+        "id": "19",
+        "name": "TYT MD-9600",
+        "type": "UHF/VHF",
+        "style": "(Өндөр ба Нам)",
+        "price": "795’000₮",
+        "priceN": "874’500₮",
+        "battery": "DC",
+        "power": "40-45W, 40-45км",
+        "hertz": "136-174MHz, 400-480MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/MD9600.png"
+      },
+      {
+        "id": "20",
+        "name": "ICOM 2300H V",
+        "type": "VHF",
+        "style": "Намын станц",
+        "price": "520’000₮",
+        "priceN": "572’000₮",
+        "battery": "DC",
+        "power": "65W, 65-67км",
+        "hertz": "136-174MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/2300HV.png"
+      },
+      {
+        "id": "21",
+        "name": "TSM610",
+        "type": "UHF/VHF",
+        "style": "(Өндөр ба Нам)",
+        "price": "110’000₮",
+        "priceN": "121’000₮",
+        "battery": "1000mAh",
+        "power": "65W, 65-67км",
+        "hertz": "136-174MHz",
+        "status": "",
+        "size": [
+          {
+            "height": "",
+            "width": ""
+          }
+        ],
+        "image": "stations/TSM610.png"
       }
-    ],
-    "image": "stations/RA89.png"
+    ]
+  },
+  {
+    "logos": [
+      { "src": "/logos/logo1.svg", "alt": "Logo 1" },
+      { "src": "/logos/logo2.svg", "alt": "Logo 2" },
+      { "src": "/logos/logo3.svg", "alt": "Logo 3" },
+      { "src": "/logos/logo4.svg", "alt": "Logo 4" },
+      { "src": "/logos/logo5.svg", "alt": "Logo 5" },
+      { "src": "/logos/logo6.svg", "alt": "Logo 6" }
+    ]
   }
 ]

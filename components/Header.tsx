@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 
         <Search />
 
-        <Button className="flex items-center gap-2 bg-transparent text-gray-700 outline-none focus:outline-none hover:underline">
+        <Button className="flex items-center gap-2 bg-white">
           <Image
             src="/icons/store.svg"
             alt="Cart Icon"

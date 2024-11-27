@@ -1,23 +1,27 @@
 import React from "react";
-import { Slider } from "./ui/slider";
+import Image from "next/image";
+import data from "@/data/products.json";
 
-const Filter: React.FC = () => {
+const Filter = () => {
+  const logos = data[1]?.logos || [];
+
   return (
-    <div className="flexf lex-col gap-4 ">
-      <h3 className=" font-semibold mb-4">Шүүлтүүр</h3>
+    <div className="flex flex-col gap-6 justify-center items-center">
+      <h3 className="font-semibold mb-4 text-lg md:text-xl">Шүүлтүүр</h3>
 
-      <div className="flex flex-row items-center justify-start md:justify-between  gap-4">
-        <h1 className="block text-sm ">Үнэ</h1>
-        <Slider defaultValue={[0]} max={80} step={1} className="w-64" />
+      <div className="flex flex-wrap justify-center gap-12">
+        {logos.map((logo, index) => (
+          <div key={index} className="flex justify-center">
+            <Image
+              src={logo.src}
+              alt={logo.alt}
+              width={200}
+              height={100}
+              style={{ objectFit: "contain" }}
+            />
+          </div>
+        ))}
       </div>
-      <div className="flex flex-row items-center justify-start md:justify-between gap-4">
-        <h1 className="block text-sm ">Брэндүүд</h1>
-        <Slider defaultValue={[0]} max={80} step={1} className="w-64" />
-      </div>
-      {}
-      <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
-        Хадгалах
-      </button>
     </div>
   );
 };

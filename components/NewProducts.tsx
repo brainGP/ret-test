@@ -13,12 +13,12 @@ const products = [
 function NewProducts() {
   return (
     <div>
-      <div className="relative overflow-hidden w-full max-w-[1536px] px-8 mt-20">
-        <div className="flex items-center my-8 gap-4">
+      <div className="relative overflow-hidden w-full max-w-[1536px] p-8">
+        <div className="flex items-center py-8 gap-4">
           <div className="w-2 h-2 bg-yellow rounded-full" />
-          <div className="text-lg font-semibold text-gray-700">
+          <p className="text-lg font-semibold text-gray-700">
             Шинэ бүтээгдэхүүн
-          </div>
+          </p>
         </div>
         <div className="flex space-x-10 animate-marquee">
           {products.map((logo, index) => (

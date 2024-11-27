@@ -3,11 +3,10 @@ import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="flex flex-col bg-gray-100 shadow justify-center items-center px-4 md:px-6">
-      {/* Main Content */}
+    <footer className="flex flex-col bg-gray-100 shadow justify-center items-center px-4 md:px-6 md:mt-16">
+      <div className="h-[0.5px] w-full bg-gray/20 my-4" />
       <div className="container mx-auto max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 py-6 text-gray-700">
-        {/* Logo Section */}
-        <div className="flex items-start justify-center sm:justify-start">
+        <div className="flex items-start md:items-center justify-center sm:justify-start">
           <Image
             src="/retevis.svg"
             alt="Retevis Mongolia Logo"
@@ -16,7 +15,6 @@ const Footer: React.FC = () => {
           />
         </div>
 
-        {/* Contact Section */}
         <div className="flex flex-col items-start">
           <h2 className="text-lg font-semibold">ХОЛБОО БАРИХ</h2>
           <p className="text-sm mt-2">
@@ -27,7 +25,6 @@ const Footer: React.FC = () => {
           </p>
         </div>
 
-        {/* Address Section */}
         <div className="flex flex-col items-start">
           <h2 className="text-lg font-semibold">ХАЯГ БАЙРШИЛ</h2>
           <p className="text-sm mt-2">
@@ -35,7 +32,6 @@ const Footer: React.FC = () => {
           </p>
         </div>
 
-        {/* Social Links */}
         <div className="flex flex-col items-start">
           <h2 className="text-lg font-semibold">СОШИАЛ ХАЯГУУД</h2>
           <a
@@ -64,9 +60,8 @@ const Footer: React.FC = () => {
           </a>
         </div>
       </div>
-
-      {/* Bottom Section */}
-      <div className="w-full border-t border-gray-300 py-4 text-sm text-center text-gray-600">
+      <div className="h-[0.5px] w-full bg-gray/20 my-4" />
+      <div className="w-full border-gray-300 py-4 text-sm text-center text-gray-600">
         © 2024 Retevis Mongolia
       </div>
     </footer>

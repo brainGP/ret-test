@@ -3,13 +3,7 @@ import Filter from "@/components/Filter";
 import ProductGrid from "@/components/ProductGrid";
 import Breadcrumb from "@/components/BreadCrumb";
 
-const products = Array(12).fill({
-  name: "Retevis гар станц",
-  price: "120'000₮",
-  image: "retevis-sample.png",
-});
-
-const Home: React.FC = () => {
+const Home = () => {
   return (
     <div className="flex flex-row gap-4">
       {/* Filter Sidebar */}
@@ -20,7 +14,7 @@ const Home: React.FC = () => {
       {/* Product Grid */}
       <main className="flex-1 ">
         <Breadcrumb />
-        <ProductGrid title="Гар станц" products={products} />
+        hello
       </main>
     </div>
   );

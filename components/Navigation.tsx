@@ -23,18 +23,14 @@ function Navigation() {
       label: "Станц",
       href: "/handstation",
       dropdown: [
-        { href: "/handstation/neg", label: "Гар станц" },
+        { href: "/handstation", label: "Гар станц" },
         { href: "/handstation/hoyor", label: "Суурь станц" },
         { href: "/handstation/gurav", label: "Дагалдах хэрэгслүүд" },
       ],
     },
-    { href: "/basestation", label: "Суурин станц" },
     {
-      label: "Бараа",
-      dropdown: [
-        { href: "/other", label: "Бусад Бараа" },
-        { href: "/news", label: "Мэдээ" },
-      ],
+      label: "Бусад бараа",
+      href: "/otherstation",
     },
     { href: "/contact", label: "Холбоо барих" },
   ];

@@ -1,14 +1,35 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Search from "./Search";
 import { Button } from "./ui/button";
 import Navigation from "./Navigation";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const Header: React.FC = () => {
+  const [visibleHeader, setVisibleHeader] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPosition = window.scrollY;
+      setVisibleHeader(currentScrollPosition < 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="flex flex-col bg-gray-100 justify-center items-center gap-2 px-4 md:px-6">
+    <header
+      className={cn(
+        "flex flex-col bg-gray-100 justify-center items-center w-full sticky border-b mb-8 py-4 transition-transform duration-300 ease-in-out",
+        visibleHeader ? "translate-y-0" : "-translate-y-20",
+        "bg-opacity-70 z-10"
+      )}
+    >
       <div className="container flex flex-col sm:flex-row items-center justify-between py-4 mx-auto max-w-7xl gap-4">
-        <div className="flex-shrink-0">
+        <Link href="/" className="flex-shrink-0">
           <Image
             src="/retevis.png"
             alt="Retevis Logo"
@@ -16,7 +37,7 @@ const Header: React.FC = () => {
             height={80}
             className="w-[160px] object-contain"
           />
-        </div>
+        </Link>
 
         <div className="w-full flex-1 max-w-md md:max-w-lg">
           <Search />
@@ -33,15 +54,9 @@ const Header: React.FC = () => {
           <span className="text-sm md:text-base">Сагс</span>
         </Button>
       </div>
+      <div className="w-full h-[1px] bg-neutral-200 my-4" />
 
-      {/* Divider */}
-      <div className="h-[0.5px] w-full bg-gray-300/50" />
-
-      {/* Navigation */}
       <Navigation />
-
-      {/* Divider */}
-      <div className="h-[0.5px] w-full bg-gray-300/50 mb-6" />
     </header>
   );
 };

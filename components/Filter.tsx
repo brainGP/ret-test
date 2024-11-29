@@ -3,7 +3,7 @@ import Image from "next/image";
 import data from "@/data/products.json";
 
 const Filter = () => {
-  const logos = data[1]?.logos || [];
+  const logos = data[0]?.logos || [];
 
   return (
     <div className="flex flex-col gap-6 justify-center items-center">

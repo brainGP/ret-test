@@ -5,7 +5,7 @@ import Image from "next/image";
 import data from "@/data/products.json";
 
 const LogoSlider: React.FC = () => {
-  const logos = data[1]?.logos || [];
+  const logos = data[0]?.logos || [];
   return (
     <div className="relative overflow-hidden w-full max-w-[1536px] p-8 ">
       <div className="flex items-center py-8 gap-4">
@@ -24,7 +24,7 @@ const LogoSlider: React.FC = () => {
             />
           </div>
         ))}
-        {/* Repeat the logos to create the infinite scroll effect */}
+
         {logos.map((logo, index) => (
           <div
             key={`repeat-${index}`}

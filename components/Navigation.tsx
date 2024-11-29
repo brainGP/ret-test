@@ -61,7 +61,7 @@ function Navigation() {
                 className={classNames(
                   "group flex items-center gap-1 cursor-pointer",
                   isActive("", item.dropdown)
-                    ? "text-yellow font-medium"
+                    ? "text-yellow font-medium underline underline-offset-1"
                     : "text-gray hover:text-yellow"
                 )}
               >

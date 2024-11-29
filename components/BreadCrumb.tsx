@@ -3,8 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
-// Define labels for your navigation items
 const Nav_labels: Record<string, string> = {
   stations: "Станц",
   handstation: "Гар станц",
@@ -16,14 +16,14 @@ const Nav_labels: Record<string, string> = {
 };
 
 const Breadcrumb = () => {
-  const pathname = usePathname() || ""; // Fallback to an empty string if undefined
+  const pathname = usePathname() || "";
   const paths = pathname.split("/").filter((path) => path);
 
   return (
-    <nav className="text-sm text-gray-600 mb-4 ml-6">
-      <ul className="flex items-center space-x-2">
+    <nav className="text-md">
+      <ul className="flex flex-row space-x-2">
         <li>
-          <Link href="/" className="hover:underline text-gray-800">
+          <Link href="/" className="hover:underline">
             Нүүр
           </Link>
         </li>
@@ -32,15 +32,19 @@ const Breadcrumb = () => {
           const label = Nav_labels[segment] || segment;
 
           return (
-            <li key={index} className="flex items-center">
-              <span className="mx-2">{">"}</span>
+            <li key={index} className="flex flex-row items-center">
+              <div className="text-gray mr-2">
+                <Image
+                  src="/icons/breadcrumb.svg"
+                  alt="logo"
+                  width={16}
+                  height={16}
+                />
+              </div>
               {index === paths.length - 1 ? (
-                <span className="text-gray-500 capitalize">{label}</span>
+                <span className="font-semibold">{label}</span>
               ) : (
-                <Link
-                  href={href}
-                  className="hover:underline text-gray-800 capitalize"
-                >
+                <Link href={href} className="hover:underline capitalize">
                   {label}
                 </Link>
               )}

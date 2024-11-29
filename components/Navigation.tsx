@@ -11,21 +11,21 @@ import {
   DropdownMenuItem,
 } from "./ui/dropdown-menu";
 
-// Utility function to handle conditional classes
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(" ");
 
 function Navigation() {
   const pathname = usePathname();
 
   const navItems = [
-    { href: "/", label: "Нүүр", icon: "icons/home.svg" },
+    { href: "/", label: "Нүүр" },
     {
-      label: "Station",
+      label: "Станц",
       href: "/handstation",
       dropdown: [
+        { href: "/stations", label: "Бүх" },
         { href: "/stations/handstation", label: "Гар станц" },
         { href: "/stations/basestation", label: "Суурь станц" },
-        { href: "/statios/equipments/", label: "Дагалдах хэрэгслүүд" },
+        { href: "/stations/equipments", label: "Дагалдах хэрэгслүүд" },
       ],
     },
     {
@@ -47,24 +47,12 @@ function Navigation() {
             <Link href={item.href}>
               <div
                 className={classNames(
-                  "flex items-center gap-1 cursor-pointer",
+                  "flex items-center gap-1 cursor-pointer group ",
                   isActive(item.href)
-                    ? "text-yellow font-medium"
+                    ? "text-yellow font-medium underline underline-offset-1 "
                     : "text-gray hover:text-yellow"
                 )}
               >
-                {item.icon && (
-                  <Image
-                    src={`/${item.icon}`}
-                    alt={item.label}
-                    height={16}
-                    width={16}
-                    className={classNames(
-                      "inline",
-                      isActive(item.href) ? "filter-yellow" : "filter-gray"
-                    )}
-                  />
-                )}
                 {item.label}
               </div>
             </Link>
@@ -72,7 +60,7 @@ function Navigation() {
             <DropdownMenu>
               <DropdownMenuTrigger
                 className={classNames(
-                  "flex items-center gap-1 cursor-pointer",
+                  "group flex items-center gap-1 cursor-pointer",
                   isActive("", item.dropdown)
                     ? "text-yellow font-medium"
                     : "text-gray hover:text-yellow"

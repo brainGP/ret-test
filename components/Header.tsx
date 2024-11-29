@@ -14,7 +14,7 @@ const Header: React.FC = () => {
             alt="Retevis Logo"
             width={160}
             height={80}
-            className="w-[120px] md:w-[160px] object-contain"
+            className="w-[160px] object-contain"
           />
         </div>
 

@@ -36,8 +36,6 @@ const Home = () => {
         <Carousel />
         <LogoSlider />
         <NewProducts />
-
-        <ProductGrid products={stations} title="Өндрийн станцууд" />
       </main>
     </div>
   );

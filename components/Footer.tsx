@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col items-start">
           <h2 className="text-lg font-semibold">СОШИАЛ ХАЯГУУД</h2>
           <a
-            href="https://www.facebook.com/profile.php?id=100026372252640"
+            href="https://www.facebook.com/RetevisMongolia"
             className="flex items-center gap-2 text-sm mt-2"
           >
             <Image
@@ -63,6 +63,10 @@ const Footer: React.FC = () => {
       <div className="h-[0.5px] w-full bg-gray/20 my-4" />
       <div className="w-full border-gray-300 py-4 text-sm text-center text-gray-600">
         © 2024 Retevis Mongolia
+        <h1 className="  text-gray-100 mx-16 p-4">
+          Америк стандартын RETEVIS брэндийн хэт богино долгионы гар болон
+          суурин радио станцын төрөлжсөн худалдаа.
+        </h1>
       </div>
     </footer>
   );

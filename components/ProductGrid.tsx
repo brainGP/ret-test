@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 
-// Define the station structure
 interface Station {
   id: string;
   name: string;

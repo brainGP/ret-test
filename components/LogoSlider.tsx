@@ -5,8 +5,7 @@ import Image from "next/image";
 import data from "@/data/products.json";
 
 const LogoSlider: React.FC = () => {
-  const logos = data[1]?.logos || []; // Access logos from the second dataset
-  const stations = data[0]?.stations || [];
+  const logos = data[1]?.logos || [];
   return (
     <div className="relative overflow-hidden w-full max-w-[1536px] p-8 ">
       <div className="flex items-center py-8 gap-4">

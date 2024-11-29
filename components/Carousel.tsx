@@ -21,7 +21,7 @@ const CustomCarousel = () => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % slideCount);
     }, autoPlayInterval);
     return () => clearInterval(interval);
-  }, []);
+  }, [slideCount]); // Added slideCount to the dependency array
 
   return (
     <div className="relative w-full ">

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Station {
   id: string;
@@ -35,10 +36,12 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, products }) => {
         {products.map((product) => (
           <Link href={`/stations/${product.id}`} key={product.id}>
             <div className="border p-4 rounded-md shadow-md transition-transform hover:scale-105">
-              <img
+              <Image
                 src={product.image}
                 alt={product.name}
-                className="w-full h-24 sm:h-28 md:h-36 object-contain mb-4"
+                width={500}
+                height={200}
+                className="object-contain mb-4"
               />
               <h3 className="text-sm sm:text-base font-medium text-gray-800">
                 {product.name}

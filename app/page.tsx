@@ -1,35 +1,8 @@
 "use client";
-
-import Carousel from "@/components/Carousel";
-import React from "react";
+import { Carousel } from "@/components/ui/carousel";
 import LogoSlider from "@/components/LogoSlider";
 import NewProducts from "@/components/NewProducts";
-import ProductGrid from "@/components/ProductGrid";
-import stationsData from "@/data/products.json";
-
-// Define the station structure
-interface Station {
-  id: string;
-  name: string;
-  type: string;
-  style: string;
-  price: string;
-  priceN: string;
-  battery: string;
-  power: string;
-  hertz: string;
-  status: string;
-  size: { height: string; width: string }[];
-  image: string;
-}
-
-interface StationsData {
-  stations: Station[];
-}
-
 const Home = () => {
-  const stations: Station[] = stationsData[0]?.stations || [];
-
   return (
     <div>
       <main>

@@ -1,6 +1,5 @@
 import React from "react";
 import Filter from "@/components/Filter";
-import ProductGrid from "@/components/ProductGrid";
 import Breadcrumb from "@/components/BreadCrumb";
 
 const Home = () => {

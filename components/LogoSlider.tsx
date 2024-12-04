@@ -7,7 +7,7 @@ import data from "@/data/products.json";
 const LogoSlider: React.FC = () => {
   const logos = data[0]?.logos || [];
   return (
-    <div className="relative overflow-hidden w-full max-w-[1536px] p-8 ">
+    <div className="relative overflow-hidden w-full p-8 ">
       <div className="flex items-center py-8 gap-4">
         <div className="w-2 h-2 bg-yellow rounded-full" />
         <div className="text-lg font-semibold text-gray-700">Брэндүүд</div>
@@ -21,6 +21,7 @@ const LogoSlider: React.FC = () => {
               width={200}
               height={100}
               style={{ objectFit: "contain" }}
+              priority={true}
             />
           </div>
         ))}
@@ -36,6 +37,7 @@ const LogoSlider: React.FC = () => {
               width={200}
               height={100}
               style={{ objectFit: "contain" }}
+              priority={true}
             />
           </div>
         ))}

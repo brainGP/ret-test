@@ -39,16 +39,14 @@ const Home = () => {
 
   return (
     <div className="flex flex-col lg:flex-row">
-      <aside className="w-full lg:w-1/4 p-4 bg-gray-50 border rounded-lg lg:block mb-6 lg:mb-0 sticky top-0 h-auto lg:h-auto hidden md:visible">
-        <Filter />
-      </aside>
+      <Filter />
 
       <main className="flex-1">
         <div className="flex flex-row justify-between space-x-4 mb-4 mx-6">
           <Breadcrumb />
           <FilterOrder onOrderChange={handleOrderChange} />
         </div>
-        <ScrollArea className="rounded-md border h-full m-4 lg:m-6">
+        <ScrollArea className="h-full m-4 lg:m-6">
           <ProductGrid title="Суурин станц" products={products} />
         </ScrollArea>
       </main>

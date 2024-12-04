@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "brand": "Retevis",
+    "brand": "Icom",
     "sort": "Гар станц",
     "name": "Retevis RT-15",
     "type": "UHF",
@@ -22,6 +22,7 @@
   },
   {
     "id": "2",
+    "brand": "Icom",
     "name": "WLN C-888",
     "type": "UHF",
     "sort": "Гар станц",
@@ -42,6 +43,7 @@
   },
   {
     "id": "3",
+
     "name": "TSSD Q5",
     "type": "UHF",
     "sort": "Гар станц",

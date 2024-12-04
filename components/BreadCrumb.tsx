@@ -39,6 +39,7 @@ const Breadcrumb = () => {
                   alt="logo"
                   width={16}
                   height={16}
+                  priority={true}
                 />
               </div>
               {index === paths.length - 1 ? (

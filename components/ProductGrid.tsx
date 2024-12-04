@@ -32,21 +32,26 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, products }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-6">
         {products.map((product) => (
           <Link href={`/stations/${product.id}`} key={product.id}>
-            <div className="border p-4 rounded-md shadow-md transition-transform hover:scale-105">
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={500}
-                height={200}
-                className="object-contain mb-4"
-              />
-              <h3 className="text-sm sm:text-base font-medium text-gray-800">
+            <div className="border p-4 h-[380px] w-full rounded-md shadow-md transition-transform hover:scale-105">
+              <div className="relative h-48 w-full bg-gray-100 rounded-md overflow-hidden flex items-center justify-center">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  width={80}
+                  height={80}
+                  className="object-contain"
+                  priority={true}
+                />
+              </div>
+              <h3 className="mt-4 text-sm sm:text-base font-medium text-gray-800">
                 {product.name}
               </h3>
-              <p className="text-orange-500 font-semibold">{product.price}</p>
+              <p className="text-orange-500 font-semibold text-lg">
+                {product.price}
+              </p>
               <p className="text-sm text-gray-500">{product.type}</p>
               <p className="text-sm text-gray-500">{product.style}</p>
             </div>

@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Retevis",
   description: "Retevis Mongolia",
+  icons: "/globe.svg",
 };
 
 export default function RootLayout({

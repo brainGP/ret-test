@@ -12,6 +12,7 @@ const Footer: React.FC = () => {
             alt="Retevis Mongolia Logo"
             width={160}
             height={80}
+            priority={true}
           />
         </div>
 
@@ -43,6 +44,7 @@ const Footer: React.FC = () => {
               alt="Facebook Logo"
               width={16}
               height={16}
+              priority={true}
             />
             Retevis Mongolia
           </a>
@@ -55,6 +57,7 @@ const Footer: React.FC = () => {
               alt="Instagram Logo"
               width={16}
               height={16}
+              priority={true}
             />
             Retevis Mongolia
           </a>

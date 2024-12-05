@@ -2,11 +2,9 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Search from "./Search";
-import { Button } from "./ui/button";
 import Navigation from "./Navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Skeleton } from "./ui/skeleton";
 import { Profile } from "./SkeletonDemo";
 
 const Header: React.FC = () => {

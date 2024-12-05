@@ -53,7 +53,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, products }) => {
                 <p className="text-orange-500 font-semibold text-base">
                   {product.priceN}
                 </p>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-center text-gray-500">
                   {product.type} {product.style}
                 </p>
               </div>

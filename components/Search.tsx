@@ -107,10 +107,9 @@ const Search = () => {
                 />
                 <div>
                   <span className="font-semibold text-sm">{product.name}</span>
-                  <span className="text-gray-500 text-xs"> Үнэ:</span>
                   <span className="text-gray-500 text-xs">
                     {" "}
-                    {product.price}
+                    {product.style}
                   </span>
                 </div>
               </div>

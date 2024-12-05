@@ -21,7 +21,7 @@ const Breadcrumb = () => {
 
   return (
     <nav className="text-md">
-      <ul className="flex flex-row space-x-2">
+      <ul className="flex flex-row space-x-2 items-center">
         <li>
           <Link href="/" className="hover:underline">
             Нүүр

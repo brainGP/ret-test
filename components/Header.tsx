@@ -6,6 +6,8 @@ import { Button } from "./ui/button";
 import Navigation from "./Navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { Skeleton } from "./ui/skeleton";
+import { Profile } from "./SkeletonDemo";
 
 const Header: React.FC = () => {
   const [visibleHeader, setVisibleHeader] = useState(true);
@@ -45,18 +47,9 @@ const Header: React.FC = () => {
         <div className="w-full flex-1 max-w-md md:max-w-lg">
           <Search />
         </div>
-
-        <Button className="items-center gap-2 bg-white hidden md:visible">
-          <Image
-            src="/icons/store.svg"
-            alt="Cart Icon"
-            width={24}
-            height={24}
-            className="w-6 h-6"
-            priority={true}
-          />
-          <span className="text-sm md:text-base">Сагс</span>
-        </Button>
+        <div className="hidden md:flex">
+          <Profile />
+        </div>
       </div>
       <div className="w-full h-[1px] bg-neutral-200 my-4" />
 

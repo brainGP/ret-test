@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import stationsData from "@/data/stations.json";
 import ProductGrid from "@/components/ProductGrid";
 import NotFound from "@/app/not-found";
+import Filter from "@/components/Filter";
 
 const BrandProducts = () => {
   const params = useParams();
@@ -14,16 +15,19 @@ const BrandProducts = () => {
   );
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="mx-auto px-4 flex flex-row">
       {products.length === 0 ? (
-        <div className="flex flex-col justify-center">
+        <div className="container flex justify-center">
           <NotFound explain="Энэ брэндийн бүтээгдэхүүн байхгүй байна." />
         </div>
       ) : (
-        <ProductGrid
-          title={` ${brandname} брэндийн бүтээгдэхүүнүүд`}
-          products={products}
-        />
+        <>
+          <Filter />
+          <ProductGrid
+            title={` ${brandname} брэндийн бүтээгдэхүүнүүд`}
+            products={products}
+          />
+        </>
       )}
     </div>
   );

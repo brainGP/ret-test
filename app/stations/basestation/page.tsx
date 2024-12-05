@@ -27,11 +27,11 @@ const Home = () => {
     }
 
     setProducts(filteredProducts);
-  }, [sortOrder]); // Stable function depends on sortOrder
+  }, [sortOrder]);
 
   useEffect(() => {
     applyFiltersAndSorting();
-  }, [applyFiltersAndSorting]); // Now safe to include
+  }, [applyFiltersAndSorting]);
 
   const handleOrderChange = (order: string) => {
     setSortOrder(order);
@@ -41,8 +41,8 @@ const Home = () => {
     <div className="flex flex-col lg:flex-row">
       <Filter />
 
-      <main className="flex-1">
-        <div className="flex flex-row justify-between space-x-4 mb-4 mx-6">
+      <main className="flex-1 items-center">
+        <div className="flex flex-col sm:flex-row justify-between mx-8 sm:mx-10 space-y-4 sm:items-center">
           <Breadcrumb />
           <FilterOrder onOrderChange={handleOrderChange} />
         </div>

@@ -72,10 +72,10 @@ function Navigation() {
                   <Link href={subItem.href} key={subIndex}>
                     <DropdownMenuItem
                       className={classNames(
-                        "w-full cursor-pointer hover:bg-gray-100 rounded-md",
+                        "w-full cursor-pointer hover:bg-gray/100 rounded-md",
                         pathname === subItem.href
                           ? "text-yellow font-medium"
-                          : ""
+                          : "text-gray hover:text-yellow"
                       )}
                     >
                       {subItem.label}

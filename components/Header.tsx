@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   return (
     <header
       className={cn(
-        "flex flex-col bg-gray-100 justify-center items-center w-full sticky top-0 border-b px-4 md:px-6 mb-8 py-4 transition-transform duration-300 ease-in-out",
+        "flex flex-col justify-center items-center w-full sticky top-0 border-b px-4 md:px-6 mb-8 py-4 transition-transform duration-300 ease-in-out",
         visibleHeader
           ? "translate-y-0"
           : "-translate-y-40 md:-translate-y-[104px]",

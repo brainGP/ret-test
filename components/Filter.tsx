@@ -7,7 +7,7 @@ const Filter = () => {
   const logos = data[0]?.logos || [];
 
   return (
-    <aside className="w-1/6 p-4 bg-gray-50 rounded-lg lg:block mb-4 lg:mb-0 sticky top-0 h-screen hidden md:visible">
+    <aside className="w-1/6 p-4 rounded-lg lg:block mb-20 top-16 h-3/4 sticky hidden md:visible items-center ">
       <div className="flex flex-col gap-6 justify-center items-center">
         <h3 className="font-semibold mb-4 text-lg md:text-xl">Брэндүүд</h3>
 

@@ -31,7 +31,6 @@ const Search = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Initialize with all products
     setFilteredProducts(
       productsData.filter((item) => typeof item === "object" && "id" in item)
     );
@@ -50,20 +49,18 @@ const Search = () => {
       );
       setFilteredProducts(results);
     } else {
-      // Reset to full list when query is cleared
       setFilteredProducts(productsData);
     }
 
-    setIsDropdownVisible(!!value); // Show dropdown only if there's a query
+    setIsDropdownVisible(!!value);
   };
 
   const handleBlur = () => {
-    // Delay hiding dropdown to allow click events to fire
     setTimeout(() => setIsDropdownVisible(false), 200);
   };
 
   return (
-    <div className="relative w-full max-w-2xl">
+    <div className="relative w-full max-w-2xl text-gray">
       <div className="flex w-full items-center bg-blue rounded-full gap-4">
         <Input
           type="search"
@@ -89,13 +86,13 @@ const Search = () => {
       </div>
 
       {isDropdownVisible && (
-        <div className="absolute left-0 right-0 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg max-h-64 overflow-y-auto z-10">
+        <div className="absolute left-0 right-0 mt-2 bg-white border border-gray rounded-lg shadow-lg max-h-64 overflow-y-auto z-10">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="flex items-center gap-4 px-4 py-2 hover:bg-gray-100 cursor-pointer border-b"
-                onClick={() => router.push(`/stations/${product.id}`)}
+                className="flex items-center gap-4 px-4 py-2 hover:bg-transparent/10 cursor-pointer border-b"
+                onClick={() => router.push(`/stations/${product.name}`)}
               >
                 <Image
                   src={product.image || "/noresult.png"}
@@ -107,15 +104,12 @@ const Search = () => {
                 />
                 <div>
                   <span className="font-semibold text-sm">{product.name}</span>
-                  <span className="text-gray-500 text-xs">
-                    {" "}
-                    {product.style}
-                  </span>
+                  <span className=" text-xs"> {product.style}</span>
                 </div>
               </div>
             ))
           ) : (
-            <div className="p-4 text-center text-gray-500 text-sm">
+            <div className="p-4 text-center 0 text-sm">
               <span>Хайлт олдсонгүй</span>
             </div>
           )}

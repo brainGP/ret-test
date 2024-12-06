@@ -11,7 +11,6 @@ const Nav_labels: Record<string, string> = {
   otherstation: "Бусад бараа",
   basestation: "Суурин станц",
   other: "Бусад Бараа",
-
   contact: "Холбоо барих",
 };
 
@@ -28,8 +27,9 @@ const Breadcrumb = () => {
           </Link>
         </li>
         {paths.map((segment, index) => {
+          const decodedSegment = decodeURIComponent(segment); // Decode the segment
           const href = "/" + paths.slice(0, index + 1).join("/");
-          const label = Nav_labels[segment] || segment;
+          const label = Nav_labels[decodedSegment] || decodedSegment;
 
           return (
             <li key={index} className="flex flex-row items-center">

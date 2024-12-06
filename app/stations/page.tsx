@@ -35,7 +35,7 @@ const Home = () => {
       <Filter />
 
       <main className="flex-1 items-center">
-        <div className="flex flex-col sm:flex-row justify-between mx-8 sm:mx-10 space-y-4 sm:items-center">
+        <div className="flex flex-col sm:flex-row justify-between mx-8 sm:mx-10 space-y-4 sm:items-center ">
           <Breadcrumb />
           <FilterOrder onOrderChange={handleOrderChange} />
         </div>

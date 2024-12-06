@@ -10,7 +10,7 @@ const LogoSlider: React.FC = () => {
     <div className="relative overflow-hidden w-full p-8 ">
       <div className="flex items-center py-8 gap-4">
         <div className="w-2 h-2 bg-yellow rounded-full" />
-        <div className="text-lg font-semibold text-gray-700">Брэндүүд</div>
+        <div className="text-lg font-semibold text-gray">Брэндүүд</div>
       </div>
       <div className="flex space-x-10 animate-marquee">
         {logos.map((logo, index) => (

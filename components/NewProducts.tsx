@@ -16,9 +16,7 @@ function NewProducts() {
       <div className="relative overflow-hidden w-full max-w-[1536px] p-8">
         <div className="flex items-center py-8 gap-4">
           <div className="w-2 h-2 bg-yellow rounded-full" />
-          <p className="text-lg font-semibold text-gray-700">
-            Шинэ бүтээгдэхүүн
-          </p>
+          <p className="text-lg font-semibold text-gray">Шинэ бүтээгдэхүүн</p>
         </div>
         <div className="flex space-x-10 animate-marquee"></div>
       </div>

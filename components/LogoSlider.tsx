@@ -7,12 +7,12 @@ import data from "@/data/products.json";
 const LogoSlider: React.FC = () => {
   const logos = data[0]?.logos || [];
   return (
-    <div className="relative overflow-hidden w-full p-8 ">
+    <div className="relative overflow-hidden w-full p-8">
       <div className="flex items-center py-8 gap-4">
         <div className="w-2 h-2 bg-yellow rounded-full" />
         <div className="text-lg font-semibold text-gray">Брэндүүд</div>
       </div>
-      <div className="flex space-x-10 animate-marquee">
+      <div className="flex space-x-10 animate-marquee items-end">
         {logos.map((logo, index) => (
           <div key={index} className="flex-shrink-0 w-36 md:w-48 lg:w-60">
             <Image

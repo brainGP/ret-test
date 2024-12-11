@@ -28,7 +28,9 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, products }) => {
       <div className="flex items-center justify-between my-6">
         <div className="flex items-center gap-4">
           <div className="w-2 h-2 bg-yellow-500 rounded-full" />
-          <p className="text-lg font-semibold ">{title}</p>
+          <p className="text-xl md:text-2xl lg:text-3xl font-semibold ">
+            {title}
+          </p>
         </div>
       </div>
 

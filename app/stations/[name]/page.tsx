@@ -85,7 +85,7 @@ const StationNamePage: React.FC = () => {
               <strong>Төрөл:</strong> {station.type} {station.style}
             </p>
             <p>
-              <strong>Багтаамж:</strong> {station.battery}
+              <strong>Хүчдэл:</strong> {station.battery}
             </p>
             <p>
               <strong>Хүч:</strong> {station.power}
@@ -96,7 +96,7 @@ const StationNamePage: React.FC = () => {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-xl sm:text-2xl font-semibold ">
-              <strong>Үнэ:</strong> {station.price}
+              <strong>Үнэ:</strong> {station.priceN}
             </span>
             <span> (НӨАТ-тэй)</span>
           </div>

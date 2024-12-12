@@ -4,11 +4,10 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import productsData from "@/data/stations.json";
 import { useRouter } from "next/navigation";
 
 interface Station {
-  id: string;
+  _id: string;
   name?: string;
   brand?: string;
   sort?: string;
@@ -26,22 +25,47 @@ interface Station {
 
 const Search = () => {
   const [query, setQuery] = useState("");
+  const [products, setProducts] = useState<Station[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Station[]>([]);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    setFilteredProducts(
-      productsData.filter((item) => typeof item === "object" && "id" in item)
-    );
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/api/product");
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+        const data = await response.json();
+
+        if (Array.isArray(data)) {
+          setProducts(data);
+          setFilteredProducts(data);
+        } else if (data.products && Array.isArray(data.products)) {
+          setProducts(data.products);
+          setFilteredProducts(data.products);
+        } else {
+          console.error("Unexpected API response:", data);
+          setProducts([]);
+          setFilteredProducts([]);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setProducts([]);
+        setFilteredProducts([]);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.toLowerCase();
     setQuery(value);
 
-    if (value) {
-      const results = productsData.filter((product) =>
+    if (value && Array.isArray(products)) {
+      const results = products.filter((product) =>
         ["name", "brand", "sort", "type", "style"].some((key) => {
           const valueToCheck = (product[key as keyof Station] || "").toString();
           return valueToCheck.toLowerCase().includes(value);
@@ -49,7 +73,7 @@ const Search = () => {
       );
       setFilteredProducts(results);
     } else {
-      setFilteredProducts(productsData);
+      setFilteredProducts(products);
     }
 
     setIsDropdownVisible(!!value);
@@ -58,7 +82,6 @@ const Search = () => {
   const handleBlur = () => {
     setTimeout(() => setIsDropdownVisible(false), 200);
   };
-
   return (
     <div className="relative w-full max-w-2xl text-gray">
       <div className="flex w-full items-center bg-blue rounded-full gap-4">
@@ -90,7 +113,7 @@ const Search = () => {
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
               <div
-                key={product.id}
+                key={product._id}
                 className="flex items-center gap-4 px-4 py-2 hover:bg-transparent/10 cursor-pointer border-b"
                 onClick={() => router.push(`/stations/${product.name}`)}
               >
@@ -104,12 +127,12 @@ const Search = () => {
                 />
                 <div>
                   <span className="font-semibold text-sm">{product.name}</span>
-                  <span className=" text-xs"> {product.style}</span>
+                  <span className="text-xs"> {product.style}</span>
                 </div>
               </div>
             ))
           ) : (
-            <div className="p-4 text-center 0 text-sm">
+            <div className="p-4 text-center text-sm">
               <span>Хайлт олдсонгүй</span>
             </div>
           )}

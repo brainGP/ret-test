@@ -9,7 +9,6 @@ const Home = () => {
 
       <main className="flex-1 ">
         <Breadcrumb />
-        hello
       </main>
     </div>
   );

@@ -21,7 +21,7 @@ const FilterOrder: React.FC<FilterOrderProps> = ({ onOrderChange }) => {
   return (
     <div>
       <Select onValueChange={handleChange}>
-        <SelectTrigger id="Эрэмбэлэх">
+        <SelectTrigger id="sort-order">
           <SelectValue placeholder="Үнээр эрэмбэлэх" />
         </SelectTrigger>
         <SelectContent position="popper">

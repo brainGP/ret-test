@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import stations from "@/data/stations.json";
 import NotFound from "@/app/not-found";
 import { useParams } from "next/navigation";
 import Image from "next/image";
@@ -12,7 +11,7 @@ import Link from "next/link";
 import ProductGrid from "@/components/ProductGrid";
 
 interface Station {
-  id: string;
+  _id: string;
   brand: string;
   name: string;
   type: string;
@@ -34,22 +33,47 @@ interface Params {
 const StationNamePage: React.FC = () => {
   const params = useParams() as Params;
   const [station, setStation] = useState<Station | null>(null);
+  const [stations, setStations] = useState<Station[]>([]);
   const router = useRouter();
 
   useEffect(() => {
+    const fetchStations = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/api/product");
+        console.log("API Response Status:", response.status);
+        if (response.ok) {
+          const data = await response.json();
+
+          setStations(data.products || []);
+        } else {
+          console.error("Failed to fetch stations");
+        }
+      } catch (error) {
+        console.error("Error fetching stations:", error);
+      }
+    };
+
+    fetchStations();
+  }, []);
+
+  useEffect(() => {
     const stationName = params?.name ? decodeURIComponent(params.name) : null;
-    if (stationName) {
+    if (stationName && stations.length > 0) {
       const foundStation = stations.find(
-        (s) => s.name.toLowerCase() === stationName.toLowerCase()
+        (s) => s.name.toLowerCase().trim() === stationName.toLowerCase().trim()
       );
+      console.log(stationName.toLowerCase);
+
       setStation(foundStation || null);
     }
-  }, [params?.name]);
+  }, [params?.name, stations]);
 
-  if (!station) return <NotFound />;
+  if (!station) {
+    return <NotFound />;
+  }
 
   const sameBrandStations = stations.filter(
-    (s) => s.brand === station.brand && s.id !== station.id
+    (s) => s.brand === station.brand && s._id !== station._id
   );
 
   return (
@@ -65,7 +89,7 @@ const StationNamePage: React.FC = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row w-full gap-4 lg:gap-12 justify-evenly items-center">
-        <div className="flex justify-center h-[330px] w-[330px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[500px] border items-center rounded-lg overflow-hidden  ">
+        <div className="flex justify-center h-[330px] w-[330px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[500px] border items-center rounded-lg overflow-hidden">
           <Image
             src={station.image}
             alt={station.name}
@@ -95,7 +119,7 @@ const StationNamePage: React.FC = () => {
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xl sm:text-2xl font-semibold ">
+            <span className="text-xl sm:text-2xl font-semibold">
               <strong>Үнэ:</strong> {station.priceN}
             </span>
             <span> (НӨАТ-тэй)</span>

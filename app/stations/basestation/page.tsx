@@ -41,7 +41,9 @@ const Home: React.FC = () => {
       setError(null);
 
       try {
-        const response = await axios.get("http://localhost:3001/api/product");
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product`
+        );
         const productsData: Station[] = response.data.products || [];
 
         const filteredProducts = productsData.filter(

@@ -33,7 +33,9 @@ const Search = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/product");
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch products");
         }

@@ -32,7 +32,7 @@ const NewProducts = () => {
 
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/product/?new=true"
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product/?new=true`
         );
         const productsData: Station[] = response.data.products || [];
         setProducts(productsData);

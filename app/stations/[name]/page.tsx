@@ -39,7 +39,9 @@ const StationNamePage: React.FC = () => {
   useEffect(() => {
     const fetchStations = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/product");
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product`
+        );
         console.log("API Response Status:", response.status);
         if (response.ok) {
           const data = await response.json();

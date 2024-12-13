@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface NotFoundProps {
-  explain?: string; // Optional prop to explain why the page wasn't found
+  explain?: string;
 }
 
 export default function NotFound({ explain }: NotFoundProps) {
@@ -13,7 +13,7 @@ export default function NotFound({ explain }: NotFoundProps) {
           src="/notfound.png"
           alt="Not Found"
           width={500}
-          height={500} // Adjust height for better aspect ratio
+          height={500}
           priority={true}
           className="w-500"
         />

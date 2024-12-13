@@ -7,6 +7,7 @@ import ProductGrid from "@/components/ProductGrid";
 import Breadcrumb from "@/components/BreadCrumb";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import FilterOrder from "@/components/FilterOrder";
+import Image from "next/image";
 
 interface Station {
   _id: string;
@@ -82,7 +83,15 @@ const Home: React.FC = () => {
         </div>
 
         {loading && (
-          <p className="text-center text-gray-500">Loading products...</p>
+          <div className="absolute inset-0 flex justify-center items-center">
+            <Image
+              src="/icons/loading.svg"
+              alt="loading"
+              width={50}
+              height={50}
+              className="animate-spin"
+            />
+          </div>
         )}
         {error && <p className="text-center text-red-500">{error}</p>}
 

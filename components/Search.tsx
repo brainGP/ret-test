@@ -109,25 +109,27 @@ const Search = () => {
       </div>
 
       {isDropdownVisible && (
-        <div className="absolute left-0 right-0 mt-2 bg-white border border-gray rounded-lg shadow-lg max-h-64 overflow-y-auto z-10">
+        <div className="absolute left-0 right-0 mt-2 bg-white border border-gray rounded-lg max-h-64 shadow-lg overflow-y-auto z-10">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
               <div
                 key={product._id}
-                className="flex items-center gap-4 px-4 py-2 hover:bg-transparent/10 cursor-pointer border-b"
+                className="flex items-center gap-4 px-4 py-2 hover:bg-transparent/10 h-32 cursor-pointer border-b"
                 onClick={() => router.push(`/stations/${product.name}`)}
               >
                 <Image
                   src={product.image || "/noresult.png"}
                   alt={product.name || "Product Image"}
-                  width={40}
-                  height={40}
-                  className="object-contain"
+                  width={80}
+                  height={80}
+                  className="object-contain max-w-[200px] max-h-[100px]"
                   priority={true}
                 />
                 <div>
-                  <span className="font-semibold text-sm">{product.name}</span>
-                  <span className="text-xs"> {product.style}</span>
+                  <span className="font-semibold text-sm block">
+                    {product.name}
+                  </span>
+                  <span className="text-xs text-gray-600">{product.style}</span>
                 </div>
               </div>
             ))

@@ -9,8 +9,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "./ui/dropdown-menu";
-import { ChevronDown, ChevronUp } from "lucide-react"; // Use icons for toggle
-import Image from "next/image";
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(" ");
 

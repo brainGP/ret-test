@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { ScrollArea } from "./ui/scroll-area";
 import ProductGrid from "./ProductGrid";
 import axios from "axios";
 import Image from "next/image";
@@ -37,7 +36,7 @@ const NewProducts = () => {
         );
         const productsData: Station[] = response.data.products || [];
         setProducts(productsData);
-      } catch (err) {
+      } catch {
         setError("Failed to fetch products. Please try again later.");
       } finally {
         setLoading(false);

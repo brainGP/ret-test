@@ -62,7 +62,7 @@ const Home: React.FC = () => {
         }
 
         setProducts(sortedProducts);
-      } catch (err) {
+      } catch {
         setError("Failed to fetch products. Please try again later.");
       } finally {
         setLoading(false);

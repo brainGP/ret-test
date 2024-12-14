@@ -15,36 +15,34 @@ import { FcGoogle } from "react-icons/fc";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
+
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
-    setError(null);
     setLoading(true);
 
     try {
       const response = await axios.post(
         "http://localhost:3001/api/auth/login",
-        {
-          email,
-          password,
-        }
+        { email, password }
       );
-
+      toast.success("Login successful");
       localStorage.setItem("user", JSON.stringify(response.data));
       router.push("/");
     } catch (err: unknown) {
+      let message = "An unexpected error occurred. Please try again.";
       if (err instanceof AxiosError && err.response) {
-        setError(err.response.data || "Something went wrong.");
-      } else {
-        setError("An unexpected error occurred.");
+        message = err.response.data || "Invalid email or password.";
       }
+
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -67,8 +65,8 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={loading}
-              required
               className="p-3"
+              aria-label="Email"
             />
             <Input
               type="password"
@@ -76,13 +74,16 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
-              required
               className="p-3"
+              aria-label="Password"
             />
-            {error && (
-              <p className="text-red-500 text-sm text-center">{error}</p>
-            )}
-            <Button type="submit" className="w-full" disabled={loading}>
+
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={loading}
+              aria-label="Login"
+            >
               {loading ? "Logging in..." : "Login"}
             </Button>
           </form>
@@ -91,28 +92,25 @@ const Login = () => {
             <Button
               variant="outline"
               size="lg"
-              className="bg-gray-100 hover:bg-gray-200"
-              onClick={() =>
-                alert("Login with Google isn\u0027t yet implemented.")
-              }
+              className="bg-neutral-400 hover:bg-gray/20"
+              disabled
+              aria-disabled="true"
             >
               <FcGoogle className="mr-2" /> Google
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="bg-gray-100 hover:bg-gray-200"
-              onClick={() =>
-                alert("Login with GitHub isn\u0027t yet implemented.")
-              }
+              className="bg-gray/10 hover:bg-gray/20"
+              disabled
+              aria-disabled="true"
             >
               <FaGithub className="mr-2" /> GitHub
             </Button>
           </div>
           <div className="text-center text-sm mt-4 text-gray-600">
-            <a>{"Don't have an account?"}</a>
-
-            <Link href="/register" className="text-blue-600 hover:underline">
+            Don&apos;t have an account?{" "}
+            <Link href="/register" className="text-sky-600 hover:underline">
               Sign up
             </Link>
           </div>

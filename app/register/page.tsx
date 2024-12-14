@@ -14,33 +14,60 @@ import { Separator } from "@/components/ui/separator";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const Signup = () => {
-  const [username, setUsername] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleSignup = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
+    if (!username || !email || !password || !confirmPassword) {
+      toast.error("All fields are required.");
+      setLoading(false);
+      return;
+    }
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long.");
+      setLoading(false);
+      return;
+    }
     if (password !== confirmPassword) {
+      toast.error("Passwords do not match.");
+      setLoading(false);
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      toast.error("Invalid email format.");
       setLoading(false);
       return;
     }
 
     try {
-      await axios.post("http://localhost:3001/api/auth/register", {
-        username,
-        email,
-        password,
-      });
-
+      const { data } = await axios.post(
+        "http://localhost:3001/api/auth/register",
+        {
+          username,
+          email,
+          password,
+        }
+      );
+      toast.success("Account created successfully!");
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
       router.push("/login");
-    } catch {
+    } catch (err: any) {
+      const message =
+        err.response?.data || "Something went wrong. Please try again.";
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -63,7 +90,6 @@ const Signup = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               disabled={loading}
-              required
               className="p-3"
             />
             <Input
@@ -72,7 +98,6 @@ const Signup = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={loading}
-              required
               className="p-3"
             />
             <Input
@@ -81,7 +106,6 @@ const Signup = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
-              required
               className="p-3"
             />
             <Input
@@ -90,7 +114,6 @@ const Signup = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               disabled={loading}
-              required
               className="p-3"
             />
             <Button type="submit" className="w-full" disabled={loading}>

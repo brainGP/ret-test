@@ -12,6 +12,7 @@ const Nav_labels: Record<string, string> = {
   basestation: "Суурин станц",
   other: "Бусад Бараа",
   contact: "Холбоо барих",
+  admin: "Админ",
 };
 
 const Breadcrumb = () => {
@@ -27,7 +28,7 @@ const Breadcrumb = () => {
           </Link>
         </li>
         {paths.map((segment, index) => {
-          const decodedSegment = decodeURIComponent(segment); // Decode the segment
+          const decodedSegment = decodeURIComponent(segment);
           const href = "/" + paths.slice(0, index + 1).join("/");
           const label = Nav_labels[decodedSegment] || decodedSegment;
 

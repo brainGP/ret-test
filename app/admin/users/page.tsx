@@ -6,11 +6,11 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Product } from "@/types/Product";
-import ProductTable from "@/components/Products/ProductTable";
-import ProductModal from "@/components/Products/ProductModal";
-import { LoadingError } from "@/components/LoadingError";
 import { toast } from "sonner";
+import Breadcrumb from "@/components/BreadCrumb";
+import { LoadingError } from "@/components/LoadingError";
+import UserModal from "@/components/Users/UserModal";
+import UserTable from "@/components/Users/UserTable";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,40 +21,44 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import Breadcrumb from "@/components/BreadCrumb";
+import { User } from "@/types/Users";
 
-function AdminPage() {
-  const [loading, setLoading] = useState(true);
+function AdminUsersPage() {
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [editProduct, setEditProduct] = useState<Product | null>(null);
-  const [newProduct, setNewProduct] = useState<Product | null>(null);
+  const [users, setUsers] = useState<User[]>([]);
+  const [newUser, setNewUser] = useState<User | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [productToDelete, setProductToDelete] = useState<string | null>(null);
+  const [editUser, setEditUser] = useState<User | null>(null);
+  const [userToDelete, setUserToDelete] = useState<string | null>(null);
   const [isFinalConfirmation, setIsFinalConfirmation] = useState(false);
   const router = useRouter();
 
-  const fetchProducts = async () => {
+  const fetchUsers = async () => {
     try {
-      const accessToken = getCookie("accessToken");
+      const accessToken = getCookie("accessToken") as string | undefined;
       if (!accessToken) throw new Error("Unauthorized");
 
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product`,
+      const response = await axios.get<User[]>(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/user`,
         { headers: { token: `Bearer ${accessToken}` } }
       );
 
       if (response.status === 200) {
-        setProducts(response.data.products);
+        console.log("Fetched users:", response.data);
+        setUsers(response.data);
+      } else {
+        throw new Error("Failed to fetch users.");
       }
-    } catch {
-      setError("Failed to fetch products.");
+    } catch (err) {
+      console.error("Error fetching users:", err);
+      setError("Failed to fetch users.");
     } finally {
       setLoading(false);
     }
   };
 
-  const deleteProduct = async (id: string) => {
+  const deleteUser = async (id: string) => {
     if (!isFinalConfirmation) return;
 
     try {
@@ -62,71 +66,71 @@ function AdminPage() {
       if (!accessToken) throw new Error("Unauthorized");
 
       const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/user/${id}`,
         { headers: { token: `Bearer ${accessToken}` } }
       );
 
       if (response.status === 200) {
-        setProducts((prev) => prev.filter((product) => product._id !== id));
-        toast.success("Бүтээгдэхүүнийг амжилттай устгалаа.");
+        setUsers((prev) => prev.filter((user) => user._id !== id));
+        toast.success("Хэрэглэгчийг амжилттай устгалаа.");
       }
     } catch {
-      toast.error("Бүтээгдэхүүнийг устгаж чадсангүй.");
+      toast.error("Хэрэглэгчийг устгаж чадсангүй.");
     } finally {
       setIsDialogOpen(false);
     }
   };
 
-  const updateProduct = async (product: Product) => {
+  const updateUser = async (user: User) => {
     try {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
 
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product/${product._id}`,
-        product,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/user/${user._id}`,
+        user,
         { headers: { token: `Bearer ${accessToken}` } }
       );
 
       if (response.status === 200) {
-        setProducts((prev) =>
-          prev.map((item) => (item._id === product._id ? response.data : item))
+        setUsers((prev) =>
+          prev.map((item) => (item._id === user._id ? response.data : item))
         );
-        toast.success("Бүтээгдэхүүн амжилттай шинэчилсэн.");
-        setEditProduct(null);
+        toast.success("Хэрэглэгч амжилттай шинэчилсэн.");
+        setEditUser(null);
       }
     } catch {
-      toast.error("Бүтээгдэхүүнийг шинэчилж чадсангүй.");
+      toast.error("Хэрэглэгчийг шинэчилж чадсангүй.");
     }
   };
 
-  const addProduct = async (product: Product) => {
+  const addUser = async (user: User) => {
     try {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
 
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product`,
-        product,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/user`,
+        user,
         { headers: { token: `Bearer ${accessToken}` } }
       );
 
       if (response.status === 201) {
-        setProducts((prev) => [...prev, response.data]);
-        toast.success("Бүтээгдэхүүнийг амжилттай нэмлээ.");
-        setNewProduct(null);
+        setUsers((prev) => [...prev, response.data]);
+        toast.success("Хэрэглэгчийг амжилттай нэмлээ.");
+        setNewUser(null);
       }
     } catch {
-      toast.error("Бүтээгдэхүүнийг нэмж чадсангүй.");
+      toast.error("Хэрэглэгчийг нэмж чадсангүй.");
     }
   };
 
-  const handleEdit = (product: Product) => {
-    setEditProduct(product);
+  const handleEdit = (user: User) => {
+    setEditUser(user);
   };
 
   const handleDelete = (id: string) => {
-    setProductToDelete(id);
+    setUserToDelete(id);
     setIsDialogOpen(true);
   };
 
@@ -134,7 +138,7 @@ function AdminPage() {
     if (!isAdmin()) {
       router.push("/login");
     } else {
-      fetchProducts();
+      fetchUsers();
     }
   }, [router]);
 
@@ -142,20 +146,22 @@ function AdminPage() {
     <div className="flex flex-col justify-center items-center w-full top-0 border-b px-4 md:px-6 mb-8 py-4">
       <div className="container flex flex-col items-centerpy-4 mx-auto max-w-7xl gap-4">
         <div className="flex flex-col sm:flex-row  justify-between ">
-          <h1 className="font-semibold text-xl mb-4">Админы хяналтын хэсэг</h1>
+          <h1 className="font-semibold text-xl mb-4">
+            Админы хэрэглэгчийг хяналтын хэсэг
+          </h1>
           <Button
             className="mb-4 text-white"
-            onClick={() => setNewProduct({} as Product)}
+            onClick={() => setNewUser({} as User)}
           >
-            Шинэ бүтээгдэхүүн нэмэх
+            Шинэ хэрэглэгчийг нэмэх
           </Button>
         </div>
         <Breadcrumb />
       </div>
       <div className="container flex flex-col sm:flex-row items-center justify-between py-4 mx-auto max-w-7xl gap-4">
         <ScrollArea className="w-full h-min-96 overflow-auto border border-gray-300 rounded-lg">
-          <ProductTable
-            products={products}
+          <UserTable
+            users={users}
             onEdit={handleEdit}
             onDelete={handleDelete}
           />
@@ -168,10 +174,10 @@ function AdminPage() {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Та энэ бүтээгдэхүүнийг устгахдаа итгэлтэй байна уу?
+              Та энэ хэрэглэгчийг устгахдаа итгэлтэй байна уу?
             </AlertDialogTitle>
             <AlertDialogDescription>
-              Энэ үйлдлийг буцаах боломжгүй. Та энэ бүтээгдэхүүнийг устгахдаа
+              Энэ үйлдлийг буцаах боломжгүй. Та энэ хэрэглэгчийг устгахдаа
               үнэхээр итгэлтэй байна уу?
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -183,8 +189,8 @@ function AdminPage() {
             <AlertDialogAction
               onClick={() => {
                 setIsFinalConfirmation(true);
-                if (productToDelete) {
-                  deleteProduct(productToDelete);
+                if (userToDelete) {
+                  deleteUser(userToDelete);
                 }
               }}
             >
@@ -194,23 +200,23 @@ function AdminPage() {
         </AlertDialogContent>
       </AlertDialog>
 
-      {editProduct && (
-        <ProductModal
-          product={editProduct}
-          onClose={() => setEditProduct(null)}
-          onSave={updateProduct}
+      {editUser && (
+        <UserModal
+          user={editUser}
+          onClose={() => setEditUser(null)}
+          onSave={updateUser}
         />
       )}
 
-      {newProduct && (
-        <ProductModal
-          product={newProduct}
-          onClose={() => setNewProduct(null)}
-          onSave={addProduct}
+      {newUser && (
+        <UserModal
+          user={newUser}
+          onClose={() => setNewUser(null)}
+          onSave={addUser}
         />
       )}
     </div>
   );
 }
 
-export default AdminPage;
+export default AdminUsersPage;

@@ -5,28 +5,12 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-
-interface Station {
-  _id: string;
-  name?: string;
-  brand?: string;
-  sort?: string;
-  type?: string;
-  style?: string;
-  price?: string;
-  priceN?: string;
-  battery?: string;
-  power?: string;
-  hertz?: string;
-  status?: string;
-  size?: { height: string; width: string }[];
-  image?: string;
-}
+import { Product } from "@/types/Product";
 
 const Search = () => {
   const [query, setQuery] = useState("");
-  const [products, setProducts] = useState<Station[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Station[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const router = useRouter();
 
@@ -69,7 +53,7 @@ const Search = () => {
     if (value && Array.isArray(products)) {
       const results = products.filter((product) =>
         ["name", "brand", "sort", "type", "style"].some((key) => {
-          const valueToCheck = (product[key as keyof Station] || "").toString();
+          const valueToCheck = (product[key as keyof Product] || "").toString();
           return valueToCheck.toLowerCase().includes(value);
         })
       );

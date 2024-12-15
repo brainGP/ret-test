@@ -7,26 +7,11 @@ import ProductGrid from "@/components/ProductGrid";
 import Breadcrumb from "@/components/BreadCrumb";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import FilterOrder from "@/components/FilterOrder";
-import Image from "next/image";
-
-interface Station {
-  _id: string;
-  name: string;
-  type: string;
-  style: string;
-  price: string;
-  priceN: string;
-  battery: string;
-  power: string;
-  hertz: string;
-  status: string;
-  size: { height: string; width: string }[];
-  image: string;
-  sort: string;
-}
+import { Product } from "@/types/Product";
+import { LoadingError } from "@/components/LoadingError";
 
 const Home: React.FC = () => {
-  const [products, setProducts] = useState<Station[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [sortOrder, setSortOrder] = useState<string>("lowtohigh");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -44,7 +29,7 @@ const Home: React.FC = () => {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product`
         );
-        const productsData: Station[] = response.data.products || [];
+        const productsData: Product[] = response.data.products || [];
 
         const filteredProducts = productsData.filter(
           (product) => product.sort === "Суурин станц"
@@ -84,20 +69,7 @@ const Home: React.FC = () => {
           <FilterOrder onOrderChange={handleOrderChange} />
         </div>
 
-        {loading && (
-          <div className="absolute inset-0 flex justify-center items-center">
-            <Image
-              src="/icons/loading.svg"
-              alt="loading"
-              width={50}
-              height={50}
-              className="animate-spin"
-            />
-          </div>
-        )}
-        {error && <p className="text-center text-red-500">{error}</p>}
-
-        {/* Product Grid */}
+        <LoadingError isLoading={loading} error={error} />
         <ScrollArea className="rounded-md h-full m-4 lg:m-6">
           <ProductGrid title="Гар станц" products={products} />
         </ScrollArea>

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { LoadingError } from "@/components/LoadingError";
 
 const Home = () => {
   const [isMapInView, setIsMapInView] = useState(false);
@@ -18,6 +19,7 @@ const Home = () => {
       },
       { threshold: 0.5 }
     );
+
     const mapSection = document.getElementById("map-section");
     if (mapSection) observer.observe(mapSection);
 
@@ -26,23 +28,16 @@ const Home = () => {
     };
   }, []);
 
+  const handleError = () => {
+    setLoading(false);
+  };
+
   return (
     <div className="flex flex-col gap-16 px-4 xl:px-16 py-8">
-      {/* Map Section */}
       <div id="map-section" className="flex flex-col gap-4">
         <h1 className="font-medium text-xl md:text-2xl">Газрын зураг</h1>
         <div className="flex justify-center relative">
-          {loading && (
-            <div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-80">
-              <Image
-                src="/icons/loading.svg"
-                alt="loading"
-                width={50}
-                height={50}
-                className="animate-spin"
-              />
-            </div>
-          )}
+          <LoadingError isLoading={loading} />
           {isMapInView && (
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.659448480662!2d106.90872647687203!3d47.90427637121876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d9693fe320bd967%3A0xbbac0999ded34b5!2zUmV0ZXZpcyBNb25nb2xpYS8g0KDQsNC00LjQviDRgdGC0LDQvdGG!5e0!3m2!1sen!2smn!4v1732851245626!5m2!1sen!2smn"
@@ -54,6 +49,7 @@ const Home = () => {
               referrerPolicy="no-referrer-when-downgrade"
               className="rounded-lg shadow-lg"
               onLoad={() => setLoading(false)}
+              onError={handleError}
             />
           )}
         </div>

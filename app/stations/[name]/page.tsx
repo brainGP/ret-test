@@ -9,22 +9,7 @@ import { useRouter } from "next/navigation";
 import Breadcrumb from "@/components/BreadCrumb";
 import Link from "next/link";
 import ProductGrid from "@/components/ProductGrid";
-
-interface Station {
-  _id: string;
-  brand: string;
-  name: string;
-  type: string;
-  style: string;
-  price: string;
-  priceN: string;
-  battery: string;
-  power: string;
-  hertz: string;
-  status: string;
-  size: { height: string; width: string }[];
-  image: string;
-}
+import { Product } from "@/types/Product";
 
 interface Params {
   name?: string;
@@ -32,8 +17,8 @@ interface Params {
 
 const StationNamePage: React.FC = () => {
   const params = useParams() as Params;
-  const [station, setStation] = useState<Station | null>(null);
-  const [stations, setStations] = useState<Station[]>([]);
+  const [station, setStation] = useState<Product | null>(null);
+  const [stations, setStations] = useState<Product[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -86,7 +71,7 @@ const StationNamePage: React.FC = () => {
           className="flex bg-gray text-white max-w-[64px] border relative hover:bg-gray/80 px-4 py-2 rounded-md shadow-sm"
           onClick={() => router.back()}
         >
-          Back
+          Буцах
         </Button>
       </div>
 
@@ -128,7 +113,7 @@ const StationNamePage: React.FC = () => {
           </div>
           <Link href="https://m.me/RetevisMongolia" passHref>
             <Button className="bg-neutral-800 text-white hover:bg-neutral-800/80 px-6 py-3 rounded-md w-full">
-              Contact
+              Холбогдох
             </Button>
           </Link>
         </div>

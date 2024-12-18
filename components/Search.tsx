@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Product } from "@/types/Product";
+import { GET } from "@/apis/axios";
 
 const Search = () => {
   const [query, setQuery] = useState("");
@@ -17,22 +18,23 @@ const Search = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
-        const data = await response.json();
+        const response = await GET({ route: `/api/product` });
 
-        if (Array.isArray(data)) {
-          setProducts(data);
-          setFilteredProducts(data);
-        } else if (data.products && Array.isArray(data.products)) {
-          setProducts(data.products);
-          setFilteredProducts(data.products);
+        if (response?.data) {
+          const data = response.data;
+          if (Array.isArray(data)) {
+            setProducts(data);
+            setFilteredProducts(data);
+          } else if (data.products && Array.isArray(data.products)) {
+            setProducts(data.products);
+            setFilteredProducts(data.products);
+          } else {
+            console.error("Unexpected API response:", data);
+            setProducts([]);
+            setFilteredProducts([]);
+          }
         } else {
-          console.error("Unexpected API response:", data);
+          console.error("Failed to fetch products");
           setProducts([]);
           setFilteredProducts([]);
         }

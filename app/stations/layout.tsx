@@ -1,5 +1,3 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,11 +10,5 @@ export default function StationLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div>
-      <Header />
-      {children}
-      <Footer />
-    </div>
-  );
+  return <div>{children}</div>;
 }

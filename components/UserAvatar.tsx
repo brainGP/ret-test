@@ -1,7 +1,6 @@
 import React from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { LogOut, SettingsIcon } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -26,7 +25,11 @@ function UserAvatar({ name }: { name: string; picture?: string }) {
     <div className="flex flex-row gap-4 items-center">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="rounded-full p-0">
+          <Button
+            variant="outline"
+            className="rounded-full p-0"
+            aria-label="User menu"
+          >
             <Avatar className="bg-slate-300 rounded-full">
               <AvatarFallback className="text-black/85 font-bold">
                 {name.charAt(0)}
@@ -37,6 +40,8 @@ function UserAvatar({ name }: { name: string; picture?: string }) {
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>Миний мэдээлэл</DropdownMenuLabel>
           <DropdownMenuSeparator />
+
+          {/* Admin-specific options */}
           {isUserAdmin && (
             <>
               <DropdownMenuGroup>
@@ -50,14 +55,16 @@ function UserAvatar({ name }: { name: string; picture?: string }) {
                   <span>Админ</span>
                   <DropdownMenuShortcut>P</DropdownMenuShortcut>
                 </DropdownMenuItem>
-                <DropdownMenuItem></DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
             </>
           )}
+
+          {/* Logout option */}
           <DropdownMenuItem
             onClick={() => {
               logoutUser();
+              router.push(`/`);
               router.refresh();
             }}
           >

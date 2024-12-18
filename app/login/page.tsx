@@ -1,35 +1,35 @@
 "use client";
+
 import React, { useState, FormEvent } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
 import { saveUserData } from "@/lib/authHelper";
 import Image from "next/image";
-import { LoadingWait } from "@/components/LoadingWait";
 import { Separator } from "@/components/ui/separator";
+import { POST } from "@/apis/axios";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | undefined>(undefined);
   const router = useRouter();
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError(undefined);
 
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/auth/login`,
-        { email, password }
-      );
+      const response = await POST({
+        route: `/api/auth/login`,
+        body: { email, password },
+      });
+
       toast.success("Амжилттай нэвтэрлээ");
       saveUserData(response.data);
 
@@ -91,11 +91,7 @@ const Login = () => {
                 />
                 <button
                   type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setShowPassword(!showPassword);
-                  }}
+                  onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-4 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none"
                 >
                   <Image
@@ -110,32 +106,29 @@ const Login = () => {
                   />
                 </button>
               </div>
-              <Button
-                type="submit"
-                className={`w-full text-white p-4 py-6 ${loading}`}
-                disabled={loading}
-              >
-                {loading ? (
-                  <LoadingWait isLoading={loading} error={error} />
-                ) : (
-                  "Үргэлжлүүлэх"
-                )}
+
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? "Түр хүлээнэ үү..." : "Нэвтрэх"}
               </Button>
+
+              <Separator />
+
+              <div className="flex justify-between text-sm text-gray">
+                <p>Үнэхээр бүртгүүлээгүй юу?</p>
+                <Link href={`/signup`} className="text-sky-600 hover:underline">
+                  Бүртгэл үүсгэх
+                </Link>
+              </div>
             </form>
-            <Separator />
-            <div className="flex flex-row justify-between text-sm mt-4 text-gray">
-              <p>Аль хэдийн хаягтай юу? </p>
-              <Link href={`/register`} className="text-sky-600 hover:underline">
-                Бүртгүүлэх
-              </Link>
-            </div>
           </CardContent>
         </Card>
+
         <p className="mt-6 text-gray-500 text-sm">
           <span>EN | MN</span>
         </p>
       </div>
 
+      {/* Right Image Section */}
       <div className="hidden md:block w-1/2 relative">
         <Image
           src="/Auth.png"

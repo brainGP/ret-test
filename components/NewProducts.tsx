@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import ProductGrid from "./ProductGrid";
-import axios from "axios";
+import { GET } from "@/apis/axios";
 
 import { Product } from "@/types/Product";
 import { LoadingError } from "./LoadingError";
@@ -17,9 +17,8 @@ const NewProducts = () => {
       setError(null);
 
       try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product/?new=true`
-        );
+        const response = await GET({ route: `/api/product/?new=true` });
+
         const productsData: Product[] = response.data.products || [];
         setProducts(productsData);
         console.log(productsData);

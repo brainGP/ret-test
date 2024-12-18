@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Filter from "@/components/Filter";
 import ProductGrid from "@/components/ProductGrid";
 import Breadcrumb from "@/components/BreadCrumb";
@@ -10,6 +9,7 @@ import FilterOrder from "@/components/FilterOrder";
 import { useParams } from "next/navigation";
 import NotFound from "@/app/not-found";
 import { Product } from "@/types/Product";
+import { GET } from "@/apis/axios";
 
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -29,9 +29,7 @@ const Home = () => {
       setError(null);
 
       try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product`
-        );
+        const response = await GET({ route: `/api/product` });
         const productsData: Product[] = response.data.products || [];
         const filteredProducts = productsData.filter(
           (product) => product.brand === brand

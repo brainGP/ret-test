@@ -14,8 +14,16 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
+import { POST } from "@/apis/axios";
 import { Product } from "@/types/Product";
 import Image from "next/image";
+
+interface Data {
+  username: string;
+  email: string;
+  password: string;
+}
+
 interface ApiResponse {
   message: string;
   data: Product[];
@@ -35,6 +43,12 @@ const Signup = () => {
   const handleSignup = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    const data: Data = {
+      username,
+      email,
+      password,
+    };
 
     if (!username || !email || !password || !confirmPassword) {
       toast.error("Бүх хэсгийг бөглөх шаардлагатай.");
@@ -58,14 +72,10 @@ const Signup = () => {
     }
 
     try {
-      await axios.post<ApiResponse>(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/auth/register`,
-        {
-          username,
-          email,
-          password,
-        }
-      );
+      await POST({
+        route: `/api/auth/register`,
+        body: data,
+      });
       toast.success("Амжилттай бүртгэгдлээ");
 
       setUsername("");

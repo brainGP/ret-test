@@ -23,6 +23,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import Breadcrumb from "@/components/BreadCrumb";
+import { DELETE, GET, POST, PUT } from "@/apis/axios";
 
 function AdminPage() {
   const [loading, setLoading] = useState(true);
@@ -40,11 +41,7 @@ function AdminPage() {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
 
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product`,
-        { headers: { token: `Bearer ${accessToken}` } }
-      );
-
+      const response = await GET({ route: `/api/product`, token: accessToken });
       if (response.status === 200) {
         setProducts(response.data.products);
       }
@@ -62,10 +59,10 @@ function AdminPage() {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
 
-      const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product/${id}`,
-        { headers: { token: `Bearer ${accessToken}` } }
-      );
+      const response = await DELETE({
+        route: `/api/product/${id}`,
+        token: accessToken,
+      });
 
       if (response.status === 200) {
         setProducts((prev) => prev.filter((product) => product._id !== id));
@@ -83,11 +80,11 @@ function AdminPage() {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
 
-      const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product/${product._id}`,
-        product,
-        { headers: { token: `Bearer ${accessToken}` } }
-      );
+      const response = await PUT({
+        route: `/api/product/${product._id}`,
+        token: accessToken,
+        body: product,
+      });
 
       if (response.status === 200) {
         setProducts((prev) =>
@@ -106,12 +103,11 @@ function AdminPage() {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
 
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product`,
-        product,
-        { headers: { token: `Bearer ${accessToken}` } }
-      );
-
+      const response = await POST({
+        route: `/api/product`,
+        token: accessToken,
+        body: product,
+      });
       if (response.status === 201) {
         setProducts((prev) => [...prev, response.data]);
         toast.success("Бүтээгдэхүүнийг амжилттай нэмлээ.");

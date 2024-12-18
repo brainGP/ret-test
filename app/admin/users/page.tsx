@@ -23,6 +23,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { User } from "@/types/Users";
+import { DELETE, GET, POST, PUT } from "@/apis/axios";
 
 function AdminUsersPage() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -39,11 +40,10 @@ function AdminUsersPage() {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
 
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/user`,
-        { headers: { token: `Bearer ${accessToken}` } }
-      );
-
+      const response = await GET({
+        token: accessToken,
+        route: `/api/user`,
+      });
       if (response.status === 200) {
         setUsers(response.data.users);
       }
@@ -58,12 +58,10 @@ function AdminUsersPage() {
     try {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
-
-      console.log(`Deleting user with ID: ${id}`);
-      const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/user/${id}`,
-        { headers: { token: `Bearer ${accessToken}` } }
-      );
+      const response = await DELETE({
+        route: `/api/user/${id}`,
+        token: accessToken,
+      });
 
       if (response.status === 200) {
         setUsers((prev) => prev.filter((user) => user._id !== id));
@@ -82,12 +80,11 @@ function AdminUsersPage() {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
 
-      const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/user/${user._id}`,
-        user,
-        { headers: { token: `Bearer ${accessToken}` } }
-      );
-
+      const response = await PUT({
+        route: `/api/user/${user._id}`,
+        token: accessToken,
+        body: user,
+      });
       if (response.status === 200) {
         setUsers((prev) =>
           prev.map((item) => (item._id === user._id ? response.data : item))
@@ -105,12 +102,11 @@ function AdminUsersPage() {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
 
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/user`,
-        user,
-        { headers: { token: `Bearer ${accessToken}` } }
-      );
-
+      const response = await POST({
+        route: `/api/user`,
+        token: accessToken,
+        body: user,
+      });
       if (response.status === 201) {
         setUsers((prev) => [...prev, response.data]);
         toast.success("Хэрэглэгчийг амжилттай нэмлээ.");

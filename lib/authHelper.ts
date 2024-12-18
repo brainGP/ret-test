@@ -39,9 +39,14 @@ export const getUserData = () => {
 export const isUserLoggedIn = () => {
   const accessToken = getCookie("accessToken");
   const cookies: Cookies = getCookies();
-  const { email, username, isAdmin, _id } = cookies;
 
-  if (!email || !username || !isAdmin || !_id || !accessToken) {
+  if (
+    !cookies.email ||
+    !cookies.username ||
+    !cookies.isAdmin ||
+    !cookies._id ||
+    !accessToken
+  ) {
     return false;
   }
 

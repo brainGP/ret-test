@@ -224,8 +224,8 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <div className="mt-6 flex justify-end">
-              <Button className="bg-green-500 text-white" type="submit">
-                Save Product
+              <Button className="text-white" type="submit">
+                Бүтээгдэхүүнийг хадгалах
               </Button>
             </div>
           </form>

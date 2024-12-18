@@ -13,6 +13,7 @@ const Nav_labels: Record<string, string> = {
   other: "Бусад Бараа",
   contact: "Холбоо барих",
   admin: "Админ",
+  users: "Хэрэглэгчид",
 };
 
 const Breadcrumb = () => {

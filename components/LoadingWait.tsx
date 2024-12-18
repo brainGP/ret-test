@@ -1,21 +1,21 @@
 import Image from "next/image";
-interface LoadingErrorProps {
+interface LoadingWaitProps {
   isLoading: boolean;
   error?: string | null;
 }
 
-export const LoadingError: React.FC<LoadingErrorProps> = ({
+export const LoadingWait: React.FC<LoadingWaitProps> = ({
   isLoading,
   error,
 }) => {
   if (isLoading)
     return (
-      <div className="absolute inset-0 flex justify-center items-center bg-transparent bg-opacity-80">
+      <div className="flex justify-center items-center bg-transparent bg-opacity-80">
         <Image
           src="/icons/loading.svg"
           alt="loading"
-          width={50}
-          height={50}
+          width={24}
+          height={24}
           className="animate-spin"
         />
       </div>

@@ -22,6 +22,7 @@ const NewProducts = () => {
         );
         const productsData: Product[] = response.data.products || [];
         setProducts(productsData);
+        console.log(productsData);
       } catch {
         setError("Failed to fetch products. Please try again later.");
       } finally {

@@ -5,8 +5,8 @@ const Footer: React.FC = () => {
   return (
     <footer className="flex flex-col justify-center items-center px-4 md:px-6 md:mt-1 text-gray">
       <div className="h-[0.5px] w-full bg-gray/20 my-4" />
-      <div className="container mx-auto max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 py-6">
-        <div className="flex items-start md:items-center justify-center sm:justify-start">
+      <div className="container flex justify-between items-start mx-auto max-w-7xl gap-8 py-6 flex-wrap">
+        <div className="flex items-center justify-center sm:justify-start">
           <Image
             src="/retevis.png"
             alt="Retevis Mongolia Logo"
@@ -15,7 +15,6 @@ const Footer: React.FC = () => {
             priority={true}
           />
         </div>
-
         <div className="flex flex-col items-start">
           <h2 className="text-lg font-semibold">ХОЛБОО БАРИХ</h2>
           <p className="text-sm mt-2">
@@ -25,14 +24,13 @@ const Footer: React.FC = () => {
             <strong>Имэйл:</strong> retevismongolia@gmail.com
           </p>
         </div>
-
         <div className="flex flex-col items-start">
           <h2 className="text-lg font-semibold">ХАЯГ БАЙРШИЛ</h2>
           <p className="text-sm mt-2">
-            ХУД, Энх-Тайваны гүүрний баруун урд уулзвар, Ulaanbaatar, Mongolia
+            ХУД, Энх-Тайваны гүүрний баруун урд
+            <br /> уулзвар, Ulaanbaatar, Mongolia
           </p>
         </div>
-
         <div className="flex flex-col items-start">
           <h2 className="text-lg font-semibold">СОШИАЛ ХАЯГУУД</h2>
           <a
@@ -63,6 +61,7 @@ const Footer: React.FC = () => {
           </a>
         </div>
       </div>
+
       <div className="h-[0.5px] w-full bg-gray/20 my-4" />
       <div className="w-full border-gray py-4 text-sm text-center">
         © 2024 Retevis Mongolia

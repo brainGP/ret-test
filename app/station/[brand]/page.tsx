@@ -33,7 +33,6 @@ const Home = () => {
           `${process.env.NEXT_PUBLIC_BACKEND_URL}api/product`
         );
         const productsData: Product[] = response.data.products || [];
-
         const filteredProducts = productsData.filter(
           (product) => product.brand === brand
         );

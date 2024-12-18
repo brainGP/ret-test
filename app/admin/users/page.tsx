@@ -11,6 +11,7 @@ import Breadcrumb from "@/components/BreadCrumb";
 import { LoadingError } from "@/components/LoadingError";
 import UserModal from "@/components/Users/UserModal";
 import UserTable from "@/components/Users/UserTable";
+import Link from "next/link";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -31,27 +32,22 @@ function AdminUsersPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editUser, setEditUser] = useState<User | null>(null);
   const [userToDelete, setUserToDelete] = useState<string | null>(null);
-  const [isFinalConfirmation, setIsFinalConfirmation] = useState(false);
   const router = useRouter();
 
   const fetchUsers = async () => {
     try {
-      const accessToken = getCookie("accessToken") as string | undefined;
+      const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
 
-      const response = await axios.get<User[]>(
+      const response = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}api/user`,
         { headers: { token: `Bearer ${accessToken}` } }
       );
 
       if (response.status === 200) {
-        console.log("Fetched users:", response.data);
-        setUsers(response.data);
-      } else {
-        throw new Error("Failed to fetch users.");
+        setUsers(response.data.users);
       }
-    } catch (err) {
-      console.error("Error fetching users:", err);
+    } catch {
       setError("Failed to fetch users.");
     } finally {
       setLoading(false);
@@ -59,12 +55,11 @@ function AdminUsersPage() {
   };
 
   const deleteUser = async (id: string) => {
-    if (!isFinalConfirmation) return;
-
     try {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
 
+      console.log(`Deleting user with ID: ${id}`);
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}api/user/${id}`,
         { headers: { token: `Bearer ${accessToken}` } }
@@ -74,7 +69,8 @@ function AdminUsersPage() {
         setUsers((prev) => prev.filter((user) => user._id !== id));
         toast.success("Хэрэглэгчийг амжилттай устгалаа.");
       }
-    } catch {
+    } catch (error) {
+      console.error("Failed to delete user:", error);
       toast.error("Хэрэглэгчийг устгаж чадсангүй.");
     } finally {
       setIsDialogOpen(false);
@@ -135,11 +131,16 @@ function AdminUsersPage() {
   };
 
   useEffect(() => {
-    if (!isAdmin()) {
-      router.push("/login");
-    } else {
-      fetchUsers();
-    }
+    const checkAuth = async () => {
+      const accessToken = getCookie("accessToken");
+      if (!accessToken || !isAdmin()) {
+        router.push("/");
+      } else {
+        await fetchUsers();
+      }
+    };
+
+    checkAuth();
   }, [router]);
 
   return (
@@ -147,7 +148,7 @@ function AdminUsersPage() {
       <div className="container flex flex-col items-centerpy-4 mx-auto max-w-7xl gap-4">
         <div className="flex flex-col sm:flex-row  justify-between ">
           <h1 className="font-semibold text-xl mb-4">
-            Админы хэрэглэгчийг хяналтын хэсэг
+            Админы хэрэглэгчдийг хянах хэсэг
           </h1>
           <Button
             className="mb-4 text-white"
@@ -156,15 +157,16 @@ function AdminUsersPage() {
             Шинэ хэрэглэгчийг нэмэх
           </Button>
         </div>
-        <Breadcrumb />
+        <div className="flex flex-row justify-between items-center">
+          <Breadcrumb />
+          <Link href={`/admin`}>
+            <Button> Бүтээгдэхүүн</Button>
+          </Link>
+        </div>
       </div>
       <div className="container flex flex-col sm:flex-row items-center justify-between py-4 mx-auto max-w-7xl gap-4">
-        <ScrollArea className="w-full h-min-96 overflow-auto border border-gray-300 rounded-lg">
-          <UserTable
-            users={users}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
+        <ScrollArea className="w-full h-min-96 overflow-auto border rounded-lg">
+          <UserTable user={users} onEdit={handleEdit} onDelete={handleDelete} />
         </ScrollArea>
       </div>
 
@@ -188,13 +190,12 @@ function AdminUsersPage() {
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={() => {
-                setIsFinalConfirmation(true);
                 if (userToDelete) {
                   deleteUser(userToDelete);
                 }
               }}
             >
-              Delete
+              Устгах
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

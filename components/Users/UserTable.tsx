@@ -13,39 +13,48 @@ import { User } from "@/types/Users";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 interface UserTableProps {
-  users: User[];
-  onEdit: (users: User) => void;
+  user: User[];
+  onEdit: (user: User) => void;
   onDelete: (id: string) => void;
 }
 
-const UserTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete }) => {
-  console.log("enenii daraah", users);
+const UserTable: React.FC<UserTableProps> = ({ user, onEdit, onDelete }) => {
+  console.log("User array:", user);
 
   return (
-    <ScrollArea className="w-screen whitespace-nowrap rounded-md border">
-      <div className="min-w-[1000px]">
+    <ScrollArea className="w-screen xl:w-full overflow-x-auto rounded-md border">
+      <div className="min-w-[1200px]">
         <Table>
           <TableCaption>Бүх жагсаалт.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[50px] text-center">#</TableHead>
-              <TableHead className="w-[150px]">Username</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Password</TableHead>
-              <TableHead>isAdmin</TableHead>
+              <TableHead className="w-[100px] text-center">#</TableHead>
+              <TableHead className="w-[300px]">Username</TableHead>
+              <TableHead className="w-[300px]">Email</TableHead>
+              <TableHead className="w-[300px]">Admin</TableHead>
+              <TableHead className="w-[300px]">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.length > 0 ? (
-              users.map((user, index) => (
+            {user.length > 0 ? (
+              user.map((user, index) => (
                 <TableRow key={user._id}>
                   <TableCell className="text-center font-medium">
                     {index + 1}.
                   </TableCell>
                   <TableCell className="font-medium">{user.username}</TableCell>
                   <TableCell>{user.email}</TableCell>
-                  <TableCell>{user.password || "N/A"}</TableCell>
-                  <TableCell>{user.isAdmin ? "Yes" : "No"}</TableCell>
+                  <TableCell>
+                    {user.isAdmin ? (
+                      <div className="flex w-[150px] items-center justify-center font-semibold border border-green-300 rounded-full py-1 bg-white text-green-400">
+                        Админ
+                      </div>
+                    ) : (
+                      <div className="flex w-[150px] items-center justify-center font-semibold border border-slate-400 rounded-full py-1 bg-white text-slate-600">
+                        Хэрэглэгч
+                      </div>
+                    )}
+                  </TableCell>
                   <TableCell>
                     <UserActions
                       user={user}
@@ -57,7 +66,7 @@ const UserTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete }) => {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={5} className="text-center">
+                <TableCell colSpan={6} className="text-center">
                   No users available.
                 </TableCell>
               </TableRow>

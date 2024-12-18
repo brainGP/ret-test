@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { isAdmin } from "@/lib/authHelper";
+import { isAdmin, isUserLoggedIn } from "@/lib/authHelper";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import ProductTable from "@/components/Products/ProductTable";
 import ProductModal from "@/components/Products/ProductModal";
 import { LoadingError } from "@/components/LoadingError";
 import { toast } from "sonner";
+import Link from "next/link";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -131,11 +132,19 @@ function AdminPage() {
   };
 
   useEffect(() => {
-    if (!isAdmin()) {
-      router.push("/login");
-    } else {
-      fetchProducts();
-    }
+    const checkAuth = async () => {
+      const accessToken = getCookie("accessToken");
+      if (!accessToken || !isAdmin()) {
+        router.push("/");
+      } else {
+        await fetchProducts();
+      }
+      if (!isUserLoggedIn) {
+        router.push("/");
+      }
+    };
+
+    checkAuth();
   }, [router]);
 
   return (
@@ -150,10 +159,15 @@ function AdminPage() {
             Шинэ бүтээгдэхүүн нэмэх
           </Button>
         </div>
-        <Breadcrumb />
+        <div className="flex flex-row justify-between items-center">
+          <Breadcrumb />
+          <Link href={`admin/users`}>
+            <Button> Хэрэглэгчид</Button>
+          </Link>
+        </div>
       </div>
       <div className="container flex flex-col sm:flex-row items-center justify-between py-4 mx-auto max-w-7xl gap-4">
-        <ScrollArea className="w-full h-min-96 overflow-auto border border-gray-300 rounded-lg">
+        <ScrollArea className="w-full h-min-96 overflow-auto border rounded-lg">
           <ProductTable
             products={products}
             onEdit={handleEdit}
@@ -181,6 +195,7 @@ function AdminPage() {
               Цуцлах
             </AlertDialogCancel>
             <AlertDialogAction
+              className="bg-red-500"
               onClick={() => {
                 setIsFinalConfirmation(true);
                 if (productToDelete) {
@@ -188,7 +203,7 @@ function AdminPage() {
                 }
               }}
             >
-              Delete
+              Устгах
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

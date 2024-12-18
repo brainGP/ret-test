@@ -18,32 +18,40 @@ interface ProductTableProps {
   onDelete: (id: string) => void;
 }
 
+// Helper function to format the price with a thousand separator
+const formatPrice = (price: string | number) => {
+  // Ensure the price is a number and return formatted string with thousand separators
+  const priceNumber =
+    typeof price === "string" ? parseInt(price.replace(/[^0-9]/g, "")) : price;
+  if (isNaN(priceNumber)) return price; // Return the original price if it's not a valid number
+  return priceNumber.toLocaleString("en-US").replace(/,/g, "'"); // Replace commas with apostrophes
+};
+
 const ProductTable: React.FC<ProductTableProps> = ({
   products,
   onEdit,
   onDelete,
 }) => {
   return (
-    <ScrollArea className="w-screen whitespace-nowrap rounded-md border">
-      <div className="min-w-[1000px]">
+    <ScrollArea className="w-screen xl:w-full overflow-x-auto rounded-md border">
+      <div className="min-w-[1200px]">
         <Table>
           <TableCaption>Бүх бүтээгдэхүүний жагсаалт.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[50px] text-center">#</TableHead>
-              <TableHead className="w-[150px]">Brand</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Type</TableHead>
-              <TableHead>Style</TableHead>
-              <TableHead>Price (НӨАТ)</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead className="w-[100px]">Brand</TableHead>
+              <TableHead className="w-[150px]">Name</TableHead>
+              <TableHead className="w-[100px]">Type</TableHead>
+              <TableHead className="w-[150px]">Style</TableHead>
+              <TableHead className="w-[100px]">Price (НӨАТ, ₮)</TableHead>
+              <TableHead className="w-[100px]">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {products.length > 0 ? (
               products.map((product, index) => (
                 <TableRow key={product._id}>
-                  {/* Row number */}
                   <TableCell className="text-center font-medium">
                     {index + 1}.
                   </TableCell>
@@ -51,7 +59,7 @@ const ProductTable: React.FC<ProductTableProps> = ({
                   <TableCell>{product.name}</TableCell>
                   <TableCell>{product.type}</TableCell>
                   <TableCell>{product.style}</TableCell>
-                  <TableCell>{product.priceN}</TableCell>
+                  <TableCell>{formatPrice(product.priceN)}₮</TableCell>
                   <TableCell>
                     <ProductActions
                       product={product}

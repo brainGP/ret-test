@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Retevis Mongolia",
 };
 
-export default function StationLayout({
+export default function ContactLayout({
   children,
 }: {
   children: React.ReactNode;

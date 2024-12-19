@@ -30,9 +30,7 @@ const UserModal: React.FC<UserModalProps> = ({ user, onClose, onSave }) => {
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div className="bg-white rounded-lg p-6 w-full max-w-2xl overflow-y-auto max-h-[90vh]">
           <div className="flex flex-row justify-between m-4">
-            <h2 className="text-xl font-bold mb-4">
-              {user._id ? "Edit User" : "Add User"}
-            </h2>
+            <h2 className="text-xl font-bold mb-4">{"Edit User"}</h2>
             <Button
               className="bg-white shadow-none hover:bg-gray/10"
               onClick={onClose}

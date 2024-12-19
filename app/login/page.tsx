@@ -115,7 +115,10 @@ const Login = () => {
 
               <div className="flex justify-between text-sm text-gray">
                 <p>Үнэхээр бүртгүүлээгүй юу?</p>
-                <Link href={`/signup`} className="text-sky-600 hover:underline">
+                <Link
+                  href={`/register`}
+                  className="text-sky-600 hover:underline"
+                >
                   Бүртгэл үүсгэх
                 </Link>
               </div>

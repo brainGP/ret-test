@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/types/Product";
+import { baseUrl } from "@/lib/staticData";
 
 interface ProductGridProps {
   title?: string;
@@ -31,7 +32,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, products }) => {
 export default ProductGrid;
 
 const ProductCard = ({ product }: { product: Product }) => {
-  const imgUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}${product.image}`;
+  const imgUrl = `${baseUrl}${product.image}`;
   return (
     <Link href={`/stations/${product.name}`}>
       <div className="border h-[380px] w-full rounded-md shadow-md transition-transform hover:scale-105 flex flex-col">

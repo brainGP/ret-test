@@ -14,6 +14,7 @@ import { GET } from "@/apis/axios";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { toast } from "sonner";
+import { baseUrl } from "@/lib/staticData";
 
 interface Params {
   name?: string;
@@ -78,7 +79,7 @@ const StationNamePage: React.FC = () => {
         <div className="flex flex-col lg:flex-row w-full gap-4 lg:gap-12 justify-evenly items-center">
           <div className="flex justify-center h-[330px] w-[330px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[500px] border items-center rounded-lg overflow-hidden">
             <Image
-              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${station.image}`}
+              src={`${baseUrl}${station.image}`}
               alt={station.name}
               height={500}
               width={500}

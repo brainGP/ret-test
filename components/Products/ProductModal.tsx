@@ -16,10 +16,40 @@ const ProductModal: React.FC<ProductModalProps> = ({
   onClose,
   onSave,
 }) => {
-  const [formData, setFormData] = useState<Product>(product);
+  const [formData, setFormData] = useState<Product>({
+    ...product,
+    brand: product.brand || "",
+    sort: product.sort || "",
+    name: product.name || "",
+    type: product.type || "",
+    style: product.style || "",
+    price: product.price || "0",
+    priceN: product.priceN || "0",
+    battery: product.battery || "",
+    power: product.power || "",
+    hertz: product.hertz || "",
+    status: product.status || "",
+    size: product.size || [{ height: "", width: "" }],
+    image: product.image || "",
+  });
 
   useEffect(() => {
-    setFormData(product);
+    setFormData({
+      ...product,
+      brand: product.brand || "",
+      sort: product.sort || "",
+      name: product.name || "",
+      type: product.type || "",
+      style: product.style || "",
+      price: product.price || "0",
+      priceN: product.priceN || "0",
+      battery: product.battery || "",
+      power: product.power || "",
+      hertz: product.hertz || "",
+      status: product.status || "",
+      size: product.size || [{ height: "", width: "" }],
+      image: product.image || "",
+    });
   }, [product]);
 
   const handleChange = (field: keyof Product, value: string | number) => {
@@ -36,13 +66,19 @@ const ProductModal: React.FC<ProductModalProps> = ({
     setFormData({ ...formData, size: updatedSizes });
   };
 
+  const handleNumericChange = (field: keyof Product, value: string) => {
+    if (/^\d*\.?\d*$/.test(value)) {
+      setFormData({ ...formData, [field]: parseFloat(value) || 0 });
+    }
+  };
+
   return (
     <ScrollArea>
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div className="bg-white rounded-lg p-6 w-full max-w-2xl overflow-y-auto max-h-[90vh]">
           <div className="flex flex-row justify-between m-4">
             <h2 className="text-xl font-bold mb-4">
-              {product._id ? "Edit Product" : "Add Product"}
+              {product._id ? "Бүтээгдэхүүн өөрчлөх" : "Бүтээгдэхүүн нэмэх"}
             </h2>
             <Button
               className="bg-white shadow-none hover:bg-gray/10"
@@ -64,10 +100,10 @@ const ProductModal: React.FC<ProductModalProps> = ({
             }}
           >
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Brand</label>
+              <label className="block text-sm font-medium mb-1">Брэнд</label>
               <input
                 type="text"
-                value={formData.brand || ""}
+                value={formData.brand}
                 onChange={(e) => handleChange("brand", e.target.value)}
                 className="w-full border rounded px-3 py-2"
                 required
@@ -75,7 +111,19 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Sort</label>
+              <label className="block text-sm font-medium mb-1">Нэр</label>
+              <input
+                type="text"
+                value={formData.name || ""}
+                onChange={(e) => handleChange("name", e.target.value)}
+                className="w-full border rounded px-3 py-2"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-1">
+                Төрөл/гар, суурь/
+              </label>
               <input
                 type="text"
                 value={formData.sort || ""}
@@ -86,18 +134,9 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Name</label>
-              <input
-                type="text"
-                value={formData.name || ""}
-                onChange={(e) => handleChange("name", e.target.value)}
-                className="w-full border rounded px-3 py-2"
-                required
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Type</label>
+              <label className="block text-sm font-medium mb-1">
+                Төрөл/UHF,VHF/
+              </label>
               <input
                 type="text"
                 value={formData.type || ""}
@@ -108,7 +147,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Style</label>
+              <label className="block text-sm font-medium mb-1">Загвар</label>
               <input
                 type="text"
                 value={formData.style || ""}
@@ -119,33 +158,35 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Price</label>
+              <label className="block text-sm font-medium mb-1">
+                Үнэ /НӨАТ-гүй/
+              </label>
               <input
                 type="text"
                 value={formData.price}
-                onChange={(e) =>
-                  handleChange("price", parseFloat(e.target.value))
-                }
+                onChange={(e) => handleNumericChange("price", e.target.value)}
                 className="w-full border rounded px-3 py-2"
                 required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">PriceN</label>
+              <label className="block text-sm font-medium mb-1">
+                Үнэ /НӨАТ-тэй/
+              </label>
               <input
                 type="text"
                 value={formData.priceN}
-                onChange={(e) =>
-                  handleChange("priceN", parseFloat(e.target.value))
-                }
+                onChange={(e) => handleNumericChange("priceN", e.target.value)}
                 className="w-full border rounded px-3 py-2"
                 required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Battery</label>
+              <label className="block text-sm font-medium mb-1">
+                Зай багтаамж
+              </label>
               <input
                 type="text"
                 value={formData.battery || ""}
@@ -156,7 +197,9 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Power</label>
+              <label className="block text-sm font-medium mb-1">
+                Хүчин чадал
+              </label>
               <input
                 type="text"
                 value={formData.power || ""}
@@ -167,7 +210,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Hertz</label>
+              <label className="block text-sm font-medium mb-1">Герц</label>
               <input
                 type="text"
                 value={formData.hertz || ""}
@@ -178,7 +221,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Status</label>
+              <label className="block text-sm font-medium mb-1">Статус</label>
               <input
                 type="text"
                 value={formData.status || ""}
@@ -188,12 +231,12 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Size</label>
+              <label className="block text-sm font-medium mb-1">Хэмжээ</label>
               {formData.size?.map((size, index) => (
                 <div key={index} className="flex space-x-2 mb-2">
                   <input
                     type="text"
-                    placeholder="Height"
+                    placeholder="Өндөр"
                     value={size.height || ""}
                     onChange={(e) =>
                       handleSizeChange(index, "height", e.target.value)
@@ -202,7 +245,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                   />
                   <input
                     type="text"
-                    placeholder="Width"
+                    placeholder="Өргөн"
                     value={size.width || ""}
                     onChange={(e) =>
                       handleSizeChange(index, "width", e.target.value)
@@ -214,7 +257,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Image</label>
+              <label className="block text-sm font-medium mb-1">Зураг</label>
               <input
                 type="file"
                 accept="image/*"
@@ -222,10 +265,9 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 className="w-full border rounded px-3 py-2"
               />
             </div>
-
             <div className="mt-6 flex justify-end">
               <Button className="text-white" type="submit">
-                Бүтээгдэхүүнийг хадгалах
+                Save Product
               </Button>
             </div>
           </form>

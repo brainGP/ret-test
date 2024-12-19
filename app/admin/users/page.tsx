@@ -37,11 +37,7 @@ function AdminUsersPage() {
     try {
       const accessToken = getCookie("accessToken");
       if (!accessToken) throw new Error("Unauthorized");
-
-      const response = await GET({
-        token: accessToken,
-        route: `/api/user`,
-      });
+      const response = await GET({ route: `/api/user`, token: accessToken });
       if (response.status === 200) {
         setUsers(response.data.users);
       }
@@ -143,12 +139,6 @@ function AdminUsersPage() {
           <h1 className="font-semibold text-xl mb-4">
             Админы хэрэглэгчдийг хянах хэсэг
           </h1>
-          <Button
-            className="mb-4 text-white"
-            onClick={() => setNewUser({} as User)}
-          >
-            Шинэ хэрэглэгчийг нэмэх
-          </Button>
         </div>
         <div className="flex flex-row justify-between items-center">
           <Breadcrumb />
@@ -173,7 +163,7 @@ function AdminUsersPage() {
             </AlertDialogTitle>
             <AlertDialogDescription>
               Энэ үйлдлийг буцаах боломжгүй. Та энэ хэрэглэгчийг устгахдаа
-              үнэхээр итгэлтэй байна уу?
+              итгэлтэй байна уу?
             </AlertDialogDescription>
           </AlertDialogHeader>
 

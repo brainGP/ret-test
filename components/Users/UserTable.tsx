@@ -18,7 +18,11 @@ interface UserTableProps {
   onDelete: (id: string) => void;
 }
 
-const UserTable: React.FC<UserTableProps> = ({ user, onEdit, onDelete }) => {
+const UserTable: React.FC<UserTableProps> = ({
+  user = [],
+  onEdit,
+  onDelete,
+}) => {
   return (
     <ScrollArea className="w-screen xl:w-full overflow-x-auto rounded-md border">
       <div className="min-w-[1200px]">
@@ -34,7 +38,7 @@ const UserTable: React.FC<UserTableProps> = ({ user, onEdit, onDelete }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {user.length > 0 ? (
+            {user && user.length > 0 ? (
               user.map((user, index) => (
                 <TableRow key={user._id}>
                   <TableCell className="text-center font-medium">

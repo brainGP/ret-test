@@ -1,5 +1,5 @@
 import { getCookie, getCookies, setCookie, deleteCookie } from "cookies-next";
-import axios from "axios";
+import { GET } from "@/apis/axios";
 
 interface User {
   accessToken: string;
@@ -63,14 +63,10 @@ export const isAdmin = async (): Promise<boolean> => {
     if (!accessToken) {
       return false;
     }
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}api/auth/admin`,
-      {
-        headers: {
-          token: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const response = await GET({
+      route: `/api/auth/admin`,
+      token: accessToken,
+    });
     if (response.status === 200) {
       return true;
     }

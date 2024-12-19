@@ -37,12 +37,14 @@ const Home = () => {
         if (sortOrder === "hightolow") {
           sortedProducts.sort(
             (a, b) =>
-              parseFloat(b.priceN as string) - parseFloat(a.priceN as string)
+              parseFloat(b.priceN?.toString() || "0") -
+              parseFloat(a.priceN?.toString() || "0")
           );
         } else if (sortOrder === "lowtohigh") {
           sortedProducts.sort(
             (a, b) =>
-              parseFloat(a.priceN as string) - parseFloat(b.priceN as string)
+              parseFloat(a.priceN?.toString() || "0") -
+              parseFloat(b.priceN?.toString() || "0")
           );
         }
 

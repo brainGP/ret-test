@@ -1,14 +1,8 @@
+import { baseUrl } from "@/lib/staticData";
 import axios, { AxiosRequestConfig } from "axios";
 
-const buildAPIUrl = (route: string) =>
-  `${process.env.NEXT_PUBLIC_BACKEND_URL}${route}`;
+const buildAPIUrl = (route: string) => `${baseUrl}${route}`;
 export type body = { [key: string]: any };
-
-interface Body {
-  email: string;
-  password: string;
-}
-
 interface MyRequest {
   route: string;
   token?: string;

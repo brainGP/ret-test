@@ -18,13 +18,11 @@ interface ProductTableProps {
   onDelete: (id: string) => void;
 }
 
-// Helper function to format the price with a thousand separator
 const formatPrice = (price: string | number) => {
-  // Ensure the price is a number and return formatted string with thousand separators
   const priceNumber =
     typeof price === "string" ? parseInt(price.replace(/[^0-9]/g, "")) : price;
-  if (isNaN(priceNumber)) return price; // Return the original price if it's not a valid number
-  return priceNumber.toLocaleString("en-US").replace(/,/g, "'"); // Replace commas with apostrophes
+  if (isNaN(priceNumber)) return price;
+  return priceNumber.toLocaleString("en-US").replace(/,/g, "'");
 };
 
 const ProductTable: React.FC<ProductTableProps> = ({

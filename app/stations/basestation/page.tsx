@@ -11,12 +11,12 @@ import { Product } from "@/types/Product";
 import { LoadingError } from "@/components/LoadingError";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { toast } from "sonner";
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [sortOrder, setSortOrder] = useState<string>("lowtohigh");
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
 
   const handleOrderChange = (order: string) => {
     setSortOrder(order);
@@ -25,7 +25,6 @@ const Home: React.FC = () => {
   useEffect(() => {
     const fetchAndSortProducts = async () => {
       setLoading(true);
-      setError(null);
 
       try {
         const response = await GET({ route: `/api/product` });
@@ -50,7 +49,7 @@ const Home: React.FC = () => {
 
         setProducts(sortedProducts);
       } catch {
-        setError("Failed to fetch products. Please try again later.");
+        toast.error("Алдаа гарлаа. Та дахин оролдоно уу");
       } finally {
         setLoading(false);
       }
@@ -71,7 +70,7 @@ const Home: React.FC = () => {
             <FilterOrder onOrderChange={handleOrderChange} />
           </div>
 
-          <LoadingError isLoading={loading} error={error} />
+          <LoadingError isLoading={loading} />
           <ScrollArea className="rounded-md h-full m-4 lg:m-6">
             <ProductGrid title="Гар станц" products={products} />
           </ScrollArea>

@@ -5,16 +5,15 @@ import { GET } from "@/apis/axios";
 
 import { Product } from "@/types/Product";
 import { LoadingError } from "./LoadingError";
+import { toast } from "sonner";
 
 const NewProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchAndSortProducts = async () => {
       setLoading(true);
-      setError(null);
 
       try {
         const response = await GET({ route: `/api/product/?new=true` });
@@ -22,7 +21,7 @@ const NewProducts = () => {
         const productsData: Product[] = response.data.products || [];
         setProducts(productsData);
       } catch {
-        setError("Failed to fetch products. Please try again later.");
+        toast.error("Алдаа гарлаа. Та дахин оролдоно уу");
       } finally {
         setLoading(false);
       }
@@ -38,8 +37,7 @@ const NewProducts = () => {
           <div className="w-2 h-2 bg-yellow rounded-full" />
           <p className="text-lg font-semibold text-gray">Шинэ бүтээгдэхүүн</p>
         </div>
-        <LoadingError isLoading={loading} error={error} />
-        {error && <p className="text-center text-red-500">{error}</p>}
+        <LoadingError isLoading={loading} />
 
         <ProductGrid products={products} />
       </div>

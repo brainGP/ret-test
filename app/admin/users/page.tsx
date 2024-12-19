@@ -26,7 +26,6 @@ import { DELETE, GET, POST, PUT } from "@/apis/axios";
 
 function AdminUsersPage() {
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const [users, setUsers] = useState<User[]>([]);
   const [newUser, setNewUser] = useState<User | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -47,7 +46,7 @@ function AdminUsersPage() {
         setUsers(response.data.users);
       }
     } catch {
-      setError("Failed to fetch users.");
+      toast.error("Алдаа гарлаа");
     } finally {
       setLoading(false);
     }
@@ -164,7 +163,7 @@ function AdminUsersPage() {
         </ScrollArea>
       </div>
 
-      <LoadingError isLoading={loading} error={error} />
+      <LoadingError isLoading={loading} />
 
       <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <AlertDialogContent>

@@ -10,12 +10,12 @@ import { useParams } from "next/navigation";
 import NotFound from "@/app/not-found";
 import { Product } from "@/types/Product";
 import { GET } from "@/apis/axios";
+import { toast } from "sonner";
 
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [sortOrder, setSortOrder] = useState<string>("lowtohigh");
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
 
   const { brand } = useParams();
 
@@ -26,7 +26,6 @@ const Home = () => {
   useEffect(() => {
     const fetchAndSortProducts = async () => {
       setLoading(true);
-      setError(null);
 
       try {
         const response = await GET({ route: `/api/product` });
@@ -50,7 +49,7 @@ const Home = () => {
 
         setProducts(sortedProducts);
       } catch {
-        setError("Failed to fetch products. Please try again later.");
+        toast.error("Алдаа гарлаа. Та дахин оролдоно уу");
       } finally {
         setLoading(false);
       }
@@ -74,9 +73,8 @@ const Home = () => {
         {loading && (
           <p className="text-center text-gray-500">Loading products...</p>
         )}
-        {error && <p className="text-center text-red-500">{error}</p>}
 
-        {products.length === 0 && !loading && !error && (
+        {products.length === 0 && !loading && (
           <NotFound explain="Энэ брэндийн бүтээгдэхүүн байхгүй байна." />
         )}
 

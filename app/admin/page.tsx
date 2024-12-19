@@ -26,7 +26,6 @@ import { DELETE, GET, POST, PUT } from "@/apis/axios";
 
 function AdminPage() {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [editProduct, setEditProduct] = useState<Product | null>(null);
   const [newProduct, setNewProduct] = useState<Product | null>(null);
@@ -45,7 +44,7 @@ function AdminPage() {
         setProducts(response.data.products);
       }
     } catch {
-      setError("Failed to fetch products.");
+      toast.error("Алдаа гарлаа");
     } finally {
       setLoading(false);
     }
@@ -171,7 +170,7 @@ function AdminPage() {
         </ScrollArea>
       </div>
 
-      <LoadingError isLoading={loading} error={error} />
+      <LoadingError isLoading={loading} />
 
       <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <AlertDialogContent>

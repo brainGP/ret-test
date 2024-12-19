@@ -46,9 +46,9 @@ const Header: React.FC = () => {
         <div className="w-full flex-1 max-w-md md:max-w-lg">
           <Search />
         </div>
-        <div className="flex items-center gap-16">
+        <div className="flex items-center justify-between gap-16">
           <ShopCard />
-          <div className="hidden md:flex">
+          <div>
             <Profile />
           </div>
         </div>

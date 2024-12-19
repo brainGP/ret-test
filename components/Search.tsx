@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { Product } from "@/types/Product";
 import { GET } from "@/apis/axios";
 import { toast } from "sonner";
-
+import { baseUrl } from "@/lib/staticData";
 const Search = () => {
   const [query, setQuery] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
@@ -71,6 +71,7 @@ const Search = () => {
   const handleBlur = () => {
     setTimeout(() => setIsDropdownVisible(false), 200);
   };
+
   return (
     <div className="relative w-full max-w-2xl text-gray">
       <div className="flex w-full items-center bg-blue rounded-full gap-4">
@@ -107,7 +108,7 @@ const Search = () => {
                 onClick={() => router.push(`/stations/${product.name}`)}
               >
                 <Image
-                  src={product.image || "/noresult.png"}
+                  src={`${baseUrl}${product.image}`}
                   alt={product.name || "Product Image"}
                   width={80}
                   height={80}

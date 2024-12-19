@@ -13,6 +13,7 @@ import { Product } from "@/types/Product";
 import { GET } from "@/apis/axios";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { toast } from "sonner";
 
 interface Params {
   name?: string;
@@ -28,16 +29,13 @@ const StationNamePage: React.FC = () => {
     const fetchStations = async () => {
       try {
         const response = await GET({ route: `/api/product` });
-        console.log("API Response Status:", response.status);
         if (response.status === 200) {
           const data = await response.data();
 
           setStations(data.products || []);
-        } else {
-          console.error("Failed to fetch stations");
         }
-      } catch (error) {
-        console.error("Error fetching stations:", error);
+      } catch {
+        toast.error("Алдаа гарлаа");
       }
     };
 
@@ -50,7 +48,6 @@ const StationNamePage: React.FC = () => {
       const foundStation = stations.find(
         (s) => s.name.toLowerCase().trim() === stationName.toLowerCase().trim()
       );
-      console.log(stationName.toLowerCase);
 
       setStation(foundStation || null);
     }

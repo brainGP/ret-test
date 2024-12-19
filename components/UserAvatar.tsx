@@ -18,9 +18,6 @@ import { isAdminC, logoutUser } from "@/lib/authHelper";
 function UserAvatar({ name }: { name: string; picture?: string }) {
   const router = useRouter();
   const isUserAdmin = isAdminC();
-
-  console.log(isUserAdmin ? "user is admin" : "user is not admin");
-
   return (
     <div className="flex flex-row gap-4 items-center">
       <DropdownMenu>

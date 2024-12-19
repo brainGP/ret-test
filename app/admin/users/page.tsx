@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { isAdmin } from "@/lib/authHelper";
-import axios from "axios";
 import { getCookie } from "cookies-next";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -67,8 +66,7 @@ function AdminUsersPage() {
         setUsers((prev) => prev.filter((user) => user._id !== id));
         toast.success("Хэрэглэгчийг амжилттай устгалаа.");
       }
-    } catch (error) {
-      console.error("Failed to delete user:", error);
+    } catch {
       toast.error("Хэрэглэгчийг устгаж чадсангүй.");
     } finally {
       setIsDialogOpen(false);

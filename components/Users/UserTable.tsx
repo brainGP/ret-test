@@ -19,8 +19,6 @@ interface UserTableProps {
 }
 
 const UserTable: React.FC<UserTableProps> = ({ user, onEdit, onDelete }) => {
-  console.log("User array:", user);
-
   return (
     <ScrollArea className="w-screen xl:w-full overflow-x-auto rounded-md border">
       <div className="min-w-[1200px]">

@@ -20,7 +20,11 @@ export function Profile() {
   useEffect(() => {
     setIsClient(true);
     const loggedInUser = isUserLoggedIn();
-    setUser(loggedInUser);
+    if (loggedInUser && typeof loggedInUser === "object") {
+      setUser(loggedInUser);
+    } else {
+      setUser(null);
+    }
   }, []);
 
   if (!isClient) {

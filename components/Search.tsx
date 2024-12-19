@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Product } from "@/types/Product";
 import { GET } from "@/apis/axios";
+import { toast } from "sonner";
 
 const Search = () => {
   const [query, setQuery] = useState("");
@@ -29,17 +30,17 @@ const Search = () => {
             setProducts(data.products);
             setFilteredProducts(data.products);
           } else {
-            console.error("Unexpected API response:", data);
+            toast.error("Буруу хүсэлт илгээгдлээ");
             setProducts([]);
             setFilteredProducts([]);
           }
         } else {
-          console.error("Failed to fetch products");
+          toast.error("Бүтээгдэхүүнийг авч чадсангүй");
           setProducts([]);
           setFilteredProducts([]);
         }
-      } catch (error) {
-        console.error("Error fetching products:", error);
+      } catch {
+        toast.error("Бүтээгдэхүүнийг татахад алдаа гарсан");
         setProducts([]);
         setFilteredProducts([]);
       }

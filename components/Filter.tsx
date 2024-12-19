@@ -1,36 +1,54 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import data from "@/data/products.json";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const Filter = () => {
   const logos = data[0]?.logos || [];
+  const searchParams = useSearchParams();
+  const brand = searchParams.get("brand") as string;
 
   return (
-    <aside className="w-1/6 p-4 rounded-lg lg:block mb-20 top-16 h-3/4 sticky hidden md:visible items-center ">
-      <div className="flex flex-col gap-6 justify-center items-center">
-        <h3 className="font-semibold mb-4 text-lg md:text-xl">Брэндүүд</h3>
+    <aside className="max-w-[250px] md:block hidden min-w-[200px]">
+      <div className=" rounded-lg top-16 sticky bg-white border m-4">
+        <div className="flex flex-col justify-center items-center">
+          <div className="w-full border-b p-4">
+            <h3 className="w-full font-semibold text-lg md:text-xl">
+              Брэндүүд :
+            </h3>
+          </div>
 
-        <div className="flex flex-wrap justify-center gap-12">
-          {logos.map((logo, index) => (
-            <Link
-              key={index}
-              href={`/station/${logo.name}`}
-              passHref
-              className="flex justify-center cursor-pointer"
-            >
-              <div className="hover:scale-110 transition">
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={120}
-                  height={60}
-                  style={{ objectFit: "contain" }}
-                  priority={true}
-                />
-              </div>
-            </Link>
-          ))}
+          <div className="flex flex-col gap-4 p-4">
+            {logos.map((logo, index) => {
+              const isActive = brand && logo.name == brand;
+              const href = isActive
+                ? "/stations"
+                : `/stations/?brand=${logo.name}`;
+              return (
+                <Link
+                  key={index}
+                  href={href}
+                  passHref
+                  className={`hover:bg-gray/[5%] transition-all w-full py-4 flex rounded justify-center min-w-[150px] cursor-pointer ${
+                    isActive && " bg-gray/5"
+                  }`}
+                >
+                  <div>
+                    <Image
+                      src={logo.src}
+                      alt={logo.alt}
+                      width={120}
+                      height={60}
+                      style={{ objectFit: "contain" }}
+                      priority={true}
+                    />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
     </aside>

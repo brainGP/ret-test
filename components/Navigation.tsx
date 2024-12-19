@@ -19,12 +19,13 @@ function Navigation() {
   const navItems = [
     { href: "/", label: "Нүүр" },
     {
-      label: "Станц",
       href: "/handstation",
+      label: "Станц",
+
       dropdown: [
         { href: "/stations", label: "Бүх" },
-        { href: "/stations/handstation", label: "Гар станц" },
-        { href: "/stations/basestation", label: "Суурь станц" },
+        { href: "/stations?type=handstation", label: "Гар станц" },
+        { href: "/stations?type=basestation", label: "Суурь станц" },
         { href: "/stations/equipments", label: "Дагалдах хэрэгслүүд" },
       ],
     },

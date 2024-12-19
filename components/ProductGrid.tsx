@@ -20,7 +20,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, products }) => {
         </div>
       )}
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-5">
         {products.map((product) => (
           <ProductCard product={product} key={product._id} />
         ))}
@@ -35,14 +35,14 @@ const ProductCard = ({ product }: { product: Product }) => {
   const imgUrl = `${baseUrl}${product.image}`;
   return (
     <Link href={`/stations/${product.name}`}>
-      <div className="border h-[380px] w-full rounded-md shadow-md transition-transform hover:scale-105 flex flex-col">
+      <div className="border hover:border-gray/30 transition-all duration-300 h-[340px] w-full rounded-md bg-white  group flex flex-col">
         <div className="relative h-48 w-full rounded-md overflow-hidden flex items-center justify-center mb-4">
           <Image
             src={imgUrl}
             alt={product.name}
             width={200}
             height={200}
-            className="object-contain w-full h-full p-2"
+            className="object-contain w-full h-full p-2 transition-all duration-300 group-hover:scale-105"
             priority={true}
           />
         </div>

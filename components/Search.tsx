@@ -9,6 +9,7 @@ import { Product } from "@/types/Product";
 import { GET } from "@/apis/axios";
 import { toast } from "sonner";
 import { baseUrl } from "@/lib/staticData";
+import { getProducts } from "@/apis/products";
 const Search = () => {
   const [query, setQuery] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
@@ -19,21 +20,10 @@ const Search = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await GET({ route: `/api/product` });
-
-        if (response?.data) {
-          const data = response.data;
-          if (Array.isArray(data)) {
-            setProducts(data);
-            setFilteredProducts(data);
-          } else if (data.products && Array.isArray(data.products)) {
-            setProducts(data.products);
-            setFilteredProducts(data.products);
-          } else {
-            toast.error("Буруу хүсэлт илгээгдлээ");
-            setProducts([]);
-            setFilteredProducts([]);
-          }
+        const data = await getProducts();
+        if (data) {
+          setProducts(data);
+          setFilteredProducts(data);
         } else {
           toast.error("Бүтээгдэхүүнийг авч чадсангүй");
           setProducts([]);

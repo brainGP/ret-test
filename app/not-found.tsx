@@ -8,7 +8,7 @@ interface NotFoundProps {
 export default function NotFound({ explain }: NotFoundProps) {
   return (
     <div>
-      <div className="w-full h-screen flex flex-col justify-center">
+      <div className="w-full py-20 flex flex-col justify-center">
         <div className="min-h-[70vh] sm:min-h-[82vh] md:min-h-[45vh] lg:min-h-[46vh] xl:min-h-[47vh] flex flex-col gap-6 items-center justify-center text-center">
           <Image
             src="/notfound.png"
@@ -24,7 +24,7 @@ export default function NotFound({ explain }: NotFoundProps) {
           {explain && <span>{explain}</span>}
           <Link
             href="/"
-            className="mt-4 px-4 py-2 bg-blue-500 text-gray rounded-md hover:bg-blue-600 hover:underline"
+            className="mt-4 px-4 py-2 text-gray rounded-md hover:underline"
           >
             Return Home
           </Link>

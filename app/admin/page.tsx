@@ -7,118 +7,51 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Product } from "@/types/Product";
 import ProductTable from "@/components/Products/ProductTable";
-import ProductModal from "@/components/Products/ProductModal";
 import { LoadingError } from "@/components/LoadingError";
 import { toast } from "sonner";
 import Link from "next/link";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 import Breadcrumb from "@/components/BreadCrumb";
-import { DELETE, GET, POST, PUT } from "@/apis/axios";
+import { deleteProductById, getProducts } from "@/apis/products";
+import ConfirmationDialog from "./components/confirmation";
+import AddProduct from "./components/addProduct";
 
 function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [editProduct, setEditProduct] = useState<Product | null>(null);
-  const [newProduct, setNewProduct] = useState<Product | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState<string | null>(null);
-  const [isFinalConfirmation, setIsFinalConfirmation] = useState(false);
+
   const router = useRouter();
 
   const fetchProducts = async () => {
     try {
-      const accessToken = getCookie("accessToken");
-      if (!accessToken) throw new Error("Unauthorized");
-
-      const response = await GET({ route: `/api/product`, token: accessToken });
-      if (response.status === 200) {
-        setProducts(response.data.products);
-      }
-    } catch {
-      toast.error("Алдаа гарлаа");
+      const data = await getProducts();
+      setProducts(data);
+    } catch (e) {
+      const err = e as Error;
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   const deleteProduct = async (id: string) => {
-    if (!isFinalConfirmation) return;
+    console.log(id);
 
     try {
-      const accessToken = getCookie("accessToken");
-      if (!accessToken) throw new Error("Unauthorized");
-
-      const response = await DELETE({
-        route: `/api/product/${id}`,
-        token: accessToken,
-      });
-
-      if (response.status === 200) {
-        setProducts((prev) => prev.filter((product) => product._id !== id));
-        toast.success("Бүтээгдэхүүнийг амжилттай устгалаа.");
-      }
-    } catch {
-      toast.error("Бүтээгдэхүүнийг устгаж чадсангүй.");
+      await deleteProductById({ id });
+      setProducts((prev) => prev.filter((product) => product._id !== id));
+      toast.success("Бүтээгдэхүүнийг амжилттай устгалаа.");
+    } catch (e) {
+      const err = e as Error;
+      toast.error(err.message);
     } finally {
       setIsDialogOpen(false);
     }
   };
 
-  const updateProduct = async (product: Product) => {
-    try {
-      const accessToken = getCookie("accessToken");
-      if (!accessToken) throw new Error("Unauthorized");
-
-      const response = await PUT({
-        route: `/api/product/${product._id}`,
-        token: accessToken,
-        body: product,
-      });
-
-      if (response.status === 200) {
-        setProducts((prev) =>
-          prev.map((item) => (item._id === product._id ? response.data : item))
-        );
-        toast.success("Бүтээгдэхүүн амжилттай шинэчилсэн.");
-        setEditProduct(null);
-      }
-    } catch {
-      toast.error("Бүтээгдэхүүнийг шинэчилж чадсангүй.");
-    }
-  };
-
-  const addProduct = async (product: Product) => {
-    try {
-      const accessToken = getCookie("accessToken");
-      if (!accessToken) throw new Error("Unauthorized");
-
-      const response = await POST({
-        route: `/api/product`,
-        token: accessToken,
-        body: product,
-      });
-      if (response.status === 201) {
-        setProducts((prev) => [...prev, response.data]);
-        toast.success("Бүтээгдэхүүнийг амжилттай нэмлээ.");
-        setNewProduct(null);
-      }
-    } catch {
-      toast.error("Бүтээгдэхүүнийг нэмж чадсангүй.");
-    }
-  };
-
-  const handleEdit = (product: Product) => {
-    setEditProduct(product);
-  };
+  const handleEdit = (product: Product) => setEditProduct(product);
 
   const handleDelete = (id: string) => {
     setProductToDelete(id);
@@ -146,16 +79,11 @@ function AdminPage() {
       <div className="container flex flex-col items-centerpy-4 mx-auto max-w-7xl gap-4">
         <div className="flex flex-col sm:flex-row  justify-between ">
           <h1 className="font-semibold text-xl mb-4">Админы хяналтын хэсэг</h1>
-          <Button
-            className="mb-4 text-white"
-            onClick={() => setNewProduct({} as Product)}
-          >
-            Шинэ бүтээгдэхүүн нэмэх
-          </Button>
+          <AddProduct setProducts={setProducts} />
         </div>
         <div className="flex flex-row justify-between items-center">
           <Breadcrumb />
-          <Link href={`admin/users`}>
+          <Link href="/admin/users">
             <Button> Хэрэглэгчид</Button>
           </Link>
         </div>
@@ -172,52 +100,19 @@ function AdminPage() {
 
       <LoadingError isLoading={loading} />
 
-      <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              Та энэ бүтээгдэхүүнийг устгахдаа итгэлтэй байна уу?
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              Энэ үйлдлийг буцаах боломжгүй. Та энэ бүтээгдэхүүнийг устгахдаа
-              үнэхээр итгэлтэй байна уу?
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => setIsDialogOpen(false)}>
-              Цуцлах
-            </AlertDialogCancel>
-            <AlertDialogAction
-              className="bg-red-500"
-              onClick={() => {
-                setIsFinalConfirmation(true);
-                if (productToDelete) {
-                  deleteProduct(productToDelete);
-                }
-              }}
-            >
-              Устгах
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-
-      {editProduct && (
-        <ProductModal
-          product={editProduct}
-          onClose={() => setEditProduct(null)}
-          onSave={updateProduct}
-        />
-      )}
-
-      {newProduct && (
-        <ProductModal
-          product={newProduct}
-          onClose={() => setNewProduct(null)}
-          onSave={addProduct}
-        />
-      )}
+      <ConfirmationDialog
+        isOpen={isDialogOpen}
+        setIsOpen={(val) => setIsDialogOpen(val)}
+        title="Бүтээгдэхүүн устгах"
+        description="Энэ үйлдлийг буцаах боломжгүй. Та энэ бүтээгдэхүүнийг устгахдаа
+              үнэхээр итгэлтэй байна уу?"
+        callback={() => {
+          if (productToDelete) {
+            deleteProduct(productToDelete);
+          }
+        }}
+        actionLabel="Устгах"
+      />
     </div>
   );
 }

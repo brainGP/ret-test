@@ -36,6 +36,19 @@ export const getUserData = () => {
   return user;
 };
 
+export const getLastLoginTimestamp = (email: string): number | null => {
+  const lastLogin = getCookie(`lastLogin-${email}`);
+  return lastLogin ? Number(lastLogin) : null;
+};
+
+export const saveLastLoginTimestamp = (email: string): void => {
+  const timestamp = new Date().getTime();
+  setCookie(`lastLogin-${email}`, timestamp, {
+    maxAge: 60 * 60 * 24 * 30,
+    path: "/",
+  });
+};
+
 export const isUserLoggedIn = () => {
   const accessToken = getCookie("accessToken");
   const cookies: Cookies = getCookies();

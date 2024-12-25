@@ -1,3 +1,5 @@
+import { hostname } from "os";
+
 const nextConfig = {
   reactStrictMode: false,
   images: {

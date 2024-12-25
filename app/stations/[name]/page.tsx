@@ -4,9 +4,7 @@ import Footer from "@/components/Footer";
 import BackButton from "@/components/BackButton";
 import { getProductByName } from "@/apis/products";
 import NotFound from "@/app/not-found";
-import { Product } from "@/types/Product";
 import RelatedProducts from "./related";
-import ProductCard from "./station";
 import StationCard from "./station";
 
 const StationNamePage = async ({
@@ -24,7 +22,7 @@ const StationNamePage = async ({
   return (
     <>
       <Header />
-      <div className="m-8 flex-1 justify-center gap-8">
+      <div className="px-8 flex-1 justify-center gap-8">
         <div className="flex-1 space-y-4 py-4">
           <Breadcrumb />
           <BackButton />

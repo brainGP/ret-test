@@ -14,6 +14,7 @@ const Nav_labels: Record<string, string> = {
   contact: "Холбоо барих",
   admin: "Админ",
   users: "Хэрэглэгчид",
+  cart: "Хадгалсан бүтээгдэхүүнүүд",
 };
 
 const Breadcrumb = () => {

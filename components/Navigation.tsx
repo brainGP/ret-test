@@ -61,7 +61,7 @@ function Navigation() {
             <DropdownMenu onOpenChange={(open) => setDropdownOpen(open)}>
               <DropdownMenuTrigger
                 className={classNames(
-                  "group flex items-center gap-1 cursor-pointer",
+                  "group flex items-center cursor-pointer",
                   isActive("", item.dropdown)
                     ? "text-yellow font-medium underline underline-offset-1"
                     : "text-gray hover:text-yellow"

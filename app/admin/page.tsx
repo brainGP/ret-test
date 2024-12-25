@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { isAdmin, isUserLoggedIn } from "@/lib/authHelper";
 import { getCookie } from "cookies-next";
@@ -21,63 +21,53 @@ function AdminPage() {
   const [editProduct, setEditProduct] = useState<Product | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState<string | null>(null);
+  const [authorized, setAuthorized] = useState(false);
 
   const router = useRouter();
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       const data = await getProducts();
       setProducts(data);
+      console.log(editProduct);
     } catch (e) {
       const err = e as Error;
       toast.error(err.message);
     } finally {
       setLoading(false);
     }
-  };
-
-  const deleteProduct = async (id: string) => {
-    console.log(id);
-
-    try {
-      await deleteProductById({ id });
-      setProducts((prev) => prev.filter((product) => product._id !== id));
-      toast.success("Бүтээгдэхүүнийг амжилттай устгалаа.");
-    } catch (e) {
-      const err = e as Error;
-      toast.error(err.message);
-    } finally {
-      setIsDialogOpen(false);
-    }
-  };
-
-  const handleEdit = (product: Product) => setEditProduct(product);
-
-  const handleDelete = (id: string) => {
-    setProductToDelete(id);
-    setIsDialogOpen(true);
-  };
+  }, [editProduct]);
 
   useEffect(() => {
     const checkAuth = async () => {
       const accessToken = getCookie("accessToken");
-      if (!accessToken || !isAdmin()) {
-        router.push("/");
-      } else {
-        await fetchProducts();
+
+      if (!accessToken || !isUserLoggedIn()) {
+        toast.error("Нэвтрэх шаардлагатай.");
+        router.push("/login");
+        return;
       }
-      if (!isUserLoggedIn) {
+      if (!isAdmin()) {
+        toast.error("Та энэ хуудсанд хандах эрхгүй байна.");
         router.push("/");
+        return;
       }
+
+      setAuthorized(true);
+      await fetchProducts();
     };
 
     checkAuth();
-  }, [router]);
+  }, [router, fetchProducts]);
+
+  if (!authorized) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col justify-center items-center w-full top-0 border-b px-4 md:px-6 mb-8 py-4">
       <div className="container flex flex-col items-centerpy-4 mx-auto max-w-7xl gap-4">
-        <div className="flex flex-col sm:flex-row  justify-between ">
+        <div className="flex flex-col sm:flex-row justify-between">
           <h1 className="font-semibold text-xl mb-4">Админы хяналтын хэсэг</h1>
           <AddProduct setProducts={setProducts} />
         </div>
@@ -92,8 +82,11 @@ function AdminPage() {
         <ScrollArea className="w-full h-min-96 overflow-auto border rounded-lg">
           <ProductTable
             products={products}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
+            onEdit={setEditProduct}
+            onDelete={(id) => {
+              setProductToDelete(id);
+              setIsDialogOpen(true);
+            }}
           />
         </ScrollArea>
       </div>
@@ -102,13 +95,17 @@ function AdminPage() {
 
       <ConfirmationDialog
         isOpen={isDialogOpen}
-        setIsOpen={(val) => setIsDialogOpen(val)}
+        setIsOpen={setIsDialogOpen}
         title="Бүтээгдэхүүн устгах"
         description="Энэ үйлдлийг буцаах боломжгүй. Та энэ бүтээгдэхүүнийг устгахдаа
-              үнэхээр итгэлтэй байна уу?"
+          үнэхээр итгэлтэй байна уу?"
         callback={() => {
           if (productToDelete) {
-            deleteProduct(productToDelete);
+            deleteProductById({ id: productToDelete });
+            setProducts((prev) =>
+              prev.filter((product) => product._id !== productToDelete)
+            );
+            toast.success("Бүтээгдэхүүнийг амжилттай устгалаа.");
           }
         }}
         actionLabel="Устгах"

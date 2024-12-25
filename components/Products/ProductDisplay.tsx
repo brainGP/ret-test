@@ -5,7 +5,6 @@ import ProductGrid from "../ProductGrid";
 import FilterOrder from "../FilterOrder";
 import { useQuery } from "@tanstack/react-query";
 import { Product } from "@/types/Product";
-import { LoadingError } from "../LoadingError";
 import { LoadingWait } from "../LoadingWait";
 
 type ProductDisplay = {

@@ -57,7 +57,7 @@ export const postNewProduct = async ({
   product: Product;
 }): Promise<Product> => {
   const accessToken = getCookie("accessToken");
-  if (!accessToken) throw new Error("Unauthorized");
+  if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
   const response = await POST({
     route: `/api/product`,
     token: accessToken,
@@ -70,7 +70,7 @@ export const postNewProduct = async ({
 
 export const deleteProductById = async ({ id }: { id: string }) => {
   const accessToken = getCookie("accessToken");
-  if (!accessToken) throw new Error("Unauthorized");
+  if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
   const response = await DELETE({
     route: `/api/product/${id}`,
     token: accessToken,
@@ -86,7 +86,7 @@ export const updateProductById = async ({
   product: Product;
 }): Promise<Product> => {
   const accessToken = getCookie("accessToken");
-  if (!accessToken) throw new Error("Unauthorized");
+  if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
   const response = await PUT({
     route: `/api/product/${product._id}`,
     token: accessToken,

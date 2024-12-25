@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Product } from "@/types/Product";
-import { GET } from "@/apis/axios";
 import { toast } from "sonner";
 import { baseUrl } from "@/lib/staticData";
 import { getProducts } from "@/apis/products";
@@ -98,7 +97,7 @@ const Search = () => {
                 onClick={() => router.push(`/stations/${product.name}`)}
               >
                 <Image
-                  src={`${baseUrl}${product.image}`}
+                  src={`${baseUrl}${product.images[0].image}`}
                   alt={product.name || "Product Image"}
                   width={80}
                   height={80}

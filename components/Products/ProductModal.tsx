@@ -23,14 +23,14 @@ const ProductModal: React.FC<ProductModalProps> = ({
     name: product.name || "",
     type: product.type || "",
     style: product.style || "",
-    price: product.price || "0",
-    priceN: product.priceN || "0",
+    price: product.price || 0,
+    priceN: product.priceN || 0,
     battery: product.battery || "",
     power: product.power || "",
     hertz: product.hertz || "",
     status: product.status || "",
-    size: product.size || [{ height: "", width: "" }],
-    image: product.image || "",
+    size: product.size || "",
+    images: product.images || [{ image: "" }],
   });
 
   useEffect(() => {
@@ -41,14 +41,14 @@ const ProductModal: React.FC<ProductModalProps> = ({
       name: product.name || "",
       type: product.type || "",
       style: product.style || "",
-      price: product.price || "0",
-      priceN: product.priceN || "0",
+      price: product.price || 0,
+      priceN: product.priceN || 0,
       battery: product.battery || "",
       power: product.power || "",
       hertz: product.hertz || "",
       status: product.status || "",
-      size: product.size || [{ height: "", width: "" }],
-      image: product.image || "",
+      size: product.size || "",
+      images: product.images || [{ image: "" }],
     });
   }, [product]);
 

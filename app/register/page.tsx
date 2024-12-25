@@ -29,14 +29,14 @@ interface ApiResponse {
   data: Product[];
 }
 
-const Signup = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showsPassword, setShowsPassword] = useState(false);
+const Signup: React.FC = () => {
+  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showsPassword, setShowsPassword] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -118,7 +118,7 @@ const Signup = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 disabled={loading}
-                className="p-4 py-6 bg-slate-100 border  rounded-lg shadow-none focus:bg-white focus:border transition duration-300"
+                className="p-4 py-6 bg-slate-100 border rounded-lg shadow-none focus:bg-white focus:border transition duration-300"
               />
               <Input
                 type="email"
@@ -126,7 +126,7 @@ const Signup = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
-                className="p-4 py-6 bg-slate-100 border  rounded-lg shadow-none focus:bg-white focus:border transition duration-300"
+                className="p-4 py-6 bg-slate-100 border rounded-lg shadow-none focus:bg-white focus:border transition duration-300"
               />
 
               <div className="relative">
@@ -136,7 +136,7 @@ const Signup = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={loading}
-                  className="p-4 py-6 bg-slate-100 border  rounded-lg shadow-none hover:bg-white focus:border transition duration-300 pr-12"
+                  className="p-4 py-6 bg-slate-100 border rounded-lg shadow-none hover:bg-white focus:border transition duration-300 pr-12"
                 />
                 <button
                   type="button"
@@ -161,12 +161,12 @@ const Signup = () => {
               </div>
               <div className="relative">
                 <Input
-                  type="password"
-                  placeholder="Нууц үг"
+                  type={showsPassword ? "text" : "password"}
+                  placeholder="Нууц үг давтах"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   disabled={loading}
-                  className="p-4 py-6 bg-slate-100 border rounded-lg shadow-none focus:bg-white focus:border transition duration-300"
+                  className="p-4 py-6 bg-slate-100 border rounded-lg shadow-none focus:bg-white focus:border transition duration-300 pr-12"
                 />
                 <button
                   type="button"

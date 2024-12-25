@@ -15,13 +15,12 @@ const CustomCarousel = () => {
   const slideCount = slides.length;
   const autoPlayInterval = 3000;
 
-  // Auto-play functionality
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % slideCount);
     }, autoPlayInterval);
     return () => clearInterval(interval);
-  }, [slideCount]); // Added slideCount to the dependency array
+  }, [slideCount]);
 
   return (
     <div className="relative w-full ">

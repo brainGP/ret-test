@@ -32,10 +32,11 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, products }) => {
 export default ProductGrid;
 
 const ProductCard = ({ product }: { product: Product }) => {
-  const imgUrl = `${baseUrl}${product.image}`;
+  // const imgUrl = `${baseUrl}${product.image}`;
+  const imgUrl = `${baseUrl}${product.images[0].image}`;
   return (
     <Link href={`/stations/${product.name}`}>
-      <div className="border hover:border-gray/30 transition-all duration-300 h-[340px] w-full rounded-md bg-white  group flex flex-col">
+      <div className="border hover:border-gray/30 transition-all duration-300 h-[340px] w-full rounded-md bg-white group flex flex-col">
         <div className="relative h-48 w-full rounded-md overflow-hidden flex items-center justify-center mb-4">
           <Image
             src={imgUrl}

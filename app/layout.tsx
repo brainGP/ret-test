@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Providers from "../providers";
+import CartProvider from "@/providers/CartProvider";
 
 export const metadata: Metadata = {
   title: "Retevis",
@@ -17,8 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-gray/[2%]">
-        <Providers>{children}</Providers>
-        <Toaster />
+        <CartProvider>
+          <Providers>{children}</Providers>
+          <Toaster />
+        </CartProvider>
       </body>
     </html>
   );

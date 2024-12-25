@@ -36,7 +36,7 @@ function AdminUsersPage() {
   const fetchUsers = async () => {
     try {
       const accessToken = getCookie("accessToken");
-      if (!accessToken) throw new Error("Unauthorized");
+      if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
       const response = await GET({ route: `/api/user`, token: accessToken });
       if (response.status === 200) {
         setUsers(response.data.users);
@@ -51,7 +51,7 @@ function AdminUsersPage() {
   const deleteUser = async (id: string) => {
     try {
       const accessToken = getCookie("accessToken");
-      if (!accessToken) throw new Error("Unauthorized");
+      if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
       const response = await DELETE({
         route: `/api/user/${id}`,
         token: accessToken,
@@ -71,7 +71,7 @@ function AdminUsersPage() {
   const updateUser = async (user: User) => {
     try {
       const accessToken = getCookie("accessToken");
-      if (!accessToken) throw new Error("Unauthorized");
+      if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
 
       const response = await PUT({
         route: `/api/user/${user._id}`,
@@ -93,7 +93,7 @@ function AdminUsersPage() {
   const addUser = async (user: User) => {
     try {
       const accessToken = getCookie("accessToken");
-      if (!accessToken) throw new Error("Unauthorized");
+      if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
 
       const response = await POST({
         route: `/api/user`,

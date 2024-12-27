@@ -11,20 +11,13 @@ import {
 import { ProductActions } from "./ProductActions";
 import { Product } from "@/types/Product";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { formatPrice } from "@/utils/formatPrice";
 
 interface ProductTableProps {
   products: Product[];
   onEdit: (product: Product) => void;
   onDelete: (id: string) => void;
 }
-
-const formatPrice = (price: string | number) => {
-  const priceNumber =
-    typeof price === "string" ? parseInt(price.replace(/[^0-9]/g, "")) : price;
-  if (isNaN(priceNumber)) return price;
-  return priceNumber.toLocaleString("en-US").replace(/,/g, "'");
-};
-
 const ProductTable: React.FC<ProductTableProps> = ({
   products,
   // onEdit,

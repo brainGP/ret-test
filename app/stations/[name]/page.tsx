@@ -14,7 +14,6 @@ const StationNamePage = async ({
 }) => {
   const name = (await params).name;
   const station = await getProductByName({ name });
-
   if (!station) {
     return <NotFound />;
   }

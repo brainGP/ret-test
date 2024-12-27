@@ -23,7 +23,7 @@ export const ProductActions: React.FC<ProductActionsProps> = (
         Засварлах
       </Button>
       <Button
-        className="bg-red-500 text-white px-3 py-1 rounded"
+        className="bg-red-500 hover:bg-red-400 text-white px-3 py-1 rounded"
         // onClick={() => onDelete(product._id!)}
       >
         Устгах

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/types/Product";
 import { baseUrl } from "@/lib/staticData";
+import { formatPrice } from "@/utils/formatPrice";
 
 interface ProductGridProps {
   title?: string;
@@ -36,7 +37,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   const imgUrl = `${baseUrl}${product.images[0].image}`;
   return (
     <Link href={`/stations/${product.name}`}>
-      <div className="border hover:border-gray/30 transition-all duration-300 h-[340px] w-full rounded-md bg-white group flex flex-col">
+      <div className="border hover:border-gray/30 transition-all duration-300 h-[340px] w-full rounded-md bg-white  group flex flex-col">
         <div className="relative h-48 w-full rounded-md overflow-hidden flex items-center justify-center mb-4">
           <Image
             src={imgUrl}
@@ -49,7 +50,9 @@ const ProductCard = ({ product }: { product: Product }) => {
         </div>
         <div className="m-4">
           <h3 className="my-2 text-xl font-semibold">{product.name}</h3>
-          <p className="font-semibold text-base">{product.priceN}</p>
+          <p className="font-semibold text-base">
+            {formatPrice(product.priceN)}₮
+          </p>
           <p className="text-sm text-start">
             {product.type} {product.style}
           </p>

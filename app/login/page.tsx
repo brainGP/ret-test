@@ -12,6 +12,7 @@ import { saveUserData } from "@/lib/authHelper";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { POST } from "@/apis/axios";
+import { signIn } from "next-auth/react";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -19,6 +20,17 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    const result = await signIn("google", { redirect: false });
+    if (result?.error) {
+      toast.error("Google login failed. Please try again.");
+    } else {
+      toast.success("Амжилттай нэвтэрлээ");
+      router.push("/");
+    }
+    setLoading(false);
+  };
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
@@ -124,6 +136,14 @@ const Login = () => {
               </div>
             </form>
           </CardContent>
+          <Button
+            type="button"
+            onClick={handleGoogleSignIn}
+            className="w-full bg-red-600 hover:bg-red-500 mt-4"
+            disabled={loading}
+          >
+            {loading ? "Түр хүлээнэ үү..." : "Google-аар Нэвтрэх"}
+          </Button>
         </Card>
 
         <p className="mt-6 text-gray-500 text-sm">

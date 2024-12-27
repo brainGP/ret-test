@@ -97,7 +97,7 @@ const Signup: React.FC = () => {
     <div className="flex h-screen">
       <div className="flex flex-col justify-center items-center w-full md:w-1/2 bg-white p-6">
         <Image
-          src="/retevis.png"
+          src="/Retevis/retevis.png"
           alt="Retevis Logo"
           width={300}
           height={100}

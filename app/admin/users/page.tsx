@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { User } from "@/types/Users";
 import { DELETE, GET, POST, PUT } from "@/apis/axios";
+import Container from "@/components/Container";
 
 function AdminUsersPage() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -147,11 +148,11 @@ function AdminUsersPage() {
           </Link>
         </div>
       </div>
-      <div className="container flex flex-col sm:flex-row items-center justify-between py-4 mx-auto max-w-7xl gap-4">
+      <Container>
         <ScrollArea className="w-full h-min-96 overflow-auto border rounded-lg">
           <UserTable user={users} onEdit={handleEdit} onDelete={handleDelete} />
         </ScrollArea>
-      </div>
+      </Container>
 
       <LoadingError isLoading={loading} />
 

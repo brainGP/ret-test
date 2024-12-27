@@ -21,20 +21,22 @@ const Home = () => {
 
   const fetcher = brand ? () => getProductsByBrand({ brand }) : getProducts;
   const filter = type
-    ? (product: Product) => product.sort == filterMap[type]
+    ? (product: Product) => product.sort === filterMap[type]
     : undefined;
+
+  const title = type ? filterMap[type] : "Бүх бараа";
 
   return (
     <main>
       <Header />
       <div className="flex flex-col lg:flex-row">
         <Filter />
-        <div className="w-full flex flex-col p-8">
+        <div className="w-full flex flex-col p-4 pl-8">
           <div className="flex">
             <Breadcrumb />
           </div>
           <ProductDisplay
-            title="Гар станц"
+            title={title}
             fetcher={fetcher}
             fetcherKey={[brand, type]}
             filter={filter}

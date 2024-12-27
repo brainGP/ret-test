@@ -56,7 +56,7 @@ const Home = () => {
         <div className="flex justify-end flex-row gap-4">
           <span className="text-neutral-400">Google maps: </span>
           <Image
-            src="/RetevisMongolia.svg"
+            src="/Retevis/RetevisMongolia.svg"
             alt="logo"
             height={10}
             width={120}
@@ -91,7 +91,7 @@ const Home = () => {
         <div className="flex justify-end flex-row gap-4">
           <span className="text-neutral-400">Facebook, Instagram: </span>
           <Image
-            src="/RetevisMongolia.svg"
+            src="/Retevis/RetevisMongolia.svg"
             alt="logo"
             height={10}
             width={120}

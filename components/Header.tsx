@@ -6,7 +6,8 @@ import Navigation from "./Navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Profile } from "./SkeletonDemo";
-import ShopCard from "./ShopCard";
+import ShopCard from "./ShopCart";
+import Container from "./Container";
 
 const Header: React.FC = () => {
   const [visibleHeader, setVisibleHeader] = useState(true);
@@ -22,7 +23,7 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header
+    <div
       className={cn(
         "flex flex-col justify-center items-center w-full sticky top-0 border-b px-4 md:px-6 mb-8 py-4 transition-transform duration-300 ease-in-out",
         visibleHeader
@@ -31,10 +32,10 @@ const Header: React.FC = () => {
         "bg-white z-10"
       )}
     >
-      <div className="container flex flex-col sm:flex-row items-center justify-between py-4 mx-auto max-w-7xl gap-4 ">
+      <Container>
         <Link href="/" className="flex-shrink-0">
           <Image
-            src="/retevis.png"
+            src="/Retevis/retevis.png"
             alt="Retevis Logo"
             width={160}
             height={80}
@@ -52,11 +53,11 @@ const Header: React.FC = () => {
             <Profile />
           </div>
         </div>
-      </div>
+      </Container>
       <div className="w-full h-[1px] bg-neutral-200 my-4" />
 
       <Navigation />
-    </header>
+    </div>
   );
 };
 

@@ -7,5 +7,7 @@ export const formatPrice = (price: string | number): string => {
   return new Intl.NumberFormat("en-MN", {
     style: "currency",
     currency: "MNT",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(priceNumber);
 };

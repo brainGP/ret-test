@@ -21,10 +21,10 @@ const StationNamePage = async ({
   return (
     <>
       <Header />
-      <div className="px-8 flex-1 justify-center gap-8">
-        <div className="flex-1 space-y-4 py-4">
-          <Breadcrumb />
+      <div className="px-4 flex-1 justify-center gap-8">
+        <div className="flex gap-4 items-center md:ml-20">
           <BackButton />
+          <Breadcrumb />
         </div>
         <StationCard station={station} />
         <RelatedProducts brand={station.brand} id={station._id} />

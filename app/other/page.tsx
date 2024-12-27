@@ -4,9 +4,9 @@ import Breadcrumb from "@/components/BreadCrumb";
 
 const OtherPage = () => {
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-col lg:flex-row">
       <Filter />
-      <main className="flex-1 ">
+      <main className="w-full flex flex-col p-4 pl-8 ">
         <Breadcrumb />
       </main>
     </div>

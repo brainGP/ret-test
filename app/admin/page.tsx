@@ -14,6 +14,7 @@ import Breadcrumb from "@/components/BreadCrumb";
 import { deleteProductById, getProducts } from "@/apis/products";
 import ConfirmationDialog from "./components/confirmation";
 import AddProduct from "./components/addProduct";
+import Container from "@/components/Container";
 
 function AdminPage() {
   const [loading, setLoading] = useState(true);
@@ -78,7 +79,7 @@ function AdminPage() {
           </Link>
         </div>
       </div>
-      <div className="container flex flex-col sm:flex-row items-center justify-between py-4 mx-auto max-w-7xl gap-4">
+      <Container>
         <ScrollArea className="w-full h-min-96 overflow-auto border rounded-lg">
           <ProductTable
             products={products}
@@ -89,7 +90,7 @@ function AdminPage() {
             }}
           />
         </ScrollArea>
-      </div>
+      </Container>
 
       <LoadingError isLoading={loading} />
 

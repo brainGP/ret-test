@@ -2,14 +2,14 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 const Nav_labels: Record<string, string> = {
   stations: "Станц",
   handstation: "Гар станц",
-  otherstation: "Бусад бараа",
   basestation: "Суурин станц",
+  otherstation: "Бусад бараа",
   other: "Бусад Бараа",
   contact: "Холбоо барих",
   admin: "Админ",
@@ -17,9 +17,20 @@ const Nav_labels: Record<string, string> = {
   cart: "Хадгалсан бүтээгдэхүүнүүд",
 };
 
+const typeLabels: Record<string, string> = {
+  handstation: "Гар станц",
+  basestation: "Суурин станц",
+};
+
 const Breadcrumb = () => {
   const pathname = usePathname() || "";
+  const searchParams = useSearchParams();
+
   const paths = pathname.split("/").filter((path) => path);
+
+  // Extract the 'type' query parameter for enhanced breadcrumbs
+  const type = searchParams.get("type");
+  const typeLabel = type && typeLabels[type] ? typeLabels[type] : null;
 
   return (
     <nav className="text-md">
@@ -39,13 +50,15 @@ const Breadcrumb = () => {
               <div className="text-gray mr-2">
                 <Image
                   src="/icons/breadcrumb.svg"
-                  alt="logo"
+                  alt="breadcrumb"
                   width={16}
                   height={16}
                   priority={true}
                 />
               </div>
-              {index === paths.length - 1 ? (
+              {index === paths.length - 1 && typeLabel ? (
+                <span className="font-semibold">{typeLabel}</span>
+              ) : index === paths.length - 1 ? (
                 <span className="font-semibold">{label}</span>
               ) : (
                 <Link href={href} className="hover:underline capitalize">

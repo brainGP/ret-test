@@ -33,12 +33,11 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, products }) => {
 export default ProductGrid;
 
 const ProductCard = ({ product }: { product: Product }) => {
-  // const imgUrl = `${baseUrl}${product.image}`;
   const imgUrl = `${baseUrl}${product.images[0].image}`;
   return (
     <Link href={`/stations/${product.name}`}>
-      <div className="border hover:border-gray/30 transition-all duration-300 h-[340px] w-full rounded-md bg-white  group flex flex-col">
-        <div className="relative h-48 w-full rounded-md overflow-hidden flex items-center justify-center mb-4">
+      <div className="border hover:border-gray/30 transition-all duration-300 h-[320px] w-full rounded-md bg-white  group flex flex-col">
+        <div className="relative h-48 w-full rounded-md overflow-hidden flex items-center justify-center">
           <Image
             src={imgUrl}
             alt={product.name}
@@ -48,8 +47,8 @@ const ProductCard = ({ product }: { product: Product }) => {
             priority={true}
           />
         </div>
-        <div className="m-4">
-          <h3 className="my-2 text-xl font-semibold">{product.name}</h3>
+        <div className="mx-4">
+          <h3 className="text-xl font-semibold">{product.name}</h3>
           <p className="font-semibold text-base">
             {formatPrice(product.priceN)}₮
           </p>

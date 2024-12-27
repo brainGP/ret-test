@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
       <div className="container flex justify-between items-start mx-auto max-w-7xl gap-8 py-6 flex-wrap">
         <div className="flex items-center justify-center sm:justify-start">
           <Image
-            src="/retevis.png"
+            src="/Retevis/retevis.png"
             alt="Retevis Mongolia Logo"
             width={160}
             height={80}
@@ -65,10 +65,10 @@ const Footer: React.FC = () => {
       <div className="h-[0.5px] w-full bg-gray/20 my-4" />
       <div className="w-full border-gray py-4 text-sm text-center">
         © 2024 Retevis Mongolia
-        <h1 className=" mx-16 p-4">
+        <p className="p-4">
           Америк стандартын RETEVIS брэндийн хэт богино долгионы гар болон
           суурин радио станцын төрөлжсөн худалдаа.
-        </h1>
+        </p>
       </div>
     </footer>
   );

@@ -4,6 +4,8 @@ export interface Product {
   type: string;
   style: string;
   price: number;
+  description: string;
+  rating: number;
   priceN: number;
   battery: string;
   power: string;

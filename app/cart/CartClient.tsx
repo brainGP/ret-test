@@ -9,6 +9,7 @@ import Link from "next/link";
 import { MdArrowBack } from "react-icons/md";
 import Image from "next/image";
 import { formatPrice } from "@/utils/formatPrice";
+import Container from "@/components/Container";
 
 const CartClient = () => {
   const { cartProducts, handleClearCart, cartTotalAmount } = useCart();
@@ -29,7 +30,7 @@ const CartClient = () => {
 
   return (
     <div className="flex flex-col justify-center items-center w-full top-0 border-b px-4 md:px-6 mb-8 py-4">
-      <div className="container flex flex-col mx-auto max-w-7xl gap-4">
+      <Container>
         <div className="flex flex-col sm:flex-row justify-between">
           <h1 className="font-semibold text-xl mb-4">
             Хадгалсан бүтээгдэхүүнүүд
@@ -38,11 +39,11 @@ const CartClient = () => {
         <div className="flex flex-row ">
           <Breadcrumb />
         </div>
-      </div>
-      <div className="container flex flex-col sm:flex-row items-center justify-between py-4 mx-auto max-w-7xl gap-4">
+      </Container>
+      <Container>
         <CartTable products={cartProducts} />
-      </div>
-      <div className="container flex flex-col justify-between md:flex-row md:justify-between py-4 mx-auto max-w-7xl gap-4">
+      </Container>
+      <Container>
         <Button
           onClick={() => {
             handleClearCart();
@@ -56,7 +57,7 @@ const CartClient = () => {
           <span className="text-pretty text-red-500">
             Та захиалга хийхдээ утасны дугаараар хийнэ үү!
           </span>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 justify-center">
             <p className="font-medium">Холбогдох дугаар:</p>
             <span className="text-lg font-bold underline">99021617</span>
           </div>
@@ -75,7 +76,7 @@ const CartClient = () => {
             </Link>
           </Button>
         </div>
-      </div>
+      </Container>
     </div>
   );
 };

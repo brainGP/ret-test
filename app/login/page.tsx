@@ -73,7 +73,7 @@ const Login = () => {
       {/* Left Section */}
       <div className="flex flex-col justify-center items-center w-full md:w-1/2 bg-white p-6">
         <Image
-          src="/retevis.png"
+          src="/Retevis/retevis.png"
           alt="Retevis Logo"
           width={300}
           height={100}

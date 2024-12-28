@@ -36,7 +36,9 @@ const AddProduct = ({
         <ProductModal
           product={newProduct}
           onClose={() => setNewProduct(null)}
-          onSave={addProduct}
+          onSave={async (updatedProduct: Product) =>
+            await addProduct(updatedProduct)
+          }
         />
       )}
     </>

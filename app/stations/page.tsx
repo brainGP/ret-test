@@ -2,8 +2,6 @@
 import React from "react";
 import Filter from "@/components/Filter";
 import Breadcrumb from "@/components/BreadCrumb";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import { getProducts, getProductsByBrand } from "@/apis/products";
 import ProductDisplay from "@/components/Products/ProductDisplay";
 import { useSearchParams } from "next/navigation";

@@ -1,6 +1,4 @@
 import Breadcrumb from "@/components/BreadCrumb";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import BackButton from "@/components/BackButton";
 import { getProductByName } from "@/apis/products";
 import NotFound from "@/app/not-found";

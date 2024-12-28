@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, FormEvent } from "react";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -75,7 +75,7 @@ const Signup: React.FC = () => {
       setPassword("");
       setConfirmPassword("");
       router.push("/login");
-    } catch (err) {
+    } catch {
       const message = "Ямар нэг зүйл буруу болсон. Дахин оролдоно уу.";
       toast.error(message);
     } finally {

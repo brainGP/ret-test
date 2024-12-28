@@ -5,9 +5,7 @@ import Footer from "@/components/Footer";
 const CartPage = () => {
   return (
     <>
-      <Header />
       <CartClient />
-      <Footer />
     </>
   );
 };

@@ -54,10 +54,8 @@ const CartClient = () => {
         </Button>
 
         <div className="flex flex-col">
-          <span className="text-pretty text-red-500">
-            Та захиалга хийхдээ утасны дугаараар хийнэ үү!
-          </span>
-          <div className="flex items-center gap-4 justify-center">
+          <span>Та захиалга хийхдээ утасны дугаараар хийнэ үү!</span>
+          <div className="flex items-center gap-4">
             <p className="font-medium">Холбогдох дугаар:</p>
             <span className="text-lg font-bold underline">99021617</span>
           </div>

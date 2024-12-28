@@ -1,5 +1,4 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,10 +12,9 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <Header />
+    <>
+      <Toaster />
       {children}
-      <Footer />
-    </div>
+    </>
   );
 }

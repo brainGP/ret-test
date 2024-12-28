@@ -126,7 +126,7 @@ const Login = () => {
               <Separator />
 
               <div className="flex justify-between text-sm text-gray">
-                <p>Үнэхээр бүртгүүлээгүй юу?</p>
+                <p>Бүртгүүлээгүй юу?</p>
                 <Link
                   href={`/register`}
                   className="text-sky-600 hover:underline"
@@ -136,14 +136,14 @@ const Login = () => {
               </div>
             </form>
           </CardContent>
-          <Button
+          {/* <Button
             type="button"
             onClick={handleGoogleSignIn}
             className="w-full bg-red-600 hover:bg-red-500 mt-4"
             disabled={loading}
           >
             {loading ? "Түр хүлээнэ үү..." : "Google-аар Нэвтрэх"}
-          </Button>
+          </Button> */}
         </Card>
 
         <p className="mt-6 text-gray-500 text-sm">

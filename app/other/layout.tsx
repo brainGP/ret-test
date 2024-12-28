@@ -14,9 +14,7 @@ export default function OtherLayout({
 }) {
   return (
     <div>
-      <Header />
-      {children}
-      <Footer />
+      <main>{children}</main>
     </div>
   );
 }

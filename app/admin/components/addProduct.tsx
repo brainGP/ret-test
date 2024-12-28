@@ -1,9 +1,10 @@
+"use client";
+import React, { useState } from "react";
+import { toast } from "sonner";
 import { postNewProduct } from "@/apis/products";
 import ProductModal from "@/components/Products/ProductModal";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/types/Product";
-import React, { useState } from "react";
-import { toast } from "sonner";
 
 const AddProduct = ({
   setProducts,
@@ -15,7 +16,8 @@ const AddProduct = ({
   const addProduct = async (product: Product) => {
     try {
       const data = await postNewProduct({ product });
-      setProducts((prev: Product[]) => [...prev, data]);
+      setProducts((prev) => [...prev, data]);
+      toast.success("Product added successfully!");
     } catch (e) {
       const err = e as Error;
       toast.error(err.message);

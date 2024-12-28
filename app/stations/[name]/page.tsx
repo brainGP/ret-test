@@ -20,7 +20,6 @@ const StationNamePage = async ({
 
   return (
     <>
-      <Header />
       <div className="px-4 flex-1 justify-center gap-8">
         <div className="flex gap-4 items-center md:ml-20">
           <BackButton />
@@ -29,7 +28,6 @@ const StationNamePage = async ({
         <StationCard station={station} />
         <RelatedProducts brand={station.brand} id={station._id} />
       </div>
-      <Footer />
     </>
   );
 };

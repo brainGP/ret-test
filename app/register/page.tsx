@@ -1,32 +1,20 @@
 "use client";
 
 import React, { useState, FormEvent } from "react";
-import {
-  Card,
-  CardHeader,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
 import { POST } from "@/apis/axios";
-import { Product } from "@/types/Product";
 import Image from "next/image";
 
 interface Data {
   username: string;
   email: string;
   password: string;
-}
-
-interface ApiResponse {
-  message: string;
-  data: Product[];
 }
 
 const Signup: React.FC = () => {
@@ -37,26 +25,29 @@ const Signup: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showsPassword, setShowsPassword] = useState<boolean>(false);
+  const [isPasswordMatching, setIsPasswordMatching] = useState<boolean>(true);
 
   const router = useRouter();
+
+  const validatePassword = (password: string) => {
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    return regex.test(password);
+  };
 
   const handleSignup = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
-    const data: Data = {
-      username,
-      email,
-      password,
-    };
 
     if (!username || !email || !password || !confirmPassword) {
       toast.error("Бүх хэсгийг бөглөх шаардлагатай.");
       setLoading(false);
       return;
     }
-    if (password.length < 6) {
-      toast.error("Нууц үг дор хаяж 6 тэмдэгттэй байх ёстой.");
+    if (!validatePassword(password)) {
+      toast.error(
+        "Нууц үг дор хаяж 6 тэмдэгттэй байх ёстой бөгөөд том, жижиг үсэг, тоо, тусгай тэмдэгт агуулсан байх ёстой."
+      );
       setLoading(false);
       return;
     }
@@ -72,6 +63,7 @@ const Signup: React.FC = () => {
     }
 
     try {
+      const data: Data = { username, email, password };
       await POST({
         route: `/api/auth/register`,
         body: data,
@@ -84,9 +76,7 @@ const Signup: React.FC = () => {
       setConfirmPassword("");
       router.push("/login");
     } catch (err) {
-      const message =
-        (err as AxiosError<ApiResponse>)?.response?.data?.message ||
-        "Ямар нэг зүйл буруу болсон. Дахин оролдоно уу.";
+      const message = "Ямар нэг зүйл буруу болсон. Дахин оролдоно уу.";
       toast.error(message);
     } finally {
       setLoading(false);
@@ -105,21 +95,22 @@ const Signup: React.FC = () => {
           className="mb-6"
         />
         <Card className="w-full max-w-md border-none shadow-none">
-          <CardHeader>
-            <CardDescription className="text-sm text-center text-gray-500">
-              Имэйлээр шинэ бүртгэл үүсгэнэ үү.
-            </CardDescription>
-          </CardHeader>
           <CardContent>
             <form onSubmit={handleSignup} className="space-y-4">
               <Input
                 type="text"
                 placeholder="Нэр"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) =>
+                  setUsername(
+                    e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1)
+                  )
+                }
                 disabled={loading}
                 className="p-4 py-6 bg-slate-100 border rounded-lg shadow-none focus:bg-white focus:border transition duration-300"
               />
+
               <Input
                 type="email"
                 placeholder="Цахим хаяг"
@@ -140,11 +131,7 @@ const Signup: React.FC = () => {
                 />
                 <button
                   type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setShowPassword(!showPassword);
-                  }}
+                  onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-4 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none"
                 >
                   <Image
@@ -159,22 +146,23 @@ const Signup: React.FC = () => {
                   />
                 </button>
               </div>
+
               <div className="relative">
                 <Input
                   type={showsPassword ? "text" : "password"}
                   placeholder="Нууц үг давтах"
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(e) => {
+                    const input = e.target.value;
+                    setConfirmPassword(input);
+                    setIsPasswordMatching(password === input);
+                  }}
                   disabled={loading}
                   className="p-4 py-6 bg-slate-100 border rounded-lg shadow-none focus:bg-white focus:border transition duration-300 pr-12"
                 />
                 <button
                   type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setShowsPassword(!showsPassword);
-                  }}
+                  onClick={() => setShowsPassword(!showsPassword)}
                   className="absolute inset-y-0 right-4 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none"
                 >
                   <Image
@@ -188,15 +176,20 @@ const Signup: React.FC = () => {
                     height={24}
                   />
                 </button>
+                {!isPasswordMatching && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Нууц үг таарахгүй байна.
+                  </p>
+                )}
               </div>
 
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Signing up..." : "Sign Up"}
+                {loading ? "Бүртгэгдэж байна..." : "Бүртгүүлэх"}
               </Button>
             </form>
             <Separator />
             <div className="flex flex-row justify-between text-sm mt-4 text-gray">
-              <p>text</p>
+              <div>Хэдийн бүртгэлтэй?</div>
               <Link href={`/login`} className="text-sky-600 hover:underline">
                 Бүртгэлтэй
               </Link>

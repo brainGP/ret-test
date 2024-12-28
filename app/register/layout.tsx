@@ -1,14 +1,14 @@
 import { Toaster } from "@/components/ui/sonner";
-import React from "react";
-export default function LoginLayout({
+
+export default function RegisterLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div>
       <Toaster />
       {children}
-    </>
+    </div>
   );
 }

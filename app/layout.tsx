@@ -3,6 +3,8 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Providers from "../providers";
 import CartProvider from "@/providers/CartProvider";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Retevis",
@@ -19,7 +21,11 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-gray/[2%]">
         <CartProvider>
-          <Providers>{children}</Providers>
+          <Providers>
+            <Header />
+            {children}
+            <Footer />
+          </Providers>
           <Toaster />
         </CartProvider>
       </body>

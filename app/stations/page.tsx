@@ -27,25 +27,21 @@ const Home = () => {
   const title = type ? filterMap[type] : "Бүх бараа";
 
   return (
-    <main>
-      <Header />
-      <div className="flex flex-col lg:flex-row">
-        <Filter />
-        <div className="w-full flex flex-col p-4 pl-8">
-          <div className="flex">
-            <Breadcrumb />
-          </div>
-          <ProductDisplay
-            title={title}
-            fetcher={fetcher}
-            fetcherKey={[brand, type]}
-            filter={filter}
-            loader={<ProductGridSkeleton />}
-          />
+    <div className="flex flex-col lg:flex-row">
+      <Filter />
+      <div className="w-full flex flex-col p-4 pl-8">
+        <div className="flex">
+          <Breadcrumb />
         </div>
+        <ProductDisplay
+          title={title}
+          fetcher={fetcher}
+          fetcherKey={[brand, type]}
+          filter={filter}
+          loader={<ProductGridSkeleton />}
+        />
       </div>
-      <Footer />
-    </main>
+    </div>
   );
 };
 

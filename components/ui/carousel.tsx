@@ -68,8 +68,8 @@ const CustomCarousel = () => {
           <Image
             src="icons/left.svg"
             alt="icon"
-            width={12}
-            height={12}
+            width={24}
+            height={24}
             priority={true}
           />
         </span>
@@ -86,8 +86,8 @@ const CustomCarousel = () => {
           <Image
             src="icons/right.svg"
             alt="icon"
-            width={12}
-            height={12}
+            width={24}
+            height={24}
             priority={true}
           />
         </span>

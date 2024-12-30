@@ -10,7 +10,7 @@ export interface Product {
   battery: string;
   power: string;
   hertz: string;
-  status: string;
+  status: boolean;
   size: string;
   images: { image: string }[];
   quantity: number;

@@ -63,7 +63,7 @@ export const postNewProduct = async ({
     token: accessToken,
     body: product,
   });
-  if (response.status !== 201)
+  if (response.status !== 200)
     throw new Error("Бүтээгдэхүүнийг нэмж чадсангүй.");
   return response.data;
 };

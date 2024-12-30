@@ -90,7 +90,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
-                className="p-4 py-6 bg-slate-100 border rounded-lg shadow-none focus:bg-white focus:border transition duration-300"
+                className="p-4 py-2 bg-slate-100 border rounded-lg shadow-none focus:bg-white focus:border transition duration-300"
               />
               <div className="relative">
                 <Input
@@ -99,7 +99,7 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={loading}
-                  className="p-4 py-6 bg-slate-100 border rounded-lg shadow-none hover:bg-white focus:border transition duration-300 pr-12"
+                  className="p-4 py-2 bg-slate-100 border rounded-lg shadow-none hover:bg-white focus:border transition duration-300 pr-12"
                 />
                 <button
                   type="button"
@@ -113,8 +113,8 @@ const Login = () => {
                         : "/icons/eyeClose.svg"
                     }
                     alt={showPassword ? "Hide password" : "Show password"}
-                    width={24}
-                    height={24}
+                    width={16}
+                    height={16}
                   />
                 </button>
               </div>

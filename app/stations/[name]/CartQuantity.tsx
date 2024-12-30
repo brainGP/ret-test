@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Product } from "@/types/Product";
-
+import { Button } from "@/components/ui/button";
 interface SetQtyProps {
   cartCounter?: boolean;
   cartProduct: Product;
@@ -18,19 +18,19 @@ const SetQuantity: React.FC<SetQtyProps> = ({
     <div className="flex py-4 items-center gap-4">
       {cartCounter ? null : <div className="font-semibold">Тоо хэмжээ:</div>}
       <div className="flex text-base items-center gap-4">
-        <button
+        <Button
           onClick={handleQtyDecrease}
-          className="border hover:border-gray transition duration-300 px-2 rounded"
+          className=" text-gray border transition duration-300 bg-transparent shadow-none rounded"
         >
           -
-        </button>
+        </Button>
         <div>{cartProduct.quantity}</div>
-        <button
+        <Button
           onClick={handleQtyIncrease}
-          className="border hover:border-gray transition duration-300 px-2 rounded"
+          className=" text-gray border transition duration-300 bg-transparent shadow-none rounded"
         >
           +
-        </button>
+        </Button>
       </div>
     </div>
   );

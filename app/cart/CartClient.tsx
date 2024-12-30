@@ -43,7 +43,7 @@ const CartClient = () => {
       <Container>
         <CartTable products={cartProducts} />
       </Container>
-      <Container>
+      <div className="container flex flex-col sm:flex-row items-start justify-between py-4 mx-auto max-w-7xl gap-4 ">
         <Button
           onClick={() => {
             handleClearCart();
@@ -57,12 +57,15 @@ const CartClient = () => {
           <span>Та захиалга хийхдээ утасны дугаараар хийнэ үү!</span>
           <div className="flex items-center gap-4">
             <p className="font-medium">Холбогдох дугаар:</p>
-            <span className="text-lg font-bold underline">99021617</span>
+            <div className="flex gap-2 items-center">
+              <p> (+976)</p>
+              <span className="text-lg font-bold underline">9902 1617</span>
+            </div>
           </div>
         </div>
 
         <div className="text-sm flex flex-col gap-1 items-start mt-8 md:mt-0">
-          <div className="flex justify-between w-full text-base font-semibold">
+          <div className="flex justify-start md:justify-between w-full text-base font-semibold gap-1">
             <span>Нийт:</span>
             <span className="text-lg">{formatPrice(cartTotalAmount)}₮</span>
           </div>
@@ -74,7 +77,7 @@ const CartClient = () => {
             </Link>
           </Button>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

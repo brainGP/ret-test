@@ -1,12 +1,12 @@
 export interface Product {
   _id: string;
   name: string;
+  brand: string;
   type: string;
   style: string;
   price: number;
-  description: string;
-  rating: number;
   priceN: number;
+  description: string;
   battery: string;
   power: string;
   hertz: string;
@@ -15,5 +15,5 @@ export interface Product {
   images: { image: string }[];
   quantity: number;
   sort: string;
-  brand: string;
+  rating: number;
 }

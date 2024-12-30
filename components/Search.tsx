@@ -63,7 +63,7 @@ const Search = () => {
 
   return (
     <div className="relative w-full max-w-2xl text-gray">
-      <div className="flex w-full items-center bg-blue rounded-full gap-4">
+      <div className="flex w-full items-center rounded-full gap-4">
         <Input
           type="search"
           placeholder="Хайлт хийх..."

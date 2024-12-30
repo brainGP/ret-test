@@ -46,52 +46,6 @@ const ProductModal: React.FC<ProductModalProps> = ({
     rating: product.rating || 0,
   });
 
-  const handleChange = (
-    field: keyof Product,
-    value: string | number | boolean
-  ) => {
-    if (typeof value === "string") {
-      value = value.charAt(0).toUpperCase() + value.slice(1);
-    }
-    setFormData({ ...formData, [field]: value });
-  };
-
-  const handleStatusChange = (value: string) => {
-    setFormData({ ...formData, status: value === "true" });
-  };
-
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      const files = Array.from(event.target.files).map((file) => ({
-        image: URL.createObjectURL(file),
-      }));
-      setFormData({
-        ...formData,
-        images: [...formData.images, ...files],
-      });
-    }
-  };
-
-  const removeImage = (index: number) => {
-    const updatedImages = formData.images.filter((_, i) => i !== index);
-    setFormData({ ...formData, images: updatedImages });
-  };
-
-  const handleSave = async () => {
-    if (!formData.name || !formData.brand || formData.price <= 0) {
-      toast.error("Бүх шаардлагатай талбарыг бөглөнө үү!");
-      return;
-    }
-
-    try {
-      await onSave(formData);
-      toast.success("Бүтээгдэхүүн амжилттай хадгалагдлаа!");
-      onClose();
-    } catch {
-      toast.error("Хадгалах явцад алдаа гарлаа.");
-    }
-  };
-
   useEffect(() => {
     setFormData({
       ...product,
@@ -114,9 +68,53 @@ const ProductModal: React.FC<ProductModalProps> = ({
     });
   }, [product]);
 
+  const handleChange = (
+    field: keyof Product,
+    value: string | number | boolean
+  ) => {
+    if (typeof value === "string") {
+      value = value.charAt(0).toUpperCase() + value.slice(1);
+    }
+    setFormData({ ...formData, [field]: value });
+  };
+
+  const handleStatusChange = (value: string) => {
+    setFormData({ ...formData, status: value === "true" });
+  };
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const files = Array.from(event.target.files).map((file) => ({
+        image: URL.createObjectURL(file),
+      }));
+      setFormData({ ...formData, images: [...formData.images, ...files] });
+    }
+  };
+
+  const removeImage = (index: number) => {
+    const updatedImages = formData.images.filter((_, i) => i !== index);
+    setFormData({ ...formData, images: updatedImages });
+  };
+
+  const handleSave = async () => {
+    if (!formData.name || !formData.brand || !formData.price) {
+      toast.error("Бүх шаардлагатай талбарыг бөглөнө үү!");
+      return;
+    } else {
+      try {
+        await onSave(formData);
+        console.log(formData);
+        toast.success("Бүтээгдэхүүн амжилттай хадгалагдлаа!");
+        onClose();
+      } catch {
+        toast.error("Хадгалах явцад алдаа гарлаа.");
+      }
+    }
+  };
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden">
+      <div className="bg-white rounded-lg w-full max-w-2xl h-full overflow-hidden">
         <ScrollArea className="h-[800px] p-6">
           <div className="flex flex-row justify-between">
             <h2 className="text-xl font-bold">
@@ -288,22 +286,20 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Зураг
-              </label>
+              <label className="block text-sm font-medium">Зураг</label>
               <Input
                 type="file"
                 accept="image/*"
                 multiple
                 onChange={handleImageChange}
-                className=" border-0 mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                className=" border-0 mt-1 px-0 block shadow-none w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
               />
               <div className="flex space-x-4 mt-4">
                 {formData.images.map((image, index) => (
                   <div key={index} className="relative">
                     <Image
                       src={image.image}
-                      alt={`Uploaded image ${index + 1}`}
+                      alt="images"
                       width={100}
                       height={100}
                       className="rounded-md"

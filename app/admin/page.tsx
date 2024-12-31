@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { isAdmin, isUserLoggedIn } from "@/lib/authHelper";
+import { isAdmin } from "@/lib/authHelper";
 import { getCookie } from "cookies-next";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";

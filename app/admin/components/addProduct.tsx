@@ -27,11 +27,11 @@ const AddProduct = ({
     try {
       const formData = new FormData();
       Object.keys(product).forEach((key) => {
-        const value = (product as any)[key];
+        const value = product[key as keyof Product];
         if (Array.isArray(value)) {
           value.forEach((item) => formData.append(key, JSON.stringify(item)));
         } else {
-          formData.append(key, value);
+          formData.append(key, String(value));
         }
       });
       files.forEach((file) => {

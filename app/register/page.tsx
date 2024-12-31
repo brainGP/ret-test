@@ -202,13 +202,16 @@ const Signup: React.FC = () => {
       </div>
 
       <div className="hidden md:block w-1/2 relative">
-        <Image
-          src="/Auth.png"
-          alt="Auth Background"
-          layout="fill"
-          objectFit="cover"
-          priority
-        />
+        <div className="relative w-full h-full">
+          <Image
+            src="/Auth.png"
+            alt="Auth Background"
+            fill
+            objectFit="cover"
+            priority
+            className="rounded-lg"
+          />
+        </div>
       </div>
     </div>
   );

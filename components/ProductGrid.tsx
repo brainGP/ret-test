@@ -39,7 +39,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       <div className="border hover:border-gray/30 transition-all duration-300 h-[320px] w-full rounded-md bg-white  group flex flex-col">
         <div className="relative h-48 w-full rounded-md overflow-hidden flex items-center justify-center">
           <Image
-            src={imgUrl}
+            src={imgUrl || "/noresult.png"}
             alt={product.name}
             width={200}
             height={200}

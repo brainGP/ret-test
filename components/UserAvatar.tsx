@@ -14,10 +14,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
 import { isAdminC, logoutUser } from "@/lib/authHelper";
+import { toast } from "sonner";
 
 function UserAvatar({ name }: { name: string; picture?: string }) {
   const router = useRouter();
   const isUserAdmin = isAdminC();
+
+  const handleLogout = () => {
+    logoutUser();
+    toast.success("Амжилттай гарлаа!");
+    router.push(`/`);
+    window.location.reload();
+  };
+
   return (
     <div className="flex flex-row gap-4 items-center">
       <DropdownMenu>
@@ -38,7 +47,6 @@ function UserAvatar({ name }: { name: string; picture?: string }) {
           <DropdownMenuLabel>Миний мэдээлэл</DropdownMenuLabel>
           <DropdownMenuSeparator />
 
-          {/* Admin-specific options */}
           {isUserAdmin && (
             <>
               <DropdownMenuGroup>
@@ -57,14 +65,7 @@ function UserAvatar({ name }: { name: string; picture?: string }) {
             </>
           )}
 
-          {/* Logout option */}
-          <DropdownMenuItem
-            onClick={() => {
-              logoutUser();
-              router.push(`/`);
-              router.refresh();
-            }}
-          >
+          <DropdownMenuItem onClick={handleLogout}>
             <LogOut className="mr-2 h-4 w-4" />
             <span>Гарах</span>
             <DropdownMenuShortcut>Q</DropdownMenuShortcut>

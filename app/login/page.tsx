@@ -12,7 +12,6 @@ import { saveUserData } from "@/lib/authHelper";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { POST } from "@/apis/axios";
-import { signIn } from "next-auth/react";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -20,20 +19,15 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
-  const handleGoogleSignIn = async () => {
-    setLoading(true);
-    const result = await signIn("google", { redirect: false });
-    if (result?.error) {
-      toast.error("Google login failed. Please try again.");
-    } else {
-      toast.success("Амжилттай нэвтэрлээ");
-      router.push("/");
-    }
-    setLoading(false);
-  };
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      toast.error("Бүх хэсгийг бөглөх шаардлагатай.");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -42,27 +36,26 @@ const Login = () => {
         body: { email, password },
       });
 
-      toast.success("Амжилттай нэвтэрлээ");
       saveUserData(response.data);
+
+      setTimeout(() => {
+        toast.success("Амжилттай нэвтэрлээ");
+      }, 0);
 
       if (response.data.isAdmin) {
         router.push("/admin");
-        router.refresh();
-        return;
-      }
-      if (!email || !password) {
-        toast.error("Бүх хэсгийг бөглөх шаардлагатай.");
-        setLoading(false);
         return;
       }
 
       router.push("/");
-      router.refresh();
     } catch (err: unknown) {
-      toast.error("Гэнэтийн алдаа гарлаа. Дахин оролдоно уу");
-      if (err instanceof AxiosError && err.response) {
-        toast.error("Имэйл эсвэл нууц үг буруу байна.");
-      }
+      setTimeout(() => {
+        if (err instanceof AxiosError && err.response) {
+          toast.error("Имэйл эсвэл нууц үг буруу байна.");
+        } else {
+          toast.error("Гэнэтийн алдаа гарлаа. Дахин оролдоно уу");
+        }
+      }, 0);
     } finally {
       setLoading(false);
     }
@@ -103,7 +96,7 @@ const Login = () => {
                 />
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={() => setShowPassword((prev) => !prev)}
                   className="absolute inset-y-0 right-4 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none"
                 >
                   <Image
@@ -136,14 +129,6 @@ const Login = () => {
               </div>
             </form>
           </CardContent>
-          <Button
-            type="button"
-            onClick={handleGoogleSignIn}
-            className="w-full bg-red-600 hover:bg-red-500 mt-4"
-            disabled={loading}
-          >
-            {loading ? "Түр хүлээнэ үү..." : "Google-аар Нэвтрэх"}
-          </Button>
         </Card>
 
         <p className="mt-6 text-gray-500 text-sm">

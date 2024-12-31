@@ -36,7 +36,7 @@ function AdminUsersPage() {
 
   const fetchUsers = async () => {
     try {
-      const accessToken = getCookie("accessToken");
+      const accessToken = getCookie("accessToken") as string;
       if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
       const response = await GET({ route: `/api/user`, token: accessToken });
       if (response.status === 200) {
@@ -51,7 +51,7 @@ function AdminUsersPage() {
 
   const deleteUser = async (id: string) => {
     try {
-      const accessToken = getCookie("accessToken");
+      const accessToken = getCookie("accessToken") as string;
       if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
       const response = await DELETE({
         route: `/api/user/${id}`,
@@ -71,7 +71,7 @@ function AdminUsersPage() {
 
   const updateUser = async (user: User) => {
     try {
-      const accessToken = getCookie("accessToken");
+      const accessToken = getCookie("accessToken") as string;
       if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
 
       const response = await PUT({
@@ -93,7 +93,7 @@ function AdminUsersPage() {
 
   const addUser = async (user: User) => {
     try {
-      const accessToken = getCookie("accessToken");
+      const accessToken = getCookie("accessToken") as string;
       if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
 
       const response = await POST({

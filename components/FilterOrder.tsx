@@ -9,12 +9,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+type SortOrder = "lowtohigh" | "hightolow";
+
 interface FilterOrderProps {
-  onOrderChange: (order: string) => void;
+  onOrderChange: (order: SortOrder) => void;
 }
 
 const FilterOrder: React.FC<FilterOrderProps> = ({ onOrderChange }) => {
-  const handleChange = (value: string) => {
+  const handleChange = (value: SortOrder) => {
     onOrderChange(value);
   };
 

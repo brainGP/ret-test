@@ -18,10 +18,11 @@ interface ProductTableProps {
   onEdit: (product: Product) => void;
   onDelete: (id: string) => void;
 }
+
 const ProductTable: React.FC<ProductTableProps> = ({
   products,
-  // onEdit,
-  // onDelete,
+  onEdit,
+  onDelete,
 }) => {
   return (
     <ScrollArea className="w-screen xl:w-full overflow-x-auto rounded-md border">
@@ -54,8 +55,8 @@ const ProductTable: React.FC<ProductTableProps> = ({
                   <TableCell>
                     <ProductActions
                       product={product}
-                      // onEdit={onEdit}
-                      // onDelete={onDelete}
+                      onEdit={onEdit}
+                      onDelete={onDelete}
                     />
                   </TableCell>
                 </TableRow>

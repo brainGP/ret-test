@@ -30,32 +30,32 @@ function AdminPage() {
     try {
       const data = await getProducts();
       setProducts(data);
-      console.log(editProduct);
     } catch (e) {
       const err = e as Error;
       toast.error(err.message);
     } finally {
       setLoading(false);
     }
-  }, [editProduct]);
+  }, []);
 
   useEffect(() => {
     const checkAuth = async () => {
       const accessToken = getCookie("accessToken");
 
-      if (!accessToken || !isUserLoggedIn()) {
+      if (!accessToken) {
         toast.error("Нэвтрэх шаардлагатай.");
         router.push("/login");
         return;
       }
-      if (!isAdmin()) {
-        toast.error("Та энэ хуудсанд хандах эрхгүй байна.");
-        router.push("/");
-        return;
-      }
 
-      setAuthorized(true);
-      await fetchProducts();
+      const isAdminUser = await isAdmin();
+      if (isAdminUser) {
+        setAuthorized(true);
+        await fetchProducts();
+      } else {
+        toast.error("Та энэ хуудсанд хандах эрхгүй.");
+        router.push("/");
+      }
     };
 
     checkAuth();
@@ -70,7 +70,11 @@ function AdminPage() {
       <div className="container flex flex-col items-centerpy-4 mx-auto max-w-7xl gap-4">
         <div className="flex flex-col sm:flex-row justify-between">
           <h1 className="font-semibold text-xl mb-4">Админы хяналтын хэсэг</h1>
-          <AddProduct setProducts={setProducts} />
+          <AddProduct
+            setProducts={setProducts}
+            editProduct={editProduct}
+            setEditProduct={setEditProduct}
+          />
         </div>
         <div className="flex flex-row justify-between items-center">
           <Breadcrumb />
@@ -98,8 +102,7 @@ function AdminPage() {
         isOpen={isDialogOpen}
         setIsOpen={setIsDialogOpen}
         title="Бүтээгдэхүүн устгах"
-        description="Энэ үйлдлийг буцаах боломжгүй. Та энэ бүтээгдэхүүнийг устгахдаа
-          үнэхээр итгэлтэй байна уу?"
+        description="Энэ үйлдлийг буцаах боломжгүй. Та энэ бүтээгдэхүүнийг устгахдаа үнэхээр итгэлтэй байна уу?"
         callback={() => {
           if (productToDelete) {
             deleteProductById({ id: productToDelete });

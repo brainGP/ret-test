@@ -20,13 +20,7 @@ export default function RootLayout({
       <body className="bg-gray/[2%]">
         <CartProvider>
           <Providers>{children}</Providers>
-          <Toaster
-            toastOptions={{
-              classNames: {
-                toast: "bg-full z-50 p-4 rounded-lg",
-              },
-            }}
-          />
+          <Toaster />
         </CartProvider>
       </body>
     </html>

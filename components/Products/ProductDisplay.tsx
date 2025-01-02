@@ -80,7 +80,7 @@ const ProductDisplay: React.FC<ProductDisplayProps> = ({
         </div>
       )}
       {isLoading && (
-        <div className="relative inset-0 flex justify-center items-start bg-white bg-opacity-50 z-20">
+        <div className="relative inset-0 flex justify-center items-start bg-white bg-opacity-50 z-10">
           {loader}
         </div>
       )}

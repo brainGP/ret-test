@@ -22,14 +22,13 @@ interface Cookies {
   _id?: string;
 }
 
-export const getUserData = (): User | null => {
+export const getUserData = () => {
   const accessToken = getCookie("accessToken");
   if (!accessToken) {
     return null;
   }
 
-  const cookies = getCookies() as Cookies;
-
+  const cookies: any = getCookies();
   const { email, username, isAdmin, _id } = cookies;
 
   const user: User = {
@@ -55,9 +54,9 @@ export const saveLastLoginTimestamp = (email: string): void => {
   });
 };
 
-export const isUserLoggedIn = (): boolean => {
+export const isUserLoggedIn = () => {
   const accessToken = getCookie("accessToken");
-  const cookies = getCookies() as Cookies;
+  const cookies: any = getCookies();
 
   if (
     !cookies.email ||
@@ -73,7 +72,7 @@ export const isUserLoggedIn = (): boolean => {
   if (!user) {
     return false;
   }
-  return true;
+  return user;
 };
 
 export const isAdmin = async (): Promise<boolean> => {
@@ -95,7 +94,7 @@ export const isAdmin = async (): Promise<boolean> => {
   }
 };
 
-export const isAdminC = (): boolean => {
+export const isAdminC = () => {
   const accessToken = getCookie("accessToken");
   if (!accessToken) {
     return false;
@@ -104,7 +103,7 @@ export const isAdminC = (): boolean => {
   return isAdmin === "true";
 };
 
-export const logoutUser = async (): Promise<void> => {
+export const logoutUser = async () => {
   deleteCookie("accessToken");
   deleteCookie("email");
   deleteCookie("username");
@@ -113,7 +112,7 @@ export const logoutUser = async (): Promise<void> => {
   deleteCookie("createdAt");
 };
 
-export const saveUserData = async (user: User): Promise<boolean> => {
+export const saveUserData = async (user: User) => {
   try {
     const duration = Number(process.env.NEXT_PUBLIC_AUTH_DURATION);
     setCookie("accessToken", user.accessToken, {

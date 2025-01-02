@@ -24,11 +24,11 @@ function UserAvatar({ name }: { name: string; picture?: string }) {
     logoutUser();
     toast.success("Амжилттай гарлаа!");
     router.push(`/`);
-    window.location.reload();
+    router.refresh();
   };
 
   return (
-    <div className="flex flex-row gap-4 items-center">
+    <div className="flex flex-row gap-2 items-center">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button

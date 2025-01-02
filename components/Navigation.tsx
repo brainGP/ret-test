@@ -11,8 +11,7 @@ import {
 } from "./ui/dropdown-menu";
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(" ");
-
-function Navigation() {
+const Navigation = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -41,7 +40,7 @@ function Navigation() {
         },
       ],
     },
-    { href: "/other", label: "Бусад бараа" },
+    { href: "/other", label: "Бусад бараа", disabled: true },
     { href: "/contact", label: "Холбоо барих" },
   ];
 
@@ -61,28 +60,33 @@ function Navigation() {
     }
     return pathname === href;
   };
+
   return (
     <nav className="flex gap-6 text-sm items-center">
       {navItems.map((item, index) => (
         <React.Fragment key={index}>
           {!item.dropdown ? (
-            <Link href={item.href}>
-              <div
-                className={classNames(
-                  "flex items-center gap-1 cursor-pointer group",
-                  isActive(item.href)
-                    ? "text-yellow font-medium underline underline-offset-1"
-                    : "text-gray hover:text-yellow"
-                )}
-              >
-                {item.label}
-              </div>
-            </Link>
+            <div
+              className={classNames(
+                "flex items-center gap-1 group",
+                item.disabled
+                  ? "text-gray/500 cursor-not-allowed"
+                  : isActive(item.href)
+                  ? "text-yellow font-medium underline underline-offset-1"
+                  : "text-gray hover:text-yellow cursor-pointer"
+              )}
+            >
+              {!item.disabled ? (
+                <Link href={item.href}>{item.label}</Link>
+              ) : (
+                <span>{item.label}</span>
+              )}
+            </div>
           ) : (
             <DropdownMenu onOpenChange={(open) => setDropdownOpen(open)}>
               <DropdownMenuTrigger
                 className={classNames(
-                  "group flex items-center cursor-pointer",
+                  "group flex items-center",
                   isActive(item.href, item.dropdown)
                     ? "text-yellow font-medium underline underline-offset-1"
                     : "text-gray hover:text-yellow"
@@ -146,6 +150,6 @@ function Navigation() {
       ))}
     </nav>
   );
-}
+};
 
 export default Navigation;

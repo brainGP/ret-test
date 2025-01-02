@@ -113,7 +113,6 @@ const ProductModal: React.FC<ProductModalProps> = ({
     } else {
       try {
         await onSave(formData, uploadedFiles);
-        toast.success("Бүтээгдэхүүн амжилттай хадгалагдлаа!");
         onClose();
       } catch {
         toast.error("Хадгалах явцад алдаа гарлаа.");

@@ -12,6 +12,7 @@ import { saveUserData } from "@/lib/authHelper";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { POST } from "@/apis/axios";
+import BackButton from "@/components/BackButton";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -64,6 +65,9 @@ const Login = () => {
   return (
     <div className="flex h-screen">
       {/* Left Section */}
+      <div className="flex absolute m-8">
+        <BackButton goToHome />
+      </div>
       <div className="flex flex-col justify-center items-center w-full md:w-1/2 bg-white p-6">
         <Image
           src="/Retevis/retevis.png"

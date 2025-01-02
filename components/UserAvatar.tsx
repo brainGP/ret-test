@@ -24,7 +24,7 @@ function UserAvatar({ name }: { name: string; picture?: string }) {
     logoutUser();
     toast.success("Амжилттай гарлаа!");
     router.push(`/`);
-    router.refresh();
+    window.location.reload();
   };
 
   return (

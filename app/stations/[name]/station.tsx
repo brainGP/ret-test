@@ -173,7 +173,7 @@ const StationCard = ({ station }: { station: Product }) => {
                   </div>
 
                   <Button
-                    className="flex bg-gray text-white hover:bg-gray/80 px-6 py-3 rounded-md max-w-96 w-full"
+                    className="flex text-white px-6 py-3 rounded-md max-w-96 w-full"
                     onClick={() => {
                       router.push(`/cart`);
                     }}
@@ -186,7 +186,7 @@ const StationCard = ({ station }: { station: Product }) => {
             ) : (
               <>
                 <Button
-                  className=" flex bg-neutral-800 text-white hover:bg-gray/80 px-6 py-3 rounded-md w-full"
+                  className=" flex text-white px-6 py-3 rounded-md w-full"
                   onClick={() => handleAddProductToCart(cartProduct)}
                 >
                   <StoreIcon size={24} color="white" />
@@ -197,7 +197,7 @@ const StationCard = ({ station }: { station: Product }) => {
           </div>
           <Link href="https://m.me/RetevisMongolia" passHref>
             <div className="flex flex-col gap-4 w-auto">
-              <Button className=" bg-white border border-gray/30 text-gray hover:bg-gray/[5%] px-6 py-3 rounded-md w-full">
+              <Button className=" bg-white border border-gray/30 text-gray hover:bg-gray/5 px-6 py-3 rounded-md w-full">
                 Холбогдох
               </Button>
             </div>

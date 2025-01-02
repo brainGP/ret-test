@@ -10,6 +10,7 @@ const RelatedProducts = ({ brand, id }: { brand: string; id: string }) => {
       fetcher={getProducts}
       filter={(product) => product.brand == brand && product._id != id}
       fetcherKey={[brand, id]}
+      hasSort={false}
       error
     />
   );

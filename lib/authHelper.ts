@@ -28,7 +28,7 @@ export const getUserData = () => {
     return null;
   }
 
-  const cookies: any = getCookies();
+  const cookies: Cookies = getCookies() as Cookies;
   const { email, username, isAdmin, _id } = cookies;
 
   const user: User = {
@@ -56,7 +56,7 @@ export const saveLastLoginTimestamp = (email: string): void => {
 
 export const isUserLoggedIn = () => {
   const accessToken = getCookie("accessToken");
-  const cookies: any = getCookies();
+  const cookies: Cookies = getCookies() as Cookies;
 
   if (
     !cookies.email ||

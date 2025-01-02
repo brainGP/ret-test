@@ -10,6 +10,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { POST } from "@/apis/axios";
 import Image from "next/image";
+import BackButton from "@/components/BackButton";
 
 interface Data {
   username: string;
@@ -85,6 +86,9 @@ const Signup: React.FC = () => {
 
   return (
     <div className="flex h-screen">
+      <div className="flex absolute">
+        <BackButton goToHome />
+      </div>
       <div className="flex flex-col justify-center items-center w-full md:w-1/2 bg-white p-6">
         <Image
           src="/Retevis/retevis.png"

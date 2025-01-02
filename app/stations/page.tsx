@@ -31,6 +31,7 @@ const Home = () => {
         <div className="flex">
           <Breadcrumb />
         </div>
+
         <ProductDisplay
           title={title}
           fetcher={fetcher}

@@ -7,6 +7,7 @@ import FilterOrder from "../FilterOrder";
 import { useQuery } from "@tanstack/react-query";
 import { Product } from "@/types/Product";
 import { LoadingWait } from "../LoadingWait";
+import BackButton from "../BackButton";
 
 type SortOrder = "lowtohigh" | "hightolow";
 
@@ -27,12 +28,18 @@ const ProductDisplay: React.FC<ProductDisplayProps> = ({
   fetcher,
   filter,
   error = (
-    <div className="w-full text-center text-gray-400">
-      Жагсаалт хоосон байна
+    <div className="w-full h-64">
+      <div className="flex absolute">
+        <BackButton />
+      </div>
+
+      <div className=" flex justify-center items-center w-full h-full">
+        <span className="text-center">Жагсаалт хоосон байна</span>
+      </div>
     </div>
   ),
   loader = (
-    <div className="w-full flex justify-center items-center">
+    <div className="w-full  flex justify-center items-center">
       <LoadingWait isLoading={true} />
     </div>
   ),
@@ -68,12 +75,12 @@ const ProductDisplay: React.FC<ProductDisplayProps> = ({
   return (
     <div className="w-full flex flex-col relative">
       {hasSort && (
-        <div className="w-full flex justify-end mb-4">
+        <div className=" w-full flex justify-end mb-4">
           <FilterOrder onOrderChange={handleOrderChange} />
         </div>
       )}
       {isLoading && (
-        <div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-50 z-10">
+        <div className="relative inset-0 flex justify-center items-start bg-white bg-opacity-50 z-20">
           {loader}
         </div>
       )}

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -14,32 +14,53 @@ const classNames = (...classes: string[]) => classes.filter(Boolean).join(" ");
 
 function Navigation() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const navItems = [
     { href: "/", label: "Нүүр" },
     {
-      href: "/handstation",
+      href: "/stations",
       label: "Станц",
-
       dropdown: [
-        { href: "/stations", label: "Бүх" },
-        { href: "/stations?type=handstation", label: "Гар станц" },
-        { href: "/stations?type=basestation", label: "Суурь станц" },
-        { href: "/stations/equipments", label: "Дагалдах хэрэгслүүд" },
+        { href: "/stations", label: "Бүх", url: null },
+        {
+          href: "/stations?type=handstation",
+          label: "Гар станц",
+          url: "handstation",
+        },
+        {
+          href: "/stations?type=basestation",
+          label: "Суурь станц",
+          url: "basestation",
+        },
+        {
+          href: "/stations/equipments",
+          label: "Дагалдах хэрэгслүүд",
+          url: "equipments",
+        },
       ],
     },
-    {
-      label: "Бусад бараа",
-      href: "/other",
-    },
+    { href: "/other", label: "Бусад бараа" },
     { href: "/contact", label: "Холбоо барих" },
   ];
 
-  const isActive = (href: string, dropdown?: { href: string }[]) =>
-    pathname === href ||
-    (dropdown && dropdown.some((item) => pathname === item.href));
+  const currentSearch = searchParams.get("type");
 
+  const isActive = (
+    href: string,
+    dropdownItems?: { href: string; url: string | null }[]
+  ) => {
+    if (dropdownItems) {
+      return dropdownItems.some((item) => {
+        if (item.url === null) {
+          return pathname === "/stations";
+        }
+        return pathname === item.href || currentSearch === item.url;
+      });
+    }
+    return pathname === href;
+  };
   return (
     <nav className="flex gap-6 text-sm items-center">
       {navItems.map((item, index) => (
@@ -48,9 +69,9 @@ function Navigation() {
             <Link href={item.href}>
               <div
                 className={classNames(
-                  "flex items-center gap-1 cursor-pointer group ",
+                  "flex items-center gap-1 cursor-pointer group",
                   isActive(item.href)
-                    ? "text-yellow font-medium underline underline-offset-1 "
+                    ? "text-yellow font-medium underline underline-offset-1"
                     : "text-gray hover:text-yellow"
                 )}
               >
@@ -62,7 +83,7 @@ function Navigation() {
               <DropdownMenuTrigger
                 className={classNames(
                   "group flex items-center cursor-pointer",
-                  isActive("", item.dropdown)
+                  isActive(item.href, item.dropdown)
                     ? "text-yellow font-medium underline underline-offset-1"
                     : "text-gray hover:text-yellow"
                 )}
@@ -108,7 +129,8 @@ function Navigation() {
                     <DropdownMenuItem
                       className={classNames(
                         "w-full cursor-pointer hover:bg-gray/100 rounded-md",
-                        pathname === subItem.href
+                        pathname === subItem.href ||
+                          currentSearch === subItem.url
                           ? "text-yellow font-medium"
                           : "text-gray hover:text-yellow"
                       )}

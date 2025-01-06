@@ -51,7 +51,7 @@ const BannerPage = () => {
       }
     };
     fetchBanners();
-  }, []);
+  }, [router]);
 
   const handleDelete = async () => {
     if (!bannerToDelete) return;

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
+import { useQuery } from "@tanstack/react-query";
 import { getBanners } from "@/apis/banner";
 import { baseUrl } from "@/lib/staticData";
 import {
@@ -12,50 +13,51 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import CarouselSkeleton from "@/skeletons/CarouselSkeleton";
 
 interface Banner {
   _id: string;
   image: string;
 }
 
-const CustomCarousel = () => {
-  const [banners, setBanners] = useState<Banner[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const slideCount = banners.length;
-  const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
+const fetchBanners = async (): Promise<Banner[]> => {
+  const banners = await getBanners();
+  return banners;
+};
 
-  useEffect(() => {
-    const fetchBanners = async () => {
-      try {
-        const fetchedBanners = await getBanners();
+const CarouselComponent = () => {
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
 
-        setBanners(fetchedBanners);
-      } catch (error) {
-        console.log("Error fetching banners:", error);
-      }
-    };
+  const {
+    data: banners = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["banners"],
+    queryFn: fetchBanners,
+    staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
+    retry: 2, // Retry failed requests up to 2 times
+  });
 
-    fetchBanners();
-  }, []);
-
-  if (slideCount === 0) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading) return <CarouselSkeleton />;
+  if (isError) return <div className="text-center">Failed to load banners</div>;
 
   return (
     <div className="relative w-full flex justify-center items-start md:items-center overflow-hidden">
       <Carousel
-        plugins={[plugin.current]}
+        plugins={[autoplayPlugin.current]}
         className="relative w-full h-[30vh] sm:h-[40vh] md:h-[60vh]"
-        onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.reset}
+        onMouseEnter={autoplayPlugin.current.stop}
+        onMouseLeave={autoplayPlugin.current.reset}
       >
         <CarouselContent>
           {banners.map((banner, index) => {
-            const imgUrl = `${baseUrl}${banner.image}`; // Ensure image is a string
+            const imgUrl = `${baseUrl}${banner.image}`;
 
             return (
-              <CarouselItem key={index}>
+              <CarouselItem key={banner._id}>
                 <div className="relative w-full h-auto items-center">
                   <Image
                     src={imgUrl}
@@ -70,26 +72,11 @@ const CustomCarousel = () => {
             );
           })}
         </CarouselContent>
-
-        {/* Carousel Controls */}
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="absolute left-10" />
+        <CarouselNext className="absolute right-10" />
       </Carousel>
-
-      {/* Dot Navigation */}
-      <div className="absolute z-30 flex -translate-x-1/2 space-x-3 bottom-5 left-1/2">
-        {banners.map((_, index) => (
-          <button
-            key={index}
-            className={`w-3 h-3 rounded-full ${
-              index === activeIndex ? "bg-yellow-500" : "bg-blue-500"
-            }`}
-            onClick={() => setActiveIndex(index)} // Direct navigation on click
-          />
-        ))}
-      </div>
     </div>
   );
 };
 
-export default CustomCarousel;
+export default CarouselComponent;

@@ -11,6 +11,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SelectGroup,
 } from "@/components/ui/select";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -113,6 +114,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
     } else {
       try {
         await onSave(formData, uploadedFiles);
+
         onClose();
       } catch {
         toast.error("Хадгалах явцад алдаа гарлаа.");
@@ -178,12 +180,24 @@ const ProductModal: React.FC<ProductModalProps> = ({
               <label className="block text-sm font-medium mb-1">
                 Төрөл /гар, суурь станц/
               </label>
-              <Input
-                type="text"
+              <Select
                 value={formData.sort}
-                onChange={(e) => handleChange("sort", e.target.value)}
-                required
-              />
+                onValueChange={(value) => handleChange("sort", value)}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue className="text-white/10" placeholder="сонгох" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="Гар станц">Гар станц</SelectItem>
+                    <SelectItem value="Суурин станц">Суурин станц</SelectItem>
+                    <SelectItem value="Дагалдах хэрэгслүүд">
+                      Дагалдах хэрэгслүүд
+                    </SelectItem>
+                    <SelectItem value="Бусад бараа">Бусад бараа</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">

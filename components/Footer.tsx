@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
@@ -24,13 +25,15 @@ const Footer: React.FC = () => {
             <strong>Имэйл:</strong> retevismongolia@gmail.com
           </p>
         </div>
-        <div className="flex flex-col items-start">
-          <h2 className="text-lg font-semibold">ХАЯГ БАЙРШИЛ</h2>
-          <p className="text-sm mt-2">
-            ХУД, Энх-Тайваны гүүрний баруун урд
-            <br /> уулзвар, Ulaanbaatar, Mongolia
-          </p>
-        </div>
+        <Link href="https://www.google.com/maps?ll=47.904276,106.911301&z=16&t=m&hl=en&gl=MN&mapclient=embed&cid=845199646097487029">
+          <div className="flex flex-col items-start">
+            <h2 className="text-lg font-semibold">ХАЯГ БАЙРШИЛ</h2>
+            <p className="text-sm mt-2">
+              Энхтайваны гүүрний баруун урд,
+              <br /> Төв банкны эсрэг талд
+            </p>
+          </div>
+        </Link>
         <div className="flex flex-col items-start">
           <h2 className="text-lg font-semibold">СОШИАЛ ХАЯГУУД</h2>
           <a

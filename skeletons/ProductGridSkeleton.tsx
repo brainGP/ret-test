@@ -3,7 +3,7 @@ import React from "react";
 const ProductGridSkeleton = () => {
   const arr = ["", "", "", "", ""];
   return (
-    <div className="w-full h-full flex flex-col gap-4">
+    <div className="relative w-full h-full flex flex-col gap-4 z-0 bg-red-300">
       <div className="h-12 flex w-full justify-between">
         <div className="bg-muted border rounded p-4 w-12 animate-pulse" />
         <div className="bg-muted border rounded p-4 w-  animate-pulse" />

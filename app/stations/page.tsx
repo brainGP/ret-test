@@ -15,6 +15,7 @@ const Home = () => {
   const filterMap: Record<string, string> = {
     handstation: "Гар станц",
     basestation: "Суурин станц",
+    equipments: "Дагалдах хэрэгслүүд",
   };
 
   const fetcher = brand ? () => getProductsByBrand({ brand }) : getProducts;

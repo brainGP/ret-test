@@ -34,13 +34,13 @@ const Navigation = () => {
           url: "basestation",
         },
         {
-          href: "/stations/equipments",
+          href: "/stations?type=equipments",
           label: "Дагалдах хэрэгслүүд",
           url: "equipments",
         },
       ],
     },
-    { href: "/other", label: "Бусад бараа", disabled: true },
+    { href: "/other", label: "Бусад бараа", disabled: false },
     { href: "/contact", label: "Холбоо барих" },
   ];
 
@@ -51,12 +51,10 @@ const Navigation = () => {
     dropdownItems?: { href: string; url: string | null }[]
   ) => {
     if (dropdownItems) {
-      return dropdownItems.some((item) => {
-        if (item.url === null) {
-          return pathname === "/stations";
-        }
-        return pathname === item.href || currentSearch === item.url;
-      });
+      return dropdownItems.some(
+        (item) =>
+          pathname === item.href || (item.url && currentSearch === item.url)
+      );
     }
     return pathname === href;
   };

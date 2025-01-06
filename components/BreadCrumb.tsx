@@ -10,6 +10,7 @@ const Nav_labels: Record<string, string> = {
   handstation: "Гар станц",
   basestation: "Суурин станц",
   otherstation: "Бусад бараа",
+  equipments: "Дагалдах хэрэгслүүд",
   other: "Бусад Бараа",
   contact: "Холбоо барих",
   admin: "Админ",
@@ -20,6 +21,7 @@ const Nav_labels: Record<string, string> = {
 const typeLabels: Record<string, string> = {
   handstation: "Гар станц",
   basestation: "Суурин станц",
+  equipments: "Дагалдах хэрэгслүүд",
 };
 
 const Breadcrumb = () => {
@@ -28,7 +30,6 @@ const Breadcrumb = () => {
 
   const paths = pathname.split("/").filter((path) => path);
 
-  // Extract the 'type' query parameter for enhanced breadcrumbs
   const type = searchParams.get("type");
   const typeLabel = type && typeLabels[type] ? typeLabels[type] : null;
 

@@ -1,5 +1,5 @@
 "use client";
-import Carousel from "@/components/ui/carousel";
+import CustomCarousel from "@/components/Carousel";
 import LogoSlider from "@/components/LogoSlider";
 import NewProducts from "@/components/NewProducts";
 import Header from "@/components/Header";
@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <Carousel />
+      <CustomCarousel />
       <LogoSlider />
       <NewProducts />
       <Footer />

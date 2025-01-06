@@ -95,7 +95,7 @@ const CartTable: React.FC<ProductTableProps> = ({ products }) => {
             ) : (
               <TableRow>
                 <TableCell colSpan={5} className="text-center">
-                  Танд хадгалсан бүтээгдэхүүн байхгүй байна!
+                  Танд сагсанд хийсэн бүтээгдэхүүн байхгүй байна!
                 </TableCell>
               </TableRow>
             )}

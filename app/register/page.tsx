@@ -86,7 +86,7 @@ const Signup: React.FC = () => {
 
   return (
     <div className="flex h-screen">
-      <div className="flex absolute">
+      <div className="flex absolute m-8">
         <BackButton goToHome />
       </div>
       <div className="flex flex-col justify-center items-center w-full md:w-1/2 bg-white p-6">

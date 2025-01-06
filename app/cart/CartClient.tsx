@@ -19,7 +19,7 @@ const CartClient = () => {
       <div className="flex justify-center items-center flex-col w-full h-96 space-y-4">
         <Image src={`/noresult.png`} alt="image" height={200} width={200} />
         <p className="font-semibold">
-          Танд хадгалсан бүтээгдэхүүн байхгүй байна!
+          Танд сагсанд хийсэн бүтээгдэхүүн байхгүй байна!
         </p>
         <Link href={`/stations`} className="hover:underline">
           Буцах

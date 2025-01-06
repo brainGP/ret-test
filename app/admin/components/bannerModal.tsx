@@ -9,7 +9,7 @@ import { Banner } from "@/types/Banner";
 interface BannerModalProps {
   banner: Banner | null;
   onClose: () => void;
-  onSave: (newBanner: Banner, files: File[]) => Promise<void>; // Define the onSave type properly
+  onSave: (newBanner: Banner, files: File[]) => Promise<void>;
 }
 
 const BannerModal: React.FC<BannerModalProps> = ({
@@ -89,7 +89,7 @@ const BannerModal: React.FC<BannerModalProps> = ({
                       height={20}
                       width={20}
                       alt="Close"
-                      color="white"
+                      color="bg-white"
                     />
                   </button>
                 </div>

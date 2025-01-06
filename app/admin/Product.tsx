@@ -102,10 +102,6 @@ function AdminPage() {
         <div className="flex flex-col sm:flex-row justify-between">
           <h1 className="font-semibold text-xl mb-4">Админы хяналтын хэсэг</h1>
           <div className="flex gap-4">
-            <Link href="/admin/banner">
-              <Button> Баннер</Button>
-            </Link>
-
             <AddProduct
               setProducts={setProducts}
               editProduct={editProduct}
@@ -138,6 +134,9 @@ function AdminPage() {
                 </SelectContent>
               </Select>
             </div>
+            <Link href="/admin/banner">
+              <Button> Баннер</Button>
+            </Link>
             <Link href="/admin/users">
               <Button> Хэрэглэгчид</Button>
             </Link>

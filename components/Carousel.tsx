@@ -28,10 +28,10 @@ const CustomCarousel = () => {
     const fetchBanners = async () => {
       try {
         const fetchedBanners = await getBanners();
-        console.log("Fetched Banners:", fetchedBanners);
+
         setBanners(fetchedBanners);
       } catch (error) {
-        console.error("Error fetching banners:", error);
+        console.log("Error fetching banners:", error);
       }
     };
 

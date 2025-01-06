@@ -135,19 +135,26 @@ function AdminUsersPage() {
 
   return (
     <div className="flex flex-col justify-center items-center w-full top-0 border-b px-4 md:px-6 mb-8 py-4">
-      <div className="container flex flex-col items-centerpy-4 mx-auto max-w-7xl gap-4">
-        <div className="flex flex-col sm:flex-row  justify-between ">
-          <h1 className="font-semibold text-xl mb-4">
-            Админы хэрэглэгчдийг хянах хэсэг
-          </h1>
+      <Container>
+        <div className="flex-1">
+          <div className="flex flex-col sm:flex-row  justify-between ">
+            <h1 className="font-semibold text-xl mb-4">
+              Админы хэрэглэгчдийг хянах хэсэг
+            </h1>
+          </div>
+          <div className="flex flex-row justify-between items-center">
+            <Breadcrumb />
+            <div className="flex gap-4">
+              <Link href="/admin/banner">
+                <Button> Баннер</Button>
+              </Link>
+              <Link href="/admin">
+                <Button> Бүтээгдэхүүн</Button>
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-row justify-between items-center">
-          <Breadcrumb />
-          <Link href={`/admin`}>
-            <Button> Бүтээгдэхүүн</Button>
-          </Link>
-        </div>
-      </div>
+      </Container>
       <Container>
         <ScrollArea className="w-full h-min-96 overflow-auto border rounded-lg">
           <UserTable user={users} onEdit={handleEdit} onDelete={handleDelete} />

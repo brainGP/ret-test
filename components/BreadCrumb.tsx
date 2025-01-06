@@ -16,6 +16,7 @@ const Nav_labels: Record<string, string> = {
   admin: "Админ",
   users: "Хэрэглэгчид",
   cart: "Хадгалсан бүтээгдэхүүнүүд",
+  banner: "Баннер",
 };
 
 const typeLabels: Record<string, string> = {

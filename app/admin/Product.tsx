@@ -32,7 +32,7 @@ function AdminPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState<string | null>(null);
   const [authorized, setAuthorized] = useState(false);
-  const [selectedSort, setSelectedSort] = useState<string>("");
+  const [selectedSort] = useState<string>("");
 
   const router = useRouter();
 
@@ -103,7 +103,7 @@ function AdminPage() {
           <h1 className="font-semibold text-xl mb-4">Админы хяналтын хэсэг</h1>
           <div className="flex gap-4">
             <Link href="/admin/banner">
-              <Button> Banner</Button>
+              <Button> Баннер</Button>
             </Link>
 
             <AddProduct

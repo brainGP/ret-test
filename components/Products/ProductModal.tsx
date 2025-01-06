@@ -130,10 +130,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
             <h2 className="text-xl font-bold">
               {product._id ? "Бүтээгдэхүүн өөрчлөх" : "Бүтээгдэхүүн нэмэх"}
             </h2>
-            <button
-              className="bg-white shadow-none hover:bg-gray-100"
-              onClick={onClose}
-            >
+            <button className=" shadow-none hover:scale-105" onClick={onClose}>
               <Image
                 src="/icons/xicon.svg"
                 height={24}

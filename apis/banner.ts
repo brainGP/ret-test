@@ -14,23 +14,23 @@ export const getBanners = async (): Promise<Banner[]> => {
 
 export const postNewBanner = async (banner: FormData): Promise<Banner> => {
   const { accessToken } = await getCookies({ cookies });
-  if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
-  const response = await POST({
-    route: `/api/dashboard`,
-    token: accessToken,
-    body: banner,
-  });
-  if (response.status !== 200) throw new Error("Зураг шинээр нэмж чадсангүй.");
-  return response.data;
-};
+  if (!accessToken) throw new Error("Unauthorized user");
 
-export const deleteBannerById = async ({ id }: { id: string }) => {
-  const { accessToken } = await getCookies({ cookies });
-  if (!accessToken) throw new Error("Зөвшөөрөлгүй хэрэглэгч");
-  const response = await DELETE({
-    route: `/api/dashboard/${id}`,
-    token: accessToken,
-  });
+  try {
+    const response = await POST({
+      route: `/api/dashboard`,
+      token: accessToken,
+      body: banner,
+    });
 
-  if (response.status !== 200) throw new Error("Зураг устгаж чадсангүй.!");
+    console.log("API Response:", response);
+    if (response.status !== 200) {
+      throw new Error("Failed to create banner");
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("Error posting new banner:", error);
+    throw error;
+  }
 };

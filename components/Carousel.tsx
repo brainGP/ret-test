@@ -3,7 +3,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { getBanners } from "@/apis/banner";
-import { Banner } from "@/types/Banner";
 import { baseUrl } from "@/lib/staticData";
 import {
   Carousel,
@@ -14,9 +13,14 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 
+interface Banner {
+  _id: string;
+  image: string;
+}
+
 const CustomCarousel = () => {
   const [banners, setBanners] = useState<Banner[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0); // Add state for active index
+  const [activeIndex, setActiveIndex] = useState(0);
   const slideCount = banners.length;
   const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
 
@@ -24,7 +28,7 @@ const CustomCarousel = () => {
     const fetchBanners = async () => {
       try {
         const fetchedBanners = await getBanners();
-        console.log("Fetched Banners:", fetchedBanners); // Log the fetched data
+        console.log("Fetched Banners:", fetchedBanners);
         setBanners(fetchedBanners);
       } catch (error) {
         console.error("Error fetching banners:", error);
@@ -34,7 +38,7 @@ const CustomCarousel = () => {
     fetchBanners();
   }, []);
 
-  if (banners.length === 0) {
+  if (slideCount === 0) {
     return <div>Loading...</div>;
   }
 
@@ -47,26 +51,24 @@ const CustomCarousel = () => {
         onMouseLeave={plugin.current.reset}
       >
         <CarouselContent>
-          {banners.map((banner, index) =>
-            banner.images.map((image, imgIndex) => {
-              const imgUrl = `${baseUrl}${image.image}`;
+          {banners.map((banner, index) => {
+            const imgUrl = `${baseUrl}${banner.image}`; // Ensure image is a string
 
-              return (
-                <CarouselItem key={imgIndex}>
-                  <div className="relative w-full h-auto items-center">
-                    <Image
-                      src={imgUrl}
-                      alt={`Banner ${index} Image ${imgIndex}`}
-                      className="object-contain p-4 h-auto w-full transition-all duration-300 "
-                      priority={true}
-                      width={600}
-                      height={600}
-                    />
-                  </div>
-                </CarouselItem>
-              );
-            })
-          )}
+            return (
+              <CarouselItem key={index}>
+                <div className="relative w-full h-auto items-center">
+                  <Image
+                    src={imgUrl}
+                    alt={`Banner ${index}`}
+                    className="object-contain p-4 h-auto w-full transition-all duration-300"
+                    priority={true}
+                    width={600}
+                    height={600}
+                  />
+                </div>
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
 
         {/* Carousel Controls */}
@@ -76,7 +78,7 @@ const CustomCarousel = () => {
 
       {/* Dot Navigation */}
       <div className="absolute z-30 flex -translate-x-1/2 space-x-3 bottom-5 left-1/2">
-        {banners[0]?.images?.map((_, index) => (
+        {banners.map((_, index) => (
           <button
             key={index}
             className={`w-3 h-3 rounded-full ${

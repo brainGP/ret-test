@@ -130,7 +130,7 @@ const StationCard = ({ station }: { station: Product }) => {
             <span className="text-gray/40"> (НӨАТ-тэй)</span>
           </div>
           <Separator />
-          <ScrollArea className="w-full h-full md:max-h-44 overflow-hidden rounded-lg">
+          <ScrollArea className="w-full max-h-[600px] lg:max-w-64 lg:max-h-44 overflow-hidden rounded-lg">
             <div className="space-y-4">
               <div className="flex-1 space-y-2">
                 <strong>Тайлбар:</strong>

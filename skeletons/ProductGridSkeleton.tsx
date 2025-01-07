@@ -6,7 +6,6 @@ const ProductGridSkeleton = () => {
     <div className="relative w-full h-full flex flex-col gap-4 z-0">
       <div className="h-12 flex w-full justify-between">
         <div className="bg-muted border rounded p-4 w-12 animate-pulse" />
-        <div className="bg-muted border rounded p-4 w-  animate-pulse" />
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-5">

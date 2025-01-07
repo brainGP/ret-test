@@ -140,15 +140,17 @@ const StationCard = ({ station }: { station: Product }) => {
                 <p className="text-sm">{station.battery}</p>
                 <BatteryIcon />
               </div>
-              <div className="flex space-x-2">
+              <div className="flex space-x-2 items-center">
                 <strong>Гаралтын чадал:</strong>
                 <p className="text-sm">{station.power}</p>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex space-x-2 items-center">
                 <strong>Давтамж:</strong>
-                <p className="text-sm">
-                  {station.hertz} {station.style}
-                </p>
+                <p className="text-sm ">{station.hertz}</p>
+              </div>
+              <div className="flex space-x-2 items-center">
+                <strong>Загвар:</strong>
+                <p className="text-sm ">{station.style}</p>
               </div>
             </div>
           </ScrollArea>

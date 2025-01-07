@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Product } from "@/types/Product";
 import { baseUrl } from "@/lib/staticData";
 import { formatPrice } from "@/utils/formatPrice";
+import { formatText } from "@/utils/formatText";
 
 interface ProductGridProps {
   title?: string;
@@ -48,7 +49,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           />
         </div>
         <div className="mx-4">
-          <h3 className="text-xl font-semibold">{product.name}</h3>
+          <h3 className="text-xl font-semibold">{formatText(product.name)}</h3>
           <p className="font-semibold text-base">
             {formatPrice(product.priceN)}₮
           </p>

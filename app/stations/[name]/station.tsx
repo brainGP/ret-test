@@ -14,7 +14,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import StoreIcon from "@/public/icons/store";
 import BatteryIcon from "@/public/icons/battery";
-import { formatText } from "@/utils/formatText";
 
 const StationCard = ({ station }: { station: Product }) => {
   const router = useRouter();

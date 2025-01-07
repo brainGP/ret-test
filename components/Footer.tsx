@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ContactInfo from "./ContactInfo";
 
 const Footer: React.FC = () => {
   return (
@@ -16,17 +17,9 @@ const Footer: React.FC = () => {
             priority={true}
           />
         </div>
-        <div className="flex flex-col items-start hover:scale-105 duration-300 transition">
-          <h2 className="text-lg font-semibold">ХОЛБОО БАРИХ</h2>
-          <p className="text-sm mt-2">
-            <strong>Утас:</strong> (+976) 9902 1617
-          </p>
-          <p className="text-sm mt-2">
-            <strong>Имэйл:</strong> retevismongolia@gmail.com
-          </p>
-        </div>
+        <ContactInfo />
         <Link href="https://www.google.com/maps?ll=47.904276,106.911301&z=16&t=m&hl=en&gl=MN&mapclient=embed&cid=845199646097487029">
-          <div className="flex flex-col items-start hover:scale-105 duration-300 transition">
+          <div className="flex flex-col group items-start hover:scale-105 duration-300 transition ">
             <h2 className="text-lg font-semibold">ХАЯГ БАЙРШИЛ</h2>
             <p className="text-sm mt-2">
               Энхтайваны гүүрний баруун урд,
@@ -35,11 +28,11 @@ const Footer: React.FC = () => {
             <span className="group-hover:underline">Зочлох</span>
           </div>
         </Link>
-        <div className="flex flex-col items-start hover:scale-105 duration-300 transition group">
+        <div className="flex flex-col items-start">
           <h2 className="text-lg font-semibold">СОШИАЛ ХАЯГУУД</h2>
           <a
             href="https://www.facebook.com/RetevisMongolia"
-            className="flex items-center gap-2 text-sm mt-2 hover:underline"
+            className="flex items-center gap-2 text-sm mt-2 hover:scale-105 duration-300 transition hover:underline"
           >
             <Image
               src="/icons/fb_logo.svg"
@@ -52,7 +45,7 @@ const Footer: React.FC = () => {
           </a>
           <a
             href="https://www.instagram.com/retevis_mongolia"
-            className="flex items-center gap-2 text-sm mt-2 hover:underline"
+            className="flex items-center gap-2 text-sm mt-2 hover:scale-105 duration-300 transition hover:underline"
           >
             <Image
               src="/icons/ig_logo.svg"

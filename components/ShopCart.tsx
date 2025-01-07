@@ -11,11 +11,14 @@ const ShopCard = () => {
 
   return (
     <div
-      className="relative cursor-pointer"
+      className="relative cursor-pointer group"
       onClick={() => router.push(`/cart`)}
     >
-      <div>
+      <div className="flex gap-4 items-center group-hover:text-yellow">
         <StoreIcon color="black" size={24} />
+        <span className="text-sm font-medium text-gray transition-colors duration-200 group-hover:text-yellow">
+          Сагс
+        </span>
       </div>
 
       {cartTotalQty > 0 && (

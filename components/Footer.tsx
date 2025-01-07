@@ -22,10 +22,10 @@ const Footer: React.FC = () => {
           <div className="flex flex-col group items-start hover:scale-105 duration-300 transition ">
             <h2 className="text-lg font-semibold">ХАЯГ БАЙРШИЛ</h2>
             <p className="text-sm mt-2">
-              Энхтайваны гүүрний баруун урд,
+              ХУД, Энхтайвны гүүрний баруун урд,
               <br /> Төв банкны эсрэг талд
             </p>
-            <span className="group-hover:underline">Зочлох</span>
+            <span className="underline">Зочлох</span>
           </div>
         </Link>
         <div className="flex flex-col items-start">

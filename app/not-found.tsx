@@ -9,7 +9,7 @@ export default function NotFound({ explain }: NotFoundProps) {
   return (
     <div>
       <div className="w-full py-20 flex flex-col justify-center">
-        <div className="min-h-[70vh] sm:min-h-[82vh] md:min-h-[45vh] lg:min-h-[46vh] xl:min-h-[47vh] flex flex-col gap-6 items-center justify-center text-center">
+        <div className="min-h-[70vh] sm:min-h-[82vh] md:min-h-[45vh] flex flex-col gap-6 items-center justify-center text-center">
           <Image
             src="/notfound.png"
             alt="Not Found"

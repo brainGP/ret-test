@@ -3,7 +3,6 @@ import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { baseUrl } from "@/lib/staticData";
-import Link from "next/link";
 import { Product } from "@/types/Product";
 import SetQuantity from "./CartQuantity";
 import { useCart } from "@/hooks/useCarts";
@@ -130,7 +129,7 @@ const StationCard = ({ station }: { station: Product }) => {
             <span className="text-gray/40"> (НӨАТ-тэй)</span>
           </div>
           <Separator />
-          <ScrollArea className="w-full max-h-[600px] lg:max-w-64 lg:max-h-44 overflow-hidden rounded-lg">
+          <ScrollArea className="w-full lg:max-w-full lg:max-h-44 overflow-hidden rounded-lg">
             <div className="space-y-4">
               <div className="flex-1 space-y-2">
                 <strong>Тайлбар:</strong>
@@ -154,7 +153,7 @@ const StationCard = ({ station }: { station: Product }) => {
             </div>
           </ScrollArea>
           <Separator />
-          <div className="flex gap-2 items-center justify-between">
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <SetQuantity
               cartProduct={cartProduct}
               handleQtyDecrease={handleQtyDecrease}
@@ -162,27 +161,25 @@ const StationCard = ({ station }: { station: Product }) => {
             />
 
             {isProductInCart ? (
-              <>
-                <div className="flex flex-col items-center gap-2">
-                  <div className="flex gap-4 items-center">
-                    <div className="w-4 h-4 flex justify-center items-center">
-                      <MdCheckCircle size={20} className="text-gray" />
-                    </div>
-
-                    <span>Таны сагсанд нэмэгдсэн байна.</span>
+              <div className="flex flex-col items-center gap-2 w-full">
+                <div className="flex gap-4 items-center">
+                  <div className="w-4 h-4 flex justify-center items-center">
+                    <MdCheckCircle size={16} className="text-gray" />
                   </div>
 
-                  <Button
-                    className="flex text-white px-6 py-3 rounded-md max-w-96 w-full"
-                    onClick={() => {
-                      router.push(`/cart`);
-                    }}
-                  >
-                    <StoreIcon size={24} color="white" />
-                    <span>Сагс харах</span>
-                  </Button>
+                  <span>Таны сагсанд нэмэгдсэн байна.</span>
                 </div>
-              </>
+
+                <Button
+                  className="flex text-white px-6 py-3 rounded-md w-full"
+                  onClick={() => {
+                    router.push(`/cart`);
+                  }}
+                >
+                  <StoreIcon size={24} color="white" />
+                  <span>Сагс харах</span>
+                </Button>
+              </div>
             ) : (
               <>
                 <Button
@@ -195,13 +192,21 @@ const StationCard = ({ station }: { station: Product }) => {
               </>
             )}
           </div>
-          <Link href="https://m.me/RetevisMongolia" passHref>
-            <div className="flex flex-col gap-4 w-auto">
-              <Button className=" bg-white border border-gray/30 text-gray hover:bg-gray/5 px-6 py-3 rounded-md w-full">
-                Холбогдох
-              </Button>
-            </div>
-          </Link>
+          <a
+            href="https://m.me/RetevisMongolia"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="bg-white border border-gray/30 text-gray hover:bg-gray/5 px-6 py-3 rounded-md w-full gap-4">
+              <Image
+                src="/icons/msgIcon.svg"
+                alt="icon"
+                height="16"
+                width="16"
+              />
+              <span> Холбогдох</span>
+            </Button>
+          </a>
         </div>
       </div>
     </div>

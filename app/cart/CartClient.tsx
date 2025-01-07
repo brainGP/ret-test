@@ -18,7 +18,7 @@ const CartClient = () => {
     return (
       <div className="flex justify-center items-center flex-col w-full h-96 space-y-4">
         <Image src={`/noresult.png`} alt="image" height={200} width={200} />
-        <p className="font-semibold">
+        <p className="font-semibold text-center">
           Танд сагсанд хийсэн бүтээгдэхүүн байхгүй байна!
         </p>
         <Link href={`/stations`} className="hover:underline">

@@ -19,10 +19,7 @@ const StationNamePage = async ({
 
   return (
     <>
-      {/* Meta Tags for SEO */}
-      <MetaTags data={{ item: station }} />
-
-      {/* Page Content */}
+      <MetaTags data={station} />
       <div className="px-4 flex-1 justify-center gap-8">
         <div className="flex gap-4 items-center md:ml-20">
           <BackButton />

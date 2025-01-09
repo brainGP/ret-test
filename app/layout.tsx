@@ -8,10 +8,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://retevis.mn"),
   title: {
     default: "Retevis",
-    template: `%s | Retevis`,
+    template: `%s | Станцын төрөлжсөн дэлгүүр`,
   },
   description: "Retevis Mongolia",
-  icons: "/RMLogo.svg",
+  icons: "/Retevis/RMlogo.png",
   verification: {
     google: "google",
     yandex: "yandex",

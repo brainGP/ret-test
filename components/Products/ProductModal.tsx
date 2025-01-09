@@ -121,6 +121,12 @@ const ProductModal: React.FC<ProductModalProps> = ({
       }
     }
   };
+  const [rating, setRating] = useState(formData.rating);
+
+  const handleRatingChange = (value: number) => {
+    setRating(value);
+    handleChange("rating", value); // Update the parent state with the new rating
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -166,13 +172,17 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 Үнэлэмж /1-5/
               </label>
               <Input
-                type="number"
-                value={formData.rating}
-                onChange={(e) =>
-                  handleChange("rating", parseFloat(e.target.value) || 0)
-                }
+                type="range"
+                min="1"
+                max="5"
+                step="1"
+                value={rating}
+                onChange={(e) => handleRatingChange(parseInt(e.target.value))}
+                className="w-full"
               />
+              <div className="mt-2 text-center">{rating}</div>{" "}
             </div>
+
             <div>
               <label className="block text-sm font-medium mb-1">
                 Төрөл /гар, суурь станц/

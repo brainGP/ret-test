@@ -5,9 +5,21 @@ import Providers from "../providers";
 import CartProvider from "@/providers/CartProvider";
 
 export const metadata: Metadata = {
-  title: "Retevis",
+  metadataBase: new URL("https://retevis.mn"),
+  title: {
+    default: "Retevis",
+    template: `%s | Retevis`,
+  },
   description: "Retevis Mongolia",
   icons: "/RMLogo.svg",
+  verification: {
+    google: "google",
+    yandex: "yandex",
+    yahoo: "yahoo",
+    other: {
+      me: ["my-email", "my-link"],
+    },
+  },
 };
 
 export default function RootLayout({

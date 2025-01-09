@@ -4,6 +4,7 @@ import { getProductByName } from "@/apis/products";
 import NotFound from "@/app/not-found";
 import RelatedProducts from "./related";
 import StationCard from "./station";
+import MetaTags from "@/components/Metatags";
 
 const StationNamePage = async ({
   params,
@@ -18,6 +19,10 @@ const StationNamePage = async ({
 
   return (
     <>
+      {/* Meta Tags for SEO */}
+      <MetaTags data={{ item: station }} />
+
+      {/* Page Content */}
       <div className="px-4 flex-1 justify-center gap-8">
         <div className="flex gap-4 items-center md:ml-20">
           <BackButton />

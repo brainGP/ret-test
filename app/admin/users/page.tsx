@@ -142,7 +142,7 @@ function AdminUsersPage() {
               Админы хэрэглэгчдийг хянах хэсэг
             </h1>
           </div>
-          <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-col items-start sm:flex-row md:justify-between md:items-center gap-4 md:gap-0">
             <Breadcrumb />
             <div className="flex gap-4">
               <Link href="/admin/banner">

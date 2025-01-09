@@ -102,14 +102,14 @@ const BannerPage = () => {
   return (
     <div className="flex flex-col justify-center items-center w-full top-0 border-b px-4 md:px-6 mb-8 py-4">
       <Container>
-        <div className="flex-1">
+        <div className="flex-1 ">
           <div className="flex flex-col sm:flex-row  justify-between ">
             <h1 className="font-semibold text-xl mb-4">
               Админы хэрэглэгчдийг хянах хэсэг
             </h1>
             <Button onClick={() => handleAddBanner()}>Баннер нэмэх</Button>
           </div>
-          <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-col items-start sm:flex-row md:justify-between md:items-center gap-4 md:gap-0 mt-4 md:mt-0">
             <Breadcrumb />
             <div className="flex gap-4">
               <Link href="/admin/users">

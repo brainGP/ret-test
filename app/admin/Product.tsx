@@ -98,7 +98,7 @@ function AdminPage() {
 
   return (
     <div className="flex flex-col justify-center items-center w-full top-0 px-4 md:px-6 border-b mb-8 py-4">
-      <div className="container flex flex-col  mx-auto max-w-7xl gap-4">
+      <Container>
         <div className="flex flex-col sm:flex-row justify-between">
           <h1 className="font-semibold text-xl mb-4">Админы хяналтын хэсэг</h1>
           <div className="flex gap-4">
@@ -109,7 +109,7 @@ function AdminPage() {
             />
           </div>
         </div>
-        <div className="flex flex-row justify-between items-center">
+        <div className="flex flex-col items-start md:flex-row md:justify-between md:items-center gap-4 md:gap-0">
           <Breadcrumb />
           <div className="flex gap-4">
             <div>
@@ -142,7 +142,7 @@ function AdminPage() {
             </Link>
           </div>
         </div>
-      </div>
+      </Container>
       <Container>
         <ScrollArea className="w-full h-min-96 overflow-auto border rounded-lg">
           <ProductTable

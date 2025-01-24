@@ -29,6 +29,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <meta
+        name="google-site-verification"
+        content="nWxsj2YVieYZPW8U8CXGojl4mRk5ii9knhDp4KWZiNc"
+      />
       <body className="bg-gray/[2%]">
         <CartProvider>
           <Providers>{children}</Providers>

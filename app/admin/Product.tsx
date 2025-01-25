@@ -99,47 +99,52 @@ function AdminPage() {
   return (
     <div className="flex flex-col justify-center items-center w-full top-0 px-4 md:px-6 border-b mb-8 py-4">
       <Container>
-        <div className="flex flex-col sm:flex-row justify-between">
-          <h1 className="font-semibold text-xl mb-4">Админы хяналтын хэсэг</h1>
-          <div className="flex gap-4">
-            <AddProduct
-              setProducts={setProducts}
-              editProduct={editProduct}
-              setEditProduct={setEditProduct}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col items-start md:flex-row md:justify-between md:items-center gap-4 md:gap-0">
-          <Breadcrumb />
-          <div className="flex gap-4">
-            <div>
-              <Select
-                onValueChange={(value) => {
-                  handleFilter(value);
-                }}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Сонгох" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="All">Бүгд</SelectItem>
-                    <SelectItem value="Гар станц">Гар станц</SelectItem>
-                    <SelectItem value="Суурин станц">Суурин станц</SelectItem>
-                    <SelectItem value="Дагалдах хэрэгслүүд">
-                      Дагалдах хэрэгслүүд
-                    </SelectItem>
-                    <SelectItem value="Бусад бараа">Бусад бараа</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+        <div className="flex-1">
+          <div className="flex flex-col sm:flex-row  justify-between">
+            <h1 className="font-semibold text-xl mb-4">
+              Админы хяналтын хэсэг
+            </h1>
+            <div className="flex gap-4">
+              <AddProduct
+                setProducts={setProducts}
+                editProduct={editProduct}
+                setEditProduct={setEditProduct}
+              />
             </div>
-            <Link href="/admin/banner">
-              <Button> Баннер</Button>
-            </Link>
-            <Link href="/admin/users">
-              <Button> Хэрэглэгчид</Button>
-            </Link>
+          </div>
+
+          <div className="flex flex-col items-start md:flex-row md:justify-between md:items-center gap-4 md:gap-0">
+            <Breadcrumb />
+            <div className="flex gap-4">
+              <div>
+                <Select
+                  onValueChange={(value) => {
+                    handleFilter(value);
+                  }}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Сонгох" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="All">Бүгд</SelectItem>
+                      <SelectItem value="Гар станц">Гар станц</SelectItem>
+                      <SelectItem value="Суурин станц">Суурин станц</SelectItem>
+                      <SelectItem value="Дагалдах хэрэгслүүд">
+                        Дагалдах хэрэгслүүд
+                      </SelectItem>
+                      <SelectItem value="Бусад бараа">Бусад бараа</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Link href="/admin/banner">
+                <Button> Баннер</Button>
+              </Link>
+              <Link href="/admin/users">
+                <Button> Хэрэглэгчид</Button>
+              </Link>
+            </div>
           </div>
         </div>
       </Container>

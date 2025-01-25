@@ -125,7 +125,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
 
   const handleRatingChange = (value: number) => {
     setRating(value);
-    handleChange("rating", value); // Update the parent state with the new rating
+    handleChange("rating", value);
   };
 
   return (
@@ -236,9 +236,9 @@ const ProductModal: React.FC<ProductModalProps> = ({
               </label>
               <Input
                 type="number"
-                value={formData.priceN}
+                placeholder="0"
                 onChange={(e) =>
-                  handleChange("priceN", parseFloat(e.target.value) || 0)
+                  handleChange("priceN", parseFloat(e.target.value))
                 }
                 className="w-full border rounded px-3 py-2"
               />
@@ -247,9 +247,9 @@ const ProductModal: React.FC<ProductModalProps> = ({
               <label className="block text-sm font-medium mb-1">Үнэ</label>
               <Input
                 type="number"
-                value={formData.price}
+                placeholder="0"
                 onChange={(e) =>
-                  handleChange("price", parseFloat(e.target.value) || 0)
+                  handleChange("price", parseFloat(e.target.value))
                 }
                 className="w-full border rounded px-3 py-2"
               />

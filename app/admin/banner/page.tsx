@@ -23,7 +23,6 @@ import Image from "next/image";
 import { Banner } from "@/types/Banner";
 import { postNewBanner } from "@/apis/banner";
 import Breadcrumb from "@/components/BreadCrumb";
-import Link from "next/link";
 import Container from "@/components/Container";
 import { useRouter } from "next/navigation";
 import {

@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/types/Product";
-import { baseUrl } from "@/lib/staticData";
 import { formatPrice } from "@/utils/formatPrice";
 import { formatText } from "@/utils/formatText";
 

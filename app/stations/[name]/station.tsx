@@ -2,7 +2,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { baseUrl } from "@/lib/staticData";
 import { Product } from "@/types/Product";
 import SetQuantity from "./CartQuantity";
 import { useCart } from "@/hooks/useCarts";

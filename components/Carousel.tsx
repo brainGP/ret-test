@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { useQuery } from "@tanstack/react-query";
 import { getBanners } from "@/apis/banner";
-import { baseUrl } from "@/lib/staticData";
 import {
   Carousel,
   CarouselContent,
@@ -41,8 +40,9 @@ const CarouselComponent = () => {
   });
 
   useEffect(() => {
+    const plugin = autoplayPlugin.current;
     return () => {
-      autoplayPlugin.current.reset();
+      plugin.reset();
     };
   }, []);
 

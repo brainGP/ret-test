@@ -3,13 +3,13 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { isAdmin } from "@/lib/authHelper";
 import { getCookie } from "cookies-next";
-import { Button } from "@/components/ui/button";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Product } from "@/types/Product";
 import ProductTable from "@/components/Products/ProductTable";
 import { LoadingError } from "@/components/LoadingError";
 import { toast } from "sonner";
-import Link from "next/link";
+
 import Breadcrumb from "@/components/BreadCrumb";
 import { deleteProductById, getProducts } from "@/apis/products";
 import ConfirmationDialog from "./components/confirmation";

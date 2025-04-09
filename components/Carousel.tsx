@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { useQuery } from "@tanstack/react-query";
 import { getBanners } from "@/apis/banner";
@@ -29,7 +29,6 @@ const CarouselComponent = () => {
   const autoplayPlugin = useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true })
   );
-
   const {
     data: banners = [],
     isLoading,
@@ -37,9 +36,15 @@ const CarouselComponent = () => {
   } = useQuery({
     queryKey: ["banners"],
     queryFn: fetchBanners,
-    staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
-    retry: 2, // Retry failed requests up to 2 times
+    staleTime: 1000 * 60 * 5,
+    retry: 2,
   });
+
+  useEffect(() => {
+    return () => {
+      autoplayPlugin.current.reset();
+    };
+  }, []);
 
   if (isLoading) return <CarouselSkeleton />;
   if (isError) return <div className="text-center">Failed to load banners</div>;
@@ -53,18 +58,16 @@ const CarouselComponent = () => {
         onMouseLeave={autoplayPlugin.current.reset}
       >
         <CarouselContent>
-          {banners.map((banner, index) => {
-            const imgUrl = `${baseUrl}${banner.image}`;
-
+          {banners.map((banner) => {
             return (
               <CarouselItem key={banner._id}>
                 <div className="relative w-full h-auto items-center">
                   <Image
-                    src={imgUrl}
-                    alt={`Banner ${index}`}
-                    className="object-contain p-4 h-auto w-full transition-all duration-300"
+                    src={banner.image}
+                    alt={`Banner featuring ${banner._id}`}
+                    className="object-cover p-4 h-auto w-full transition-all duration-300"
                     priority={true}
-                    width={600}
+                    width={1200}
                     height={600}
                   />
                 </div>

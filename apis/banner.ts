@@ -7,8 +7,11 @@ import { Banner } from "@/types/Banner";
 
 export const getBanners = async (): Promise<Banner[]> => {
   const response = await GET({ route: "/api/dashboard" });
+
   if (response.status !== 200) throw new Error("Алдаа гарлаа");
-  const data: Banner[] = response.data.banner || [];
+
+  const data: Banner[] = response.data.banners || [];
+
   return data;
 };
 

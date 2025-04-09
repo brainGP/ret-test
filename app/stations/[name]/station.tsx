@@ -80,14 +80,14 @@ const StationCard = ({ station }: { station: Product }) => {
     <div className="flex flex-col lg:flex-row w-full items-center justify-between gap-8 px-24 space-y-4 lg:space-y-0 mt-8">
       <div className="flex flex-col-reverse gap-8 lg:gap-12 md:flex-row justify-between">
         <div className="flex flex-row md:flex-col h-auto w-full max-w-[400px] md:max-w-[160px] lg:max-w-[130px] justify-center lg:items-center gap-4 md:space-y-2">
-          {station.images.map((image) => (
+          {station.images.map((image, index) => (
             <div
-              key={image.image}
+              key={`${image.image}-${index}`}
               onClick={() => handleImageClick(image.image)}
               className="cursor-pointer border hover:border-gray/30 rounded-lg w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] flex justify-between items-center group"
             >
               <Image
-                src={`${baseUrl}${image.image}`}
+                src={image.image}
                 alt={image.image}
                 height={200}
                 width={200}
@@ -99,7 +99,7 @@ const StationCard = ({ station }: { station: Product }) => {
 
         <div className="flex justify-center items-center h-[360px] w-[360px] sm:w-[500px] sm:h-[500px] border rounded-lg overflow-hidden">
           <Image
-            src={`${baseUrl}${selectedImage}`}
+            src={`${selectedImage}`}
             alt={station.name}
             height={500}
             width={500}

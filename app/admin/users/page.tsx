@@ -24,6 +24,13 @@ import {
 import { User } from "@/types/Users";
 import { DELETE, GET, POST, PUT } from "@/apis/axios";
 import Container from "@/components/Container";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function AdminUsersPage() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -133,6 +140,19 @@ function AdminUsersPage() {
     checkAuth();
   }, [router]);
 
+  const handleNavigation = (value: string) => {
+    switch (value) {
+      case "Бүтээгдэхүүн":
+        router.push("/admin");
+        break;
+      case "Баннер":
+        router.push("/admin/banner");
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center items-center w-full top-0 border-b px-4 md:px-6 mb-8 py-4">
       <Container>
@@ -144,13 +164,17 @@ function AdminUsersPage() {
           </div>
           <div className="flex flex-col items-start sm:flex-row md:justify-between md:items-center gap-4 md:gap-0">
             <Breadcrumb />
+
             <div className="flex gap-4">
-              <Link href="/admin/banner">
-                <Button> Баннер</Button>
-              </Link>
-              <Link href="/admin">
-                <Button> Бүтээгдэхүүн</Button>
-              </Link>
+              <Select onValueChange={handleNavigation}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Хэрэглэгчид" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Баннер">Баннер</SelectItem>
+                  <SelectItem value="Бүтээгдэхүүн">Бүтээгдэхүүн</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>

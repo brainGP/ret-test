@@ -24,33 +24,37 @@ const BannerModal: React.FC<BannerModalProps> = ({
 
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
+  // Handle the image selection and preview
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const newFiles = Array.from(event.target.files);
       setUploadedFiles([...uploadedFiles, ...newFiles]);
 
+      // Create a preview URL for the selected image
       const newImages = newFiles.map((file) => URL.createObjectURL(file));
       setFormData({ ...formData, image: newImages[0] });
     }
   };
 
+  // Handle save action
   const handleSave = async () => {
-    if (!formData.image) {
+    if (uploadedFiles.length === 0) {
       toast.error("Зураг сонгох шаардлагатай.");
       return;
     } else {
       try {
-        await onSave(formData, uploadedFiles);
-        onClose();
+        await onSave(formData, uploadedFiles); // Passing actual file(s)
+        onClose(); // Close the modal after saving
       } catch {
         toast.error("Хадгалах явцад алдаа гарлаа.");
       }
     }
   };
 
+  // Remove the selected image
   const removeImage = () => {
     setFormData({ ...formData, image: "" });
-    setUploadedFiles([]);
+    setUploadedFiles([]); // Clear the uploaded files array
   };
 
   return (
@@ -74,7 +78,7 @@ const BannerModal: React.FC<BannerModalProps> = ({
               {formData.image && (
                 <div className="relative">
                   <Image
-                    src={formData.image}
+                    src={formData.image} // Blob URL for preview
                     alt="Banner Image"
                     width={100}
                     height={100}
@@ -98,8 +102,10 @@ const BannerModal: React.FC<BannerModalProps> = ({
           </div>
 
           <div className="flex justify-end space-x-4">
-            <Button onClick={onClose}>Cancel</Button>
-            <Button className="bg-indigo-600 text-white" onClick={handleSave}>
+            <button className="hover:underline" onClick={onClose}>
+              Болих
+            </button>
+            <Button className="text-white" onClick={handleSave}>
               Save
             </Button>
           </div>

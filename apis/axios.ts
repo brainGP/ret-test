@@ -38,9 +38,14 @@ export const PUT = async ({ route, token, body }: MyBodyRequest) => {
 
 export const POST = async ({ route, token, body }: MyBodyRequest) => {
   const url = buildAPIUrl(route);
+  const isFormData = body instanceof FormData;
+
   const config: AxiosRequestConfig = {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: {
+      Authorization: `Bearer ${token}`,
+      ...(isFormData ? {} : { "Content-Type": "application/json" }),
+    },
   };
-  body;
+
   return axios.post(url, body, config);
 };

@@ -4,8 +4,8 @@ import React from "react";
 import { Button } from "./ui/button";
 
 interface BackButtonProps {
-  customRoute?: string; // Optional: Specific route to navigate to
-  goToHome?: boolean; // Optional: Navigate to "/" if true
+  customRoute?: string;
+  goToHome?: boolean;
 }
 
 const BackButton: React.FC<BackButtonProps> = ({ customRoute, goToHome }) => {

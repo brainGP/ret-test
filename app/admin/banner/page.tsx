@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/table";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import BannerModal from "../components/bannerModal";
-import { baseUrl } from "@/lib/staticData";
 import ConfirmationDialog from "../components/confirmation";
 import Image from "next/image";
 import { Banner } from "@/types/Banner";
@@ -27,6 +26,13 @@ import Breadcrumb from "@/components/BreadCrumb";
 import Link from "next/link";
 import Container from "@/components/Container";
 import { useRouter } from "next/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const BannerPage = () => {
   const [banners, setBanners] = useState<Banner[]>([]);
@@ -98,6 +104,18 @@ const BannerPage = () => {
       toast.error("An error occurred. Please try again.");
     }
   };
+  const handleNavigation = (value: string) => {
+    switch (value) {
+      case "Бүтээгдэхүүн":
+        router.push("/admin");
+        break;
+      case "Хэрэглэгчид":
+        router.push("/admin/users");
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center items-center w-full top-0 border-b px-4 md:px-6 mb-8 py-4">
@@ -112,12 +130,15 @@ const BannerPage = () => {
           <div className="flex flex-col items-start sm:flex-row md:justify-between md:items-center gap-4 md:gap-0 mt-4 md:mt-0">
             <Breadcrumb />
             <div className="flex gap-4">
-              <Link href="/admin/users">
-                <Button> Хэрэглэгчид</Button>
-              </Link>
-              <Link href="/admin">
-                <Button> Бүтээгдэхүүн</Button>
-              </Link>
+              <Select onValueChange={handleNavigation}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Баннер" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Хэрэглэгчид">Хэрэглэгчид</SelectItem>
+                  <SelectItem value="Хэрэглэгчид">Бүтээгдэхүүн</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>
@@ -151,7 +172,7 @@ const BannerPage = () => {
                     <TableCell>
                       <div className="flex items-center p-4">
                         <Image
-                          src={`${baseUrl}${banner.image}`}
+                          src={banner.image}
                           alt={`Banner image ${banner._id}`}
                           width={300}
                           height={300}

@@ -131,21 +131,15 @@ const ProductModal: React.FC<ProductModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg w-full max-w-2xl overflow-hidden">
+        <div className=" pt-6 px-6 flex flex-row justify-between">
+          <h2 className="text-xl font-bold">
+            {product._id ? "Бүтээгдэхүүн өөрчлөх" : "Бүтээгдэхүүн нэмэх"}
+          </h2>
+          <button className=" shadow-none hover:scale-105" onClick={onClose}>
+            <Image src="/icons/xicon.svg" height={24} width={24} alt="Close" />
+          </button>
+        </div>
         <ScrollArea className="h-[800px] p-6">
-          <div className="flex flex-row justify-between">
-            <h2 className="text-xl font-bold">
-              {product._id ? "Бүтээгдэхүүн өөрчлөх" : "Бүтээгдэхүүн нэмэх"}
-            </h2>
-            <button className=" shadow-none hover:scale-105" onClick={onClose}>
-              <Image
-                src="/icons/xicon.svg"
-                height={24}
-                width={24}
-                alt="Close"
-              />
-            </button>
-          </div>
-
           <div className="space-y-4 mt-4 mx-1">
             <div>
               <label className="block text-sm font-medium mb-1">Нэр</label>

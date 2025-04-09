@@ -76,8 +76,9 @@ const Signup: React.FC = () => {
       setPassword("");
       setConfirmPassword("");
       router.push("/login");
-    } catch {
+    } catch (error: any) {
       const message = "Ямар нэг зүйл буруу болсон. Дахин оролдоно уу.";
+      console.log(error);
       toast.error(message);
     } finally {
       setLoading(false);

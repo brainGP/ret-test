@@ -95,6 +95,18 @@ function AdminPage() {
       );
     }
   };
+  const handleNavigation = (value: string) => {
+    switch (value) {
+      case "Баннер":
+        router.push("/admin/banner");
+        break;
+      case "Хэрэглэгчид":
+        router.push("/admin/users");
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center items-center w-full top-0 px-4 md:px-6 border-b mb-8 py-4">
@@ -138,12 +150,16 @@ function AdminPage() {
                   </SelectContent>
                 </Select>
               </div>
-              <Link href="/admin/banner">
-                <Button> Баннер</Button>
-              </Link>
-              <Link href="/admin/users">
-                <Button> Хэрэглэгчид</Button>
-              </Link>
+
+              <Select onValueChange={handleNavigation}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Бүтээгдэхүүн" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Баннер">Баннер</SelectItem>
+                  <SelectItem value="Хэрэглэгчид">Хэрэглэгчид</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Filter from "@/components/Filter";
-import Breadcrumb from "@/components/BreadCrumb";
 import { getProducts, getProductsByBrand } from "@/apis/products";
 import ProductDisplay from "@/components/Products/ProductDisplay";
 import { useSearchParams } from "next/navigation";
@@ -29,10 +28,6 @@ const OtherPage = () => {
     <div className="flex flex-col lg:flex-row">
       <Filter />
       <div className="w-full flex flex-col p-4 pl-8">
-        <div className="flex">
-          <Breadcrumb />
-        </div>
-
         <ProductDisplay
           title={title}
           fetcher={fetcher}

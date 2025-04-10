@@ -16,7 +16,7 @@ const ShopCard = () => {
     >
       <div className="flex gap-4 items-center group-hover:text-yellow">
         <StoreIcon color="black" size={24} />
-        <span className="text-sm font-medium text-gray transition-colors duration-200 group-hover:text-yellow">
+        <span className="hidden lg:block text-sm font-medium text-gray transition-colors duration-200 group-hover:text-yellow">
           Сагс
         </span>
       </div>

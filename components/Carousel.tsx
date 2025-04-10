@@ -61,22 +61,22 @@ const CarouselComponent = () => {
           {banners.map((banner) => {
             return (
               <CarouselItem key={banner._id}>
-                <div className="relative w-full h-auto items-center">
+                <div className="relative w-full h-[30vh] sm:h-[40vh] md:h-[60vh]">
                   <Image
                     src={banner.image}
                     alt={`Banner featuring ${banner._id}`}
-                    className="object-cover p-4 h-auto w-full transition-all duration-300"
+                    className="object-cover object-center"
                     priority={true}
-                    width={1200}
-                    height={600}
+                    fill
+                    sizes="100vw"
                   />
                 </div>
               </CarouselItem>
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className="absolute left-6 lg:left-10 h-6 w-6 lg:h-8 lg:w-8" />
-        <CarouselNext className="absolute right-6 lg:right-10 h-6 w-6 lg:h-8 lg:w-8" />
+        <CarouselPrevious className="absolute left-6 lg:left-8 h-6 w-6 lg:h-8 lg:w-8" />
+        <CarouselNext className="absolute right-6 lg:right-8 h-6 w-6 lg:h-8 lg:w-8" />
       </Carousel>
     </div>
   );

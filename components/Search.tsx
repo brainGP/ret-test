@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Product } from "@/types/Product";
 import { toast } from "sonner";
-import { baseUrl } from "@/lib/staticData";
 import { getProducts } from "@/apis/products";
+
 const Search = () => {
   const [query, setQuery] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
@@ -62,7 +62,7 @@ const Search = () => {
   };
 
   return (
-    <div className="relative w-full max-w-2xl text-gray">
+    <div className="relative w-full max-w-2xl text-gray py-2">
       <div className="flex w-full items-center rounded-full gap-4">
         <Input
           type="search"
@@ -71,11 +71,11 @@ const Search = () => {
           onChange={handleSearch}
           onFocus={() => setIsDropdownVisible(true)}
           onBlur={handleBlur}
-          className="px-4"
+          className="px-4 h-10"
         />
         <Button
           type="submit"
-          className="rounded-full bg-yellow hover:bg-yellow"
+          className="rounded-md bg-yellow hover:bg-yellow/60 flex items-center justify-center p-0 aspect-square"
         >
           <Image
             src="/icons/search.svg"
@@ -97,7 +97,7 @@ const Search = () => {
                 onClick={() => router.push(`/stations/${product.name}`)}
               >
                 <Image
-                  src={`${baseUrl}${product.images[0].image}`}
+                  src={`${product.images[0].image}`}
                   alt={product.name || "Product Image"}
                   width={80}
                   height={80}

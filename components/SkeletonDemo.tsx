@@ -46,7 +46,7 @@ export function Profile() {
             width={24}
             className="transition-colors duration-200"
           />
-          <span className="text-sm font-medium text-gray transition-colors duration-200 group-hover:text-yellow">
+          <span className="hidden lg:block text-sm font-medium text-gray transition-colors duration-200 group-hover:text-yellow">
             Нэвтрэх
           </span>
         </div>

@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Product } from "@/types/Product";
 import { LoadingWait } from "../LoadingWait";
 import BackButton from "../BackButton";
+import Breadcrumb from "../BreadCrumb";
 
 type SortOrder = "lowtohigh" | "hightolow";
 
@@ -75,7 +76,8 @@ const ProductDisplay: React.FC<ProductDisplayProps> = ({
   return (
     <div className="w-full flex flex-col relative">
       {hasSort && (
-        <div className=" w-full flex justify-end mb-4">
+        <div className=" w-full flex justify-between py-4">
+          <Breadcrumb />
           <FilterOrder onOrderChange={handleOrderChange} />
         </div>
       )}

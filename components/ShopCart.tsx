@@ -11,7 +11,7 @@ const ShopCard = () => {
 
   return (
     <div
-      className="relative cursor-pointer group"
+      className="relative cursor-pointer group text-zinc-600"
       onClick={() => router.push(`/cart`)}
     >
       <div className="flex gap-2 items-center ">
@@ -19,7 +19,7 @@ const ShopCard = () => {
           className=" group-hover:text-yellow transition-colors duration-200"
           size={24}
         />
-        <span className="hidden lg:block text-sm font-medium text-gray-700 group-hover:text-yellow transition-colors duration-200">
+        <span className="hidden lg:block text-sm font-medium group-hover:text-yellow transition-colors duration-200">
           Сагс
         </span>
       </div>

@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         {/* Footer Grid */}
         <div className="grid grid-cols-2 justify-center md:grid-cols-4 gap-8">
           {/* Logo Section */}
-          <div className="flex items-center justify-start sm:justify-start hover:scale-105 duration-300 transition">
+          <div className="flex items-center justify-start sm:justify-start duration-300 transition">
             <Image
               src="/Retevis/retevis.png"
               alt="Retevis Mongolia Logo"
@@ -29,13 +29,15 @@ const Footer: React.FC = () => {
           {/* Address Section */}
           <div>
             <Link href="https://www.google.com/maps?ll=47.904276,106.911301&z=16&t=m&hl=en&gl=MN&mapclient=embed&cid=845199646097487029">
-              <div className="flex flex-col group items-start hover:scale-105 duration-300 transition">
+              <div className="flex flex-col group items-start">
                 <h2 className="text-lg font-semibold">ХАЯГ БАЙРШИЛ</h2>
-                <p className="text-sm mt-2">
-                  ХУД, Энхтайваны гүүрийн баруун урд,
-                  <br /> Төв Хаан банкны эсрэг талд
-                </p>
-                <span className="underline">Зочлох</span>
+                <div className=" hover:scale-105 duration-300 transition">
+                  <p className="text-sm mt-2">
+                    ХУД, Энхтайваны гүүрийн баруун урд,
+                    <br /> Төв Хаан банкны эсрэг талд
+                  </p>
+                  <span className="underline">Зочлох</span>
+                </div>
               </div>
             </Link>
           </div>

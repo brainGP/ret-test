@@ -87,7 +87,6 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* ✅ Mobile Bottom Navigation Fixed */}
       <div className="md:hidden fixed bottom-0 left-0 w-full z-30 border-t bg-white shadow-md">
         <Navigation />
       </div>

@@ -79,14 +79,14 @@ const StationCard = ({ station }: { station: Product }) => {
     <div className="flex flex-col lg:flex-row w-full items-center justify-between gap-8 px-24 space-y-4 lg:space-y-0 mt-8">
       <div className="flex flex-col-reverse gap-8 lg:gap-12 md:flex-row justify-between">
         <div className="flex flex-row md:flex-col h-auto w-full max-w-[400px] md:max-w-[160px] lg:max-w-[130px] justify-center lg:items-center gap-4 md:space-y-2">
-          {station.images.map((image, index) => (
+          {station.images.map((image) => (
             <div
-              key={`${image.image}-${index}`}
+              key={image.image}
               onClick={() => handleImageClick(image.image)}
               className="cursor-pointer border hover:border-gray/30 rounded-lg w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] flex justify-between items-center group"
             >
               <Image
-                src={image.image}
+                src={`${image.image}`}
                 alt={image.image}
                 height={200}
                 width={200}
@@ -107,32 +107,36 @@ const StationCard = ({ station }: { station: Product }) => {
           />
         </div>
       </div>
+
       <div className="min-w-[400px] px-8 md:px-0 max-w-[682px] overflow-hidden flex justify-center">
         <div className="flex flex-col space-y-2 w-[360px] sm:w-[500px] md:w-[682px] lg:w-[580px] justify-center">
-          <Image
-            src={`/Retevis/rete.svg`}
-            alt="logo"
-            height={200}
-            width={80}
-            className="object-contain hidden md:block"
-          />
+          <ScrollArea className="w-full h-[360px] overflow-hidden">
+            <Image
+              src={`/Retevis/rete.svg`}
+              alt="logo"
+              height={200}
+              width={80}
+              className="object-contain hidden md:block"
+            />
 
-          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray">
-            {station.name}
-          </h1>
-          <Rating value={station.rating} readOnly />
-          <div className="flex items-end gap-2 py-4">
-            <span className="text-3xl md:text-4xl font-semibold">
-              {formatPrice(station.priceN)}₮
-            </span>
-            <span className="text-gray/40"> (НӨАТ-тэй)</span>
-          </div>
-          <Separator />
-          <ScrollArea className="w-full lg:max-w-full lg:max-h-44 overflow-hidden rounded-lg">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray">
+              {station.name}
+            </h1>
+            <Rating value={station.rating} readOnly />
+            <div className="flex items-end gap-2 py-4">
+              <span className="text-3xl md:text-4xl font-semibold">
+                {formatPrice(station.priceN)}₮
+              </span>
+              <span className="text-gray/40"> (НӨАТ-тэй)</span>
+            </div>
+            <Separator />
+
             <div className="space-y-4">
               <div className="flex-1 space-y-2">
                 <strong>Тайлбар:</strong>
-                <p className="text-sm">{station.description}</p>
+                <p className="text-sm break-words whitespace-pre-wrap">
+                  {station.description}
+                </p>
               </div>
               <div className="flex gap-2 items-center">
                 <strong>Батарэй:</strong>
@@ -154,60 +158,56 @@ const StationCard = ({ station }: { station: Product }) => {
             </div>
           </ScrollArea>
           <Separator />
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div className="mt-4">
             <SetQuantity
               cartProduct={cartProduct}
               handleQtyDecrease={handleQtyDecrease}
               handleQtyIncrease={handleQtyIncrease}
             />
-
+          </div>
+          <div className="flex items-center justify-between gap-x-16">
             {isProductInCart ? (
               <div className="flex flex-col items-center gap-2 w-full">
                 <div className="flex gap-4 items-center">
-                  <div className="w-4 h-4 flex justify-center items-center">
-                    <MdCheckCircle size={16} className="text-gray" />
-                  </div>
-
+                  <MdCheckCircle size={16} className="text-gray" />
                   <span>Таны сагсанд нэмэгдсэн байна.</span>
                 </div>
 
                 <Button
                   className="flex text-white px-6 py-3 rounded-md w-full"
-                  onClick={() => {
-                    router.push(`/cart`);
-                  }}
+                  onClick={() => router.push("/cart")}
                 >
                   <StoreIcon size={24} color="white" />
                   <span>Сагс харах</span>
                 </Button>
               </div>
             ) : (
-              <>
-                <Button
-                  className=" flex text-white px-6 py-3 rounded-md w-full"
-                  onClick={() => handleAddProductToCart(cartProduct)}
-                >
-                  <StoreIcon size={24} color="white" />
-                  <span>Сагсанд нэмэх</span>
-                </Button>
-              </>
+              <Button
+                className="flex text-white px-6 py-3 rounded-md w-3/5"
+                onClick={() => handleAddProductToCart(cartProduct)}
+              >
+                <StoreIcon size={24} color="white" />
+                <span>Сагсанд нэмэх</span>
+              </Button>
             )}
-          </div>
-          <a
-            href="https://m.me/RetevisMongolia"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button className="bg-white border border-gray/30 text-gray hover:bg-gray/5 px-6 py-3 rounded-md w-full gap-4">
-              <Image
-                src="/icons/msgIcon.svg"
-                alt="icon"
-                height="16"
-                width="16"
-              />
-              <span> Холбогдох</span>
+
+            <Button className=" bg-white border border-gray/30 text-gray hover:bg-gray/5 px-6 py-3 rounded-md w-3/5 gap-4">
+              <a
+                href="https://m.me/RetevisMongolia"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-2 justify-between"
+              >
+                <Image
+                  src="/icons/msgIcon.svg"
+                  alt="icon"
+                  height={16}
+                  width={16}
+                />
+                <span>Холбогдох</span>
+              </a>
             </Button>
-          </a>
+          </div>
         </div>
       </div>
     </div>

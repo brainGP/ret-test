@@ -3,7 +3,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/hooks/useCarts";
-import StoreIcon from "@/public/icons/store";
+import { ShoppingBag } from "lucide-react";
 
 const ShopCard = () => {
   const router = useRouter();
@@ -14,15 +14,18 @@ const ShopCard = () => {
       className="relative cursor-pointer group"
       onClick={() => router.push(`/cart`)}
     >
-      <div className="flex gap-4 items-center group-hover:text-yellow">
-        <StoreIcon color="black" size={24} />
-        <span className="hidden lg:block text-sm font-medium text-gray transition-colors duration-200 group-hover:text-yellow">
+      <div className="flex gap-4 items-center ">
+        <ShoppingBag
+          className=" group-hover:text-yellow transition-colors duration-200"
+          size={24}
+        />
+        <span className="hidden lg:block text-sm font-medium text-gray-700 group-hover:text-yellow transition-colors duration-200">
           Сагс
         </span>
       </div>
 
       {cartTotalQty > 0 && (
-        <div className="absolute top-[-10px] right-[-16px] bg-gray text-white h-5 w-5 rounded-full flex justify-center items-center text-xs">
+        <div className="absolute top-[-10px] right-[-16px] bg-gray text-red-400 h-5 w-5 rounded-full flex justify-center items-center text-xs">
           {cartTotalQty}
         </div>
       )}

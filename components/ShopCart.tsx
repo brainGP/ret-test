@@ -14,7 +14,7 @@ const ShopCard = () => {
       className="relative cursor-pointer group"
       onClick={() => router.push(`/cart`)}
     >
-      <div className="flex gap-4 items-center ">
+      <div className="flex gap-2 items-center ">
         <ShoppingBag
           className=" group-hover:text-yellow transition-colors duration-200"
           size={24}

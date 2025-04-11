@@ -1,10 +1,10 @@
 "use client";
 import { User } from "lucide-react";
-import { Button } from "./ui/button";
-import Link from "next/link";
+
 import { isUserLoggedIn } from "@/lib/authHelper";
 import UserAvatar from "./UserAvatar";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface User {
   username: string;
@@ -16,6 +16,7 @@ interface User {
 export function Profile() {
   const [isClient, setIsClient] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     setIsClient(true);
@@ -36,18 +37,19 @@ export function Profile() {
   }
 
   return (
-    <Button className="flex flex-row bg-white transition-transform shadow-none duration-200 p-0 hover:bg-white group">
-      <Link href={`/login`}>
-        <div className="flex gap-4 items-center text-gray">
-          <User
-            className=" group-hover:text-yellow transition-colors duration-200"
-            size={24}
-          />
-          <span className="hidden lg:block text-sm font-medium group-hover:text-yellow transition-colors duration-200">
-            Нэвтрэх
-          </span>
-        </div>
-      </Link>
-    </Button>
+    <div
+      className="relative cursor-pointer group"
+      onClick={() => router.push(`/login`)}
+    >
+      <div className="flex gap-2 items-center ">
+        <User
+          className=" group-hover:text-yellow transition-colors duration-200"
+          size={24}
+        />
+        <span className="hidden lg:block text-sm font-medium text-gray-700 group-hover:text-yellow transition-colors duration-200">
+          Нэвтрэх
+        </span>
+      </div>
+    </div>
   );
 }

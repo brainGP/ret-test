@@ -55,7 +55,7 @@ const CartTable: React.FC<ProductTableProps> = ({ products }) => {
                     <Image
                       src={
                         product.images?.[0]?.image
-                          ? `${baseUrl}${product.images[0].image}`
+                          ? `${product.images[0].image}`
                           : "/noresult.png"
                       }
                       alt={product.name}

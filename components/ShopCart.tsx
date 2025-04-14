@@ -25,8 +25,8 @@ const ShopCard = () => {
       </div>
 
       {cartTotalQty > 0 && (
-        <div className="absolute top-[-10px] right-[-16px] bg-gray text-red-400 h-5 w-5 rounded-full flex justify-center items-center text-xs">
-          {cartTotalQty}
+        <div className="absolute top-[-10px] right-[-16px] text-gray border h-5 w-5 rounded-full flex justify-center items-center text-xs">
+          {cartTotalQty}As
         </div>
       )}
     </div>

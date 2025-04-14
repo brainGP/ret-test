@@ -1,22 +1,25 @@
-import { hostname } from "os";
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   reactStrictMode: false,
   experimental: {
     serverActions: {
-      bodySizeLimit: "5mb",
+      bodySizeLimit: "10mb",
     },
   },
   images: {
-    domains: ["res.cloudinary.com"],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "res.cloudinary.com",
       },
-      {
-        protocol: "http",
-        hostname: "**",
-      },
+      // Add more patterns if needed:
+      // {
+      //   protocol: "https",
+      //   hostname: "**",
+      // },
     ],
   },
 };
+
+export default nextConfig;

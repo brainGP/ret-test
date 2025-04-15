@@ -167,18 +167,16 @@ const StationCard = ({ station }: { station: Product }) => {
           </div>
           <div className="flex items-center justify-between gap-x-16">
             {isProductInCart ? (
-              <div className="flex flex-col items-center  w-full">
-                <Button
-                  className="flex text-white px-6 py-3 rounded-md w-full"
-                  onClick={() => router.push("/cart")}
-                >
-                  <StoreIcon size={24} color="white" />
-                  <span>Таны сагсанд нэмэгдсэн байна.</span>
-                </Button>
-              </div>
+              <Button
+                className="flex text-white px-6 py-3 rounded-md w-full"
+                onClick={() => router.push("/cart")}
+              >
+                <StoreIcon size={24} color="white" />
+                <span>Сагс харах</span>
+              </Button>
             ) : (
               <Button
-                className="flex text-white px-6 py-3 rounded-md w-3/5"
+                className="flex text-white px-6 py-3 rounded-md w-full"
                 onClick={() => handleAddProductToCart(cartProduct)}
               >
                 <StoreIcon size={24} color="white" />
@@ -186,7 +184,7 @@ const StationCard = ({ station }: { station: Product }) => {
               </Button>
             )}
 
-            <Button className=" bg-white border border-gray/30 text-gray hover:bg-gray/5 px-6 py-3 rounded-md w-3/5 gap-4">
+            <Button className=" bg-white border border-gray/30 text-gray hover:bg-gray/5 px-6 py-3 rounded-md gap-4 w-full">
               <a
                 href="https://m.me/RetevisMongolia"
                 target="_blank"

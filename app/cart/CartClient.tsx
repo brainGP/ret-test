@@ -30,16 +30,16 @@ const CartClient = () => {
 
   return (
     <div className="flex flex-col justify-center items-center w-full top-0 border-b px-4 md:px-6 mb-8 py-4">
-      <Container>
-        <div className="flex flex-col sm:flex-row justify-between">
-          <h1 className="font-semibold text-xl mb-4">
+      <div className="container flex flex-col items-center justify-start py-4 mx-auto max-w-7xl gap-4 ">
+        <div className=" w-full flex justify-start">
+          <h1 className="font-semibold text-xl mb-4 justify-start">
             Хадгалсан бүтээгдэхүүнүүд
           </h1>
         </div>
-        <div className="flex flex-row ">
+        <div className=" w-full flex justify-start">
           <Breadcrumb />
         </div>
-      </Container>
+      </div>
       <Container>
         <CartTable products={cartProducts} />
       </Container>

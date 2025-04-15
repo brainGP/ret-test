@@ -1,20 +1,12 @@
+"use client";
 import React from "react";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Product } from "@/types/Product";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import Image from "next/image";
+import { Product } from "@/types/Product";
 import { formatPrice } from "@/utils/formatPrice";
 import SetQuantity from "../stations/[name]/CartQuantity";
 import { useCart } from "@/hooks/useCarts";
 import { Button } from "@/components/ui/button";
+import { Trash2 } from "lucide-react";
 
 interface ProductTableProps {
   products: Product[];
@@ -28,82 +20,86 @@ const CartTable: React.FC<ProductTableProps> = ({ products }) => {
   } = useCart();
 
   return (
-    <ScrollArea className="w-screen xl:w-full overflow-x-auto rounded-md border">
-      <div className="min-w-[1200px]">
-        <Table>
-          <TableCaption>Product list in your cart</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[50px] text-center">#</TableHead>
-              <TableHead className="w-[200px]">Image</TableHead>
-              <TableHead className="w-[100px]">Product</TableHead>
-              <TableHead className="w-[150px]">Price</TableHead>
-              <TableHead className="w-[100px]">Quantity</TableHead>
-              <TableHead className="w-[150px]">Total</TableHead>
-              <TableHead className="w-[150px]">Action</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {products && products.length > 0 ? (
-              products.map((product, index) => (
-                <TableRow key={product._id}>
-                  <TableCell className="text-center font-medium">
-                    {index + 1}.
-                  </TableCell>
-                  <TableCell className="w-40 h-40">
-                    <Image
-                      src={
-                        product.images?.[0]?.image
-                          ? `${product.images[0].image}`
-                          : "/noresult.png"
-                      }
-                      alt={product.name}
-                      width={200}
-                      height={200}
-                      className="object-contain h-full"
-                      priority={true}
-                    />
-                  </TableCell>
-                  <TableCell className="font-medium">{product.name}</TableCell>
-                  <TableCell>{formatPrice(product.priceN)}₮</TableCell>
-                  <TableCell>
-                    <SetQuantity
-                      cartCounter={true}
-                      cartProduct={product}
-                      handleQtyDecrease={() => {
-                        handleCartQtyDecrease(product);
-                      }}
-                      handleQtyIncrease={() => {
-                        handleCartQtyIncrease(product);
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    {formatPrice(product.priceN * product.quantity)}₮
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      className="bg-red-500 hover:bg-red-400"
-                      onClick={() => handleRemoveProductFromCart(product)}
-                    >
-                      Устгах
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={5} className="text-center">
-                  Танд сагсанд хийсэн бүтээгдэхүүн байхгүй байна!
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+    <div className="w-full overflow-x-auto">
+      {products && products.length > 0 ? (
+        <table className="min-w-full table-fixed border-collapse">
+          <thead className="bg-gray-100 text-sm font-semibold text-gray-700">
+            <tr>
+              <th className="w-[80px] p-3 text-left">Зураг</th>
+              <th className="w-[200px] p-3 text-left">Бүтээгдэхүүн</th>
+              <th className="w-[100px] p-3 text-left">Үнэ</th>
+              <th className="w-[120px] p-3 text-left">Тоо ширхэг</th>
+              <th className="w-[100px] p-3 text-left">Нийт</th>
+              <th className="w-[140px] p-3 text-left">Үйлдэл</th>
+            </tr>
+          </thead>
 
-      <ScrollBar orientation="horizontal" />
-    </ScrollArea>
+          <tbody className="text-sm">
+            {products.map((product) => (
+              <tr
+                key={product._id}
+                className="border-b hover:bg-gray-50 transition"
+              >
+                {/* Image */}
+                <td className="p-3">
+                  <Image
+                    src={product.images?.[0]?.image || "/noresult.png"}
+                    alt={product.name}
+                    width={60}
+                    height={60}
+                    className="object-contain rounded-md"
+                  />
+                </td>
+
+                {/* Product Info */}
+                <td className="p-3">
+                  <p className="font-medium">{product.name}</p>
+                  <div className="flex gap-1 mt-1 text-xs text-gray-500">
+                    <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full">
+                      {product.brand}
+                    </span>
+                  </div>
+                </td>
+
+                {/* Price */}
+                <td className="p-3 font-semibold">
+                  {formatPrice(product.priceN)}₮
+                </td>
+
+                {/* Quantity */}
+                <td className="p-3">
+                  <SetQuantity
+                    cartCounter
+                    cartProduct={product}
+                    handleQtyDecrease={() => handleCartQtyDecrease(product)}
+                    handleQtyIncrease={() => handleCartQtyIncrease(product)}
+                  />
+                </td>
+
+                {/* Total */}
+                <td className="p-3 font-semibold">
+                  {formatPrice(product.priceN * product.quantity)}₮
+                </td>
+
+                {/* Actions */}
+                <td className="p-3 space-y-2">
+                  <Button
+                    className="bg-red-500 hover:bg-red-400 text-white text-xs w-full"
+                    onClick={() => handleRemoveProductFromCart(product)}
+                  >
+                    <Trash2 size={14} className="mr-1" /> Устгах
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p className="text-center text-gray-500 mt-6">
+          Танд сагсанд хийсэн бүтээгдэхүүн байхгүй байна!
+        </p>
+      )}
+    </div>
   );
 };
 

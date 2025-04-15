@@ -20,8 +20,8 @@ const StationNamePage = async ({
   return (
     <>
       <MetaTags data={station} />
-      <div className="px-4 flex-1 justify-center gap-8">
-        <div className="flex gap-4 items-center md:ml-20 pt-4">
+      <div className="px-8 md:px-12 lg:px-16 flex-1 justify-center gap-8">
+        <div className="flex gap-4 items-center pt-4">
           <BackButton />
           <Breadcrumb />
         </div>

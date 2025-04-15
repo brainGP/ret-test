@@ -75,7 +75,7 @@ const Header: React.FC = () => {
                 <Search />
               </div>
 
-              <div className="flex items-center gap-12 md:gap-6 ">
+              <div className="flex items-center gap-12 md:gap-8 ">
                 <ShopCard />
                 <Profile />
               </div>

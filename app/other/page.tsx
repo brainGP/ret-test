@@ -23,7 +23,7 @@ const OtherPage = () => {
   const title = "Бусад бараа";
 
   return (
-    <div className="flex flex-col lg:flex-row">
+    <div className="flex flex-col lg:flex-row px-4 md:px-8 lg:px-12">
       <Filter />
       <div className="w-full flex flex-col p-4">
         <ProductDisplay

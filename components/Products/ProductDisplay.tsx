@@ -74,7 +74,7 @@ const ProductDisplay: React.FC<ProductDisplayProps> = ({
     setSortOrder(order);
   };
   const pathname = usePathname();
-  const showTypeFilter = pathname.startsWith("/stations"); // Show only when path starts with /stations
+  const showTypeFilter = pathname.startsWith("/stations");
 
   return (
     <div className="w-full flex flex-col relative">

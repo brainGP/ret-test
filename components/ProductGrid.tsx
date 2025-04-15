@@ -14,7 +14,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, products }) => {
   return (
     <section className="mx-auto text-gray">
       {title && (
-        <div className="flex items-center gap-4 my-6">
+        <div className="flex items-center gap-4 my-6 ">
           <p className="text-xl md:text-2xl lg:text-3xl font-semibold">
             {title}
           </p>

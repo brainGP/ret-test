@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Product } from "@/types/Product";
 import SetQuantity from "./CartQuantity";
 import { useCart } from "@/hooks/useCarts";
-import { MdCheckCircle } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { Rating } from "@mui/material";
 import { formatPrice } from "@/utils/formatPrice";
@@ -56,61 +55,58 @@ const StationCard = ({ station }: { station: Product }) => {
   }, [cartProducts, station._id]);
 
   const handleQtyIncrease = useCallback(() => {
-    if (cartProduct.quantity >= station.quantity) {
-      return;
-    }
-    setCartProduct((prev) => ({
-      ...prev,
-      quantity: prev.quantity + 1,
-    }));
-  }, [cartProduct, station.quantity]);
+    setCartProduct((prev) => {
+      if (prev.quantity >= station.quantity) return prev;
+      return { ...prev, quantity: prev.quantity + 1 };
+    });
+  }, [station.quantity]);
 
   const handleQtyDecrease = useCallback(() => {
-    if (cartProduct.quantity === 1) {
-      return;
-    }
-    setCartProduct((prev) => ({
-      ...prev,
-      quantity: prev.quantity - 1,
-    }));
-  }, [cartProduct]);
+    setCartProduct((prev) => {
+      if (prev.quantity <= 1) return prev;
+      return { ...prev, quantity: prev.quantity - 1 };
+    });
+  }, []);
 
   return (
-    <div className="flex flex-col lg:flex-row w-full items-center justify-between gap-8 px-24 space-y-4 lg:space-y-0 mt-8">
-      <div className="flex flex-col-reverse gap-8 lg:gap-12 md:flex-row justify-between">
-        <div className="flex flex-row md:flex-col h-auto w-full max-w-[400px] md:max-w-[160px] lg:max-w-[130px] justify-center lg:items-center gap-4 md:space-y-2">
-          {station.images.map((image) => (
+    <div className="flex flex-col lg:flex-row w-full justify-between gap-8 space-y-4 lg:space-y-0 mt-8">
+      <div className="flex w-full h-full gap-8 flex-row justify-between">
+        <div className="flex flex-col gap-8 justify-center items-center w-[33%]">
+          {station.images.slice(0, 3).map((image) => (
             <div
               key={image.image}
               onClick={() => handleImageClick(image.image)}
-              className="cursor-pointer border hover:border-gray/30 rounded-lg w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] flex justify-between items-center group"
+              className="cursor-pointer border hover:border-gray/30 rounded-lg flex justify-center items-center group aspect-square
+                 w-full p-2"
             >
               <Image
-                src={`${image.image}`}
+                src={image.image}
                 alt={image.image}
-                height={200}
-                width={200}
-                className="object-contain h-full transition-transform duration-300 group-hover:scale-110"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110 aspect-square"
               />
             </div>
           ))}
         </div>
 
-        <div className="flex justify-center items-center h-[360px] w-[360px] sm:w-[500px] sm:h-[500px] border rounded-lg overflow-hidden">
+        <div className="flex justify-center items-center w-full border rounded-lg overflow-hidden bg-white p-8 aspect-square">
           <Image
-            src={`${selectedImage}`}
+            src={selectedImage}
             alt={station.name}
-            height={500}
-            width={500}
-            className="object-contain w-full h-full p-2"
-            priority={true}
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-fit h-full object-contain rounded-md aspect-square"
+            priority
           />
         </div>
       </div>
 
-      <div className="min-w-[400px] px-8 md:px-0 max-w-[682px] overflow-hidden flex justify-center">
-        <div className="flex flex-col space-y-2 w-[360px] sm:w-[500px] md:w-[682px] lg:w-[580px] justify-center">
-          <ScrollArea className="w-full h-[360px] overflow-hidden">
+      <div className="w-full flex justify-center lg:h-[580px]">
+        <div className="flex flex-col space-y-2 w-full justify-between h-full">
+          <ScrollArea className="w-full h-auto lg:h-full lg:overflow-y-auto">
             <Image
               src={`/Retevis/rete.svg`}
               alt="logo"
@@ -118,18 +114,22 @@ const StationCard = ({ station }: { station: Product }) => {
               width={80}
               className="object-contain hidden md:block"
             />
-
-            <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray">
-              {station.name}
-            </h1>
-            <Rating value={station.rating} readOnly />
-            <div className="flex items-end gap-2 py-4">
+            <div className="flex justify-between items-center">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray">
+                {station.name}
+              </h1>
+              <div className="flex items-center gap-2 p-4">
+                <Rating value={station.rating} precision={0.5} readOnly />
+                <span className="text-sm text-gray">({station.rating})</span>
+              </div>
+            </div>
+            <div className="flex items-end gap-2">
               <span className="text-3xl md:text-4xl font-semibold">
                 {formatPrice(station.priceN)}₮
               </span>
               <span className="text-gray/40"> (НӨАТ-тэй)</span>
             </div>
-            <Separator />
+            <Separator className="my-4" />
 
             <div className="space-y-4">
               <div className="flex-1 space-y-2">
@@ -167,18 +167,13 @@ const StationCard = ({ station }: { station: Product }) => {
           </div>
           <div className="flex items-center justify-between gap-x-16">
             {isProductInCart ? (
-              <div className="flex flex-col items-center gap-2 w-full">
-                <div className="flex gap-4 items-center">
-                  <MdCheckCircle size={16} className="text-gray" />
-                  <span>Таны сагсанд нэмэгдсэн байна.</span>
-                </div>
-
+              <div className="flex flex-col items-center  w-full">
                 <Button
                   className="flex text-white px-6 py-3 rounded-md w-full"
                   onClick={() => router.push("/cart")}
                 >
                   <StoreIcon size={24} color="white" />
-                  <span>Сагс харах</span>
+                  <span>Таны сагсанд нэмэгдсэн байна.</span>
                 </Button>
               </div>
             ) : (

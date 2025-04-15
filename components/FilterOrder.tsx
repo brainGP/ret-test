@@ -21,9 +21,9 @@ const FilterOrder: React.FC<FilterOrderProps> = ({ onOrderChange }) => {
   };
 
   return (
-    <div>
+    <div className="max-w-[200px] w-full text-sm">
       <Select onValueChange={handleChange}>
-        <SelectTrigger id="sort-order">
+        <SelectTrigger id="sort-order w-full">
           <SelectValue placeholder="Үнээр эрэмбэлэх" />
         </SelectTrigger>
         <SelectContent position="popper">

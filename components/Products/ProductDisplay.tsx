@@ -9,6 +9,8 @@ import { Product } from "@/types/Product";
 import { LoadingWait } from "../LoadingWait";
 import BackButton from "../BackButton";
 import Breadcrumb from "../BreadCrumb";
+import TypeFilter from "../TypeFilter";
+import { usePathname } from "next/navigation";
 
 type SortOrder = "lowtohigh" | "hightolow";
 
@@ -30,17 +32,16 @@ const ProductDisplay: React.FC<ProductDisplayProps> = ({
   filter,
   error = (
     <div className="w-full h-64">
-      <div className="flex absolute">
+      <div className="flex absolute my-4">
         <BackButton />
       </div>
-
       <div className=" flex justify-center items-center w-full h-full">
         <span className="text-center">Жагсаалт хоосон байна</span>
       </div>
     </div>
   ),
   loader = (
-    <div className="w-full  flex justify-center items-center">
+    <div className="w-full flex justify-center items-center">
       <LoadingWait isLoading={true} />
     </div>
   ),
@@ -72,17 +73,23 @@ const ProductDisplay: React.FC<ProductDisplayProps> = ({
   const handleOrderChange = (order: SortOrder) => {
     setSortOrder(order);
   };
+  const pathname = usePathname();
+  const showTypeFilter = pathname.startsWith("/stations"); // Show only when path starts with /stations
 
   return (
     <div className="w-full flex flex-col relative">
       {hasSort && (
-        <div className=" w-full flex justify-between py-4">
+        <div className="w-full flex flex-wrap gap-4 items-center justify-between md:pr-4 py-4">
           <Breadcrumb />
-          <FilterOrder onOrderChange={handleOrderChange} />
+          <div className="w-full flex justify-between gap-4">
+            {showTypeFilter && <TypeFilter />}
+            <FilterOrder onOrderChange={handleOrderChange} />
+          </div>
         </div>
       )}
+
       {isLoading && (
-        <div className=" flex justify-center items-start bg-white bg-opacity-50 overflow-hidden">
+        <div className="flex justify-center items-start bg-white bg-opacity-50 overflow-hidden">
           {loader}
         </div>
       )}

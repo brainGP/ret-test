@@ -5,7 +5,7 @@ import ContactInfo from "./ContactInfo";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="flex flex-col justify-center items-center px-4 md:px-6 md:mt-1 text-gray">
+    <footer className="flex flex-col justify-center items-center px-8 md:mt-1 text-gray">
       <div className="h-[0.5px] w-full bg-gray/20 my-4" />
       <div className="container mx-auto max-w-7xl py-6">
         {/* Footer Grid */}
@@ -19,6 +19,7 @@ const Footer: React.FC = () => {
               height={80}
               priority={true}
             />
+            x
           </div>
 
           {/* Contact Info Section */}

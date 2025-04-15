@@ -3,12 +3,12 @@ import React from "react";
 const ProductGridSkeleton = () => {
   const arr = ["", "", "", "", ""];
   return (
-    <div className="relative w-full h-full flex flex-col gap-4 z-0">
-      <div className="h-12 flex w-full justify-between">
+    <div className="relative w-full h-full flex flex-col gap-4 z-0 py-40">
+      {/* <div className="h-12 flex w-full justify-between">
         <div className="bg-muted border rounded p-4 w-12 animate-pulse" />
-      </div>
+      </div> */}
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-5 md:pr-4">
         {arr.map((row, index) => {
           return (
             <div

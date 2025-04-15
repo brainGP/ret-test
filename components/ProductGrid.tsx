@@ -37,22 +37,20 @@ const ProductCard = ({ product }: { product: Product }) => {
 
   return (
     <Link href={`/stations/${product.name}`}>
-      <div className="border hover:border-gray/30 transition-all duration-300 h-[320px] w-full rounded-md bg-white  group flex flex-col">
-        <div className="relative h-48 w-full rounded-md overflow-hidden flex items-center justify-center">
+      <div className="border hover:border-gray/30 transition-all duration-300 h-[280px] md:h-[300px] w-full rounded-md bg-white group flex flex-col">
+        <div className="relative h-48 w-full rounded-md px-4 py-2 md:py-4 overflow-hidden flex items-center justify-center">
           <Image
             src={imgUrl || "/noresult.png"}
             alt={product.name}
             width={200}
             height={200}
-            className="object-contain w-full h-full p-2 transition-all duration-300 group-hover:scale-105"
+            className="object-contain w-full h-full px- transition-all duration-300 group-hover:scale-105"
             priority={true}
           />
         </div>
-        <div className="mx-4">
-          <h3 className="text-xl font-semibold">{formatText(product.name)}</h3>
-          <p className="font-semibold text-base">
-            {formatPrice(product.priceN)}₮
-          </p>
+        <div className="p-4">
+          <h3 className="text-lg">{formatText(product.name)}</h3>
+          <p className="font-bold text-xl">{formatPrice(product.priceN)}₮</p>
           <p className="text-sm text-start">
             {product.type} {product.style}
           </p>

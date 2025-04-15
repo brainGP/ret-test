@@ -17,8 +17,6 @@ const OtherPage = () => {
   };
 
   const fetcher = brand ? () => getProductsByBrand({ brand }) : getProducts;
-
-  // Always filter for "Бусад бараа" when on /other
   const filter = (product: Product) =>
     !type || type === "other" ? product.sort === filterMap["other"] : true;
 
@@ -27,7 +25,7 @@ const OtherPage = () => {
   return (
     <div className="flex flex-col lg:flex-row">
       <Filter />
-      <div className="w-full flex flex-col p-4 pl-8">
+      <div className="w-full flex flex-col p-4">
         <ProductDisplay
           title={title}
           fetcher={fetcher}

@@ -4,10 +4,12 @@ export const formatPrice = (price: string | number): string => {
 
   if (isNaN(priceNumber)) return price.toString();
 
-  return new Intl.NumberFormat("en-MN", {
+  const formatted = new Intl.NumberFormat("en-MN", {
     style: "currency",
     currency: "MNT",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(priceNumber);
+
+  return formatted.replace("MNT", "").trim();
 };

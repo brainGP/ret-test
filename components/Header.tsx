@@ -23,7 +23,6 @@ const Header: React.FC = () => {
 
   return (
     <>
-      {/* Mobile Header */}
       <div
         className={cn(
           "sticky top-0 z-30 w-full bg-white opacity-95 border-b transition-transform duration-300 ease-in-out md:hidden",
@@ -42,7 +41,7 @@ const Header: React.FC = () => {
                 priority
               />
             </Link>
-            <div className="flex items-center gap-8 px-2">
+            <div className="flex items-center gap-8">
               <ShopCard />
               <Profile />
             </div>

@@ -35,7 +35,7 @@ const Breadcrumb = () => {
   const typeLabel = type && typeLabels[type] ? typeLabels[type] : null;
 
   return (
-    <nav className="text-md">
+    <nav className="text-md w-full">
       <ul className="flex flex-row space-x-2 items-center">
         <li>
           <Link href="/" className="hover:underline">

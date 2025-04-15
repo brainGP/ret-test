@@ -71,7 +71,7 @@ function UserAvatar({ name }: { name: string; picture?: string }) {
             <DropdownMenuShortcut>Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>
-        {name}
+        <span className="hidden lg:block">{name}</span>
       </DropdownMenu>
     </div>
   );

@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/table";
 import { Product } from "@/types/Product";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { baseUrl } from "@/lib/staticData";
 import Image from "next/image";
 import { formatPrice } from "@/utils/formatPrice";
 import SetQuantity from "../stations/[name]/CartQuantity";

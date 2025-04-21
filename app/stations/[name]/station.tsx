@@ -69,7 +69,7 @@ const StationCard = ({ station }: { station: Product }) => {
   }, []);
 
   return (
-    <div className="flex flex-col lg:flex-row w-full justify-between gap8 space-y-4 lg:space-y-0 mt-8">
+    <div className="flex flex-col lg:flex-row w-full justify-between gap-8 space-y-4 lg:space-y-0 mt-8">
       <div className="flex w-full h-full gap-8 flex-row justify-between">
         <div className="flex flex-col gap-8 justify-center items-center w-[33%]">
           {station.images.slice(0, 3).map((image) => (

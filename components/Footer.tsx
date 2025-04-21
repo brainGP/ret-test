@@ -19,7 +19,6 @@ const Footer: React.FC = () => {
               height={80}
               priority={true}
             />
-            x
           </div>
 
           {/* Contact Info Section */}

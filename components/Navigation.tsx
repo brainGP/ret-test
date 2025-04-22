@@ -11,16 +11,32 @@ const Navigation = () => {
   const pathname = usePathname();
 
   const navItems = [
-    { href: "/", label: "Нүүр", icon: <Home size={24} /> },
-    { href: "/stations", label: "Станц", icon: <Smartphone size={24} /> },
-    { href: "/other", label: "Бусад бараа", icon: <Package size={24} /> },
-    { href: "/contact", label: "Холбоо барих", icon: <Contact size={24} /> },
+    { href: "/", label: "Нүүр", icon: <Home size={24} />, aria: "Home page" },
+    {
+      href: "/stations",
+      label: "Станц",
+      icon: <Smartphone size={24} />,
+      aria: "Stations page",
+    },
+    {
+      href: "/other",
+      label: "Бусад бараа",
+      icon: <Package size={24} />,
+      aria: "Other products page",
+    },
+    {
+      href: "/contact",
+      label: "Холбоо барих",
+      icon: <Contact size={24} />,
+      aria: "Contact page",
+    },
   ];
 
   const isActive = (href: string) => pathname === href;
 
   return (
     <nav className="flex gap-8 text-sm justify-center items-center flex-wrap">
+      {/* Desktop view */}
       <div className="hidden md:flex gap-8">
         {navItems.map((item, index) => (
           <div
@@ -37,21 +53,22 @@ const Navigation = () => {
         ))}
       </div>
 
+      {/* Mobile view */}
       <div className="w-full flex md:hidden h-[60px] bg-white border-t items-center justify-between px-8">
         {navItems.map((item, index) => (
-          <div
+          <Link
             key={index}
+            href={item.href}
+            aria-label={item.aria}
             className={classNames(
-              "flex items-center justify-between gap-2 p-4",
+              "flex items-center justify-center gap-2 p-4",
               isActive(item.href)
                 ? "text-yellow"
                 : "text-gray hover:text-yellow"
             )}
           >
-            <Link href={item.href} className="flex items-center gap-1">
-              {item.icon}
-            </Link>
-          </div>
+            {item.icon}
+          </Link>
         ))}
       </div>
     </nav>

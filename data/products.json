@@ -1,8 +1,8 @@
 [
   {
     "logos": [
-      { "src": "/logos/logo7.svg", "alt": "Logo 1", "name": "Retevis" },
-      { "src": "/logos/logo1.svg", "alt": "Logo 2", "name": "Icom" },
+      { "src": "/logos/logo7.svg", "alt": "Logo 1", "name": "RETEVIS" },
+      { "src": "/logos/logo1.svg", "alt": "Logo 2", "name": "ICOM" },
       { "src": "/logos/logo2.svg", "alt": "Logo 3", "name": "KSU7" },
       { "src": "/logos/logo3.svg", "alt": "Logo 4", "name": "TDX" },
       { "src": "/logos/logo4.svg", "alt": "Logo 5", "name": "TSSD" },
